@@ -41,7 +41,6 @@
    [ ex ]<br>
   ![스크린샷 2023-11-05 17 11 27](https://github.com/FX-STUDY/BE-springBasic/assets/100909578/94e23bb3-6e24-4733-9758-f6d87fa8f43c)
 
-  
    
 ### ReadMe 제출 양식
 1. Mission Title
@@ -50,3 +49,30 @@
 4. Solution
 5. About
 <hr>
+
+## Commit Message ROLE
+Header, Body, Footer는 빈 행으로 구분한다 <br>
+... <br>
+타입(스코프): 주제(제목) // Header(헤더) <br>
+
+본문 // Body(바디) <br>
+
+바닥글 // Footer <br>
+... <br>
+
+|타입이름|내용|
+|------|---|
+|feat|새로운 기능에 대한 커밋|
+|fix|버그 수정에 대한 커밋|
+|build|빌드 관련 파일 수정 / 모듈 설치 또는 삭제에 대한 커밋|
+|chore|그 외 자잘한 수정에 대한 커밋|
+|ci|ci 관련 설정 수정에 대한 커밋|
+|docs|문서 수정에 대한 커밋|
+|style|코드 스타일 혹은 포맷 등에 관한 커밋|
+|refactor|코드 리팩토링에 대한 커밋|
+|test|테스트 코드 수정에 대한 커밋|
+|perf|성능 개선에 대한 커밋|
+
+매주 README 커밋 -> DOCS <br>
+mission 풀이 후 커밋 -> feat <br>
+PR 후 수정 사항 커밋 -> perf <br>
