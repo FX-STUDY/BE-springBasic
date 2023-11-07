@@ -39,7 +39,12 @@
    - reader 출제 branch 를 기준으로 분기 branch 생성
    - code 작성 및 문제 해결 과정에서 느낀점, 배운점 작성 <br>
    [ ex ]<br>
-  ![스크린샷 2023-11-05 17 11 27](https://github.com/FX-STUDY/BE-springBasic/assets/100909578/94e23bb3-6e24-4733-9758-f6d87fa8f43c)
+
+  <img width="701" alt="스크린샷 2023-11-07 10 02 24" src="https://github.com/FX-STUDY/BE-springBasic/assets/100909578/219410d4-18da-49c3-8b49-d875d9ea12b8">
+
+<img width="708" alt="스크린샷 2023-11-07 10 24 16" src="https://github.com/FX-STUDY/BE-springBasic/assets/100909578/2cd2e451-17a9-4216-8671-8138f035554e">
+
+<img width="752" alt="스크린샷 2023-11-07 10 03 05" src="https://github.com/FX-STUDY/BE-springBasic/assets/100909578/21825da1-5382-4015-a75c-5f7570e74dd9">
 
    
 ### ReadMe 제출 양식
