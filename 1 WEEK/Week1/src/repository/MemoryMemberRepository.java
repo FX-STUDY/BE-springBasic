@@ -4,11 +4,12 @@ import member.Member;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class MemoryMemberRepository implements MemberRepository{
 
 
-    private static Map<Long, Member> store = new HashMap<>();
+    private static ConcurrentHashMap<Long, Member> store = new ConcurrentHashMap<>();
     private static long incrementID = 0L;
 
     public Member save(Member member) {
