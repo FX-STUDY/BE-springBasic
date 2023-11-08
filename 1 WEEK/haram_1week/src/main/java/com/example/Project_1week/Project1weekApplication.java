@@ -1,5 +1,6 @@
 package com.example.Project_1week;
 
+import com.example.Project_1week.user.UserDAO;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -10,32 +11,9 @@ import java.sql.SQLException;
 @SpringBootApplication
 public class Project1weekApplication {
 
-	public static void main(String[] args) {
-		Connection c = null;
+	public static void main(String[] args) throws SQLException {
+		UserDAO userDAO = new UserDAO();
+		userDAO.signUp();
 
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			System.err.println("JDBC 드라이버를 로드하는데 문제 발생" + e.getMessage());
-			e.printStackTrace();
-		}
-
-		try {
-			c = DriverManager.getConnection("jdbc:mysql://localhost:3306/jspdb", "jspuser", "jsppass");
-			System.out.println("연결 완료!!!");
-		} catch (SQLException e) {
-			System.out.println("연결 오류" + e.getMessage());
-			e.printStackTrace();
-		}
-
-		try {
-			if(c != null) {
-				c.close();
-			}
-		} catch (SQLException e) {
-
-		}
 	}
-
-
 }
