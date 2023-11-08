@@ -7,12 +7,10 @@ import repository.MemoryMemberRepository;
 public class Main {
     public static void main(String[] args) {
         MemberService memberSerive = new MemberService();
-        Member member1 = new Member();
-        Member member2 = new Member();
 
-        //회원 name, pwd, grade 지정
-        member1.setAll("name1", "password1", "NORMAL");
-        member2.setAll("name2", "password2", "VIP");
+        //회원 name, grade 지정
+        Member member1 = new Member("name1", "NORMAL");
+        Member member2 = new Member("name2", "VIP");
 
 
         //회원가입
@@ -22,7 +20,21 @@ public class Main {
         System.out.println(id2);
 
 
-        
+        //id 검색 -> 앞서 지정한 name 출력
+        Member findMember1 = memberSerive.findByName(id1);
+        Member findMember2 = memberSerive.findByName(id2);
+        System.out.println(findMember1.getName());
+        System.out.println(findMember2.getName());
+
+
+        //상품 주문
+        //고객의 고유 id, 상품
+        ProductService productService = new ProductService();
+        Product product1 = new Product("상품1", 10000L);//상품 이름과 가격
+        Product product2 = new Product("상품2", 20000L);
+        productService.order(id1, product1);
+        productService.order(id2, product2);
+
 
 
 
