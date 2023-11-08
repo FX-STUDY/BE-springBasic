@@ -5,7 +5,10 @@ import repository.MemberRepository;
 import repository.MemoryMemberRepository;
 
 public class MemberService {
-    MemoryMemberRepository memoryMemberRepository = new MemoryMemberRepository();
+
+
+    private static final MemoryMemberRepository memoryMemberRepository = new MemoryMemberRepository();
+
 
     public Long signUp(Member member) {
         memoryMemberRepository.save(member);
