@@ -1,5 +1,6 @@
 package service;
 
+import member.GradeType;
 import member.Member;
 import member.Product;
 import repository.MemoryMemberRepository;
@@ -9,8 +10,8 @@ public class Main {
         MemberService memberSerive = new MemberService();
 
         //회원 name, grade 지정
-        Member member1 = new Member("name1", "NORMAL");
-        Member member2 = new Member("name2", "VIP");
+        Member member1 = new Member("name1", GradeType.VIP);
+        Member member2 = new Member("name2", GradeType.NORMAL);
 
 
         //회원가입

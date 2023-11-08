@@ -4,13 +4,18 @@ public class Member {
 
     private Long id;
     private String name;
-    private String grade; // NORMAL, VIP
+    private GradeType grade;
+
 
 
 
     //getter setter
+    public void Member(String name, GradeType grade) {
+        this.name = name;
+        this.grade = grade;
+    }
 
-    public Member(String name, String grade) {
+    public Member(String name, GradeType grade) {
         this.name = name;
         this.grade = grade;
     }
@@ -31,11 +36,11 @@ public class Member {
         this.name = name;
     }
 
-    public String getGrade() {
+    public GradeType getGrade() {
         return grade;
     }
 
-    public void setGrade(String grade) {
+    public void setGrade(GradeType grade) {
         this.grade = grade;
     }
 
