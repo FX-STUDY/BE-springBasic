@@ -30,10 +30,7 @@ public class UserDAO {
             return;
         }
 
-        userVO = setUser(userId,userPassword);
+        setUser(userId,userPassword);
 
-        Long userSequence = userVO.getUserSequence();
-        userVO.setUserPassword(userPassword);
-        userVO.setUserSequence(1L);
     }
 
