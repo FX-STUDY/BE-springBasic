@@ -1,4 +1,4 @@
-package com.myMission.week2.grade;
+package com.myMission.yebin.grade;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,4 +9,6 @@ import lombok.Setter;
 public class GradeVO {
     private String Basic;
     private String VIP;
+
+
 }
