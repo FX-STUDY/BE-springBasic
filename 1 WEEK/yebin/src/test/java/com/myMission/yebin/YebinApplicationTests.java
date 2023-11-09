@@ -1,10 +1,10 @@
-package com.myMission.week2;
+package com.myMission.yebin;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Week2ApplicationTests {
+class YebinApplicationTests {
 
 	@Test
 	void contextLoads() {
