@@ -20,10 +20,12 @@ public class UserDAO {
         userList.add(userVO);
     }
 
-    public String getUser(){
-        String userId = userVO.getUserId();
-        Long userSequence = userVO.getUserSequence();
-        return userId+", "+userSequence;
+    public Map<String,Long> getAllUser(){
+        Map<String,Long> userInformationMap = new HashMap<>();
+        for(UserVO user : userList){
+            userInformationMap.put(user.getUserId(),user.getUserSequence());
+        }
+        return userInformationMap;
     }
     public void signUp(String userId, String userPassword, String checkUserPassword){
         if(!userPassword.equals(checkUserPassword)){
