@@ -5,6 +5,9 @@ import com.myMission.yebin.users.UserVO;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.List;
+import java.util.Map;
+
 @SpringBootApplication
 public class YebinApplication {
 
@@ -14,7 +17,9 @@ public class YebinApplication {
 		// 회원가입 test
 		UserDAO dao = new UserDAO();
 		dao.signUp("yebin","123","123");
-		String user = dao.getUser();
+		dao.signUp("test2","123","123");
+		Map<String,Long> user = dao.getAllUser();
 		System.out.println(user);
+		//System.out.println(user);
 	}
 }

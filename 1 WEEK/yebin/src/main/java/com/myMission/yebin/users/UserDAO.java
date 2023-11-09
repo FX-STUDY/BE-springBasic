@@ -2,14 +2,22 @@ package com.myMission.yebin.users;
 
 import org.apache.catalina.User;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UserDAO {
-    private UserVO userVO = new UserVO();
-    public UserVO setUser(String userId, String userPassword){
+    //private UserVO userVO = new UserVO();
+    private ArrayList<UserVO> userList = new ArrayList<>();
+    private static Long userSequence = 1L;
+    public void setUser(String userId, String userPassword){
+        UserVO userVO = new UserVO();
         userVO.setUserId(userId);
         userVO.setUserPassword(userPassword);
-        return userVO;
+        userVO.setUserSequence(userSequence++);
+
+        userList.add(userVO);
     }
 
     public String getUser(){
