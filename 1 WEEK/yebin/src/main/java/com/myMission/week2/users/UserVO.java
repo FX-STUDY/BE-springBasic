@@ -12,5 +12,5 @@ public class UserVO {
     // 회원 패스워드
     private String userPassword;
     // 회원 번호
-    private String userSequence;
+    private int userSequence;
 }
