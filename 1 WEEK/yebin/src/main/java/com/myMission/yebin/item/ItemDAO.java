@@ -13,4 +13,15 @@ public class ItemDAO {
         itemList.add(itemVO);
     }
 
+    // 상품 이름으로 상품 가격 찾기
+    public int findItemPriceByItemName(String itemName){
+        int findItemPrice;
+        for (ItemVO itemVO : itemList){
+            if (itemName.equals(itemVO.getItemName())){
+                findItemPrice = itemVO.getItemPrice();
+                return findItemPrice;
+            }
+        }
+        return 0;
+    }
 }
