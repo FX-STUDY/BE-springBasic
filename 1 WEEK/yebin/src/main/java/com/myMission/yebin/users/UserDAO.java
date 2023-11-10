@@ -1,5 +1,6 @@
 package com.myMission.yebin.users;
 
+import com.myMission.yebin.grade.GradeVO;
 import org.apache.catalina.User;
 
 import java.util.ArrayList;
@@ -10,12 +11,9 @@ import java.util.Map;
 public class UserDAO {
     //private UserVO userVO = new UserVO();
     private ArrayList<UserVO> userList = new ArrayList<>();
-    private static Long userSequence = 1L;
-    public void setUser(String userId, String userPassword){
-        UserVO userVO = new UserVO();
-        userVO.setUserId(userId);
-        userVO.setUserPassword(userPassword);
-        userVO.setUserSequence(userSequence++);
+    private static Long userNumber = 1L;
+    public void saveUser(String userId, GradeVO grade){
+        UserVO userVO = new UserVO(userId, userNumber++, grade);
 
         userList.add(userVO);
     }
