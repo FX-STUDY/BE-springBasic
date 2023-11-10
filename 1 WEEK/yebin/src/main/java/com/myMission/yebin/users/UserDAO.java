@@ -18,10 +18,10 @@ public class UserDAO {
         userList.add(userVO);
     }
 
-    public Map<String,Long> getAllUser(){
+    public Map<String,Long> findAllUser(){
         Map<String,Long> userInformationMap = new HashMap<>();
         for(UserVO user : userList){
-            userInformationMap.put(user.getUserId(),user.getUserSequence());
+            userInformationMap.put(user.getUserId(),user.getUserNumber());
         }
         return userInformationMap;
     }
