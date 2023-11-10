@@ -25,12 +25,5 @@ public class UserDAO {
         }
         return userInformationMap;
     }
-    public void signUp(String userId, String userPassword, String checkUserPassword){
-        if(!userPassword.equals(checkUserPassword)){
-            return;
-        }
 
-        setUser(userId,userPassword);
-
-    }
-
+}
