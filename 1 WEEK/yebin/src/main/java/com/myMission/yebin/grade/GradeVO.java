@@ -7,5 +7,4 @@ import lombok.Setter;
 
 public enum GradeVO {
     Basic, VIP
-
 }
