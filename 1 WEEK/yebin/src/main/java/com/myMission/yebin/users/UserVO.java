@@ -2,35 +2,33 @@ package com.myMission.yebin.users;
 
 // 회원정보 관련
 
+import com.myMission.yebin.grade.GradeVO;
+import lombok.Getter;
+
 public class UserVO {
     // 회원 아이디
     private String userId;
-    // 회원 패스워드
-    private String userPassword;
     // 회원 번호
-    private Long userSequence;
+    private final Long userNumber;
+    // 회원 등급
+    private String userGrade;
+
+    // Build Pattern ??
+    public UserVO(String userId, Long userNumber, GradeVO userGrade){
+        this.userId = userId;
+        this.userNumber = userNumber;
+        this.userGrade = userGrade.toString();
+    }
 
     public String getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public Long getUserNumber() {
+        return userNumber;
     }
 
-    public String getUserPassword() {
-        return userPassword;
-    }
-
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
-    }
-
-    public Long getUserSequence() {
-        return userSequence;
-    }
-
-    public void setUserSequence(Long userSequence) {
-        this.userSequence = userSequence;
+    public String getUserGrade() {
+        return userGrade;
     }
 }
