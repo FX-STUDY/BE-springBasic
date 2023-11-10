@@ -34,8 +34,12 @@ public class Main {
         Product product1 = new Product("상품1", 10000L);//상품 이름과 가격
         Product product2 = new Product("상품2", 20000L);
         productService.order(id1, product1);
+        productService.order(id1, product1); //key값을 member의 id로, value에 product 주입
         productService.order(id2, product2);
 
+        //등급별 할인된 가격 확인
+        System.out.println(product1.getDiscountedPrice());
+        System.out.println(product2.getDiscountedPrice());
 
 
 
