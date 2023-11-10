@@ -1,5 +1,6 @@
 package com.myMission.yebin;
 
+import com.myMission.yebin.grade.GradeVO;
 import com.myMission.yebin.users.UserDAO;
 import com.myMission.yebin.users.UserVO;
 import org.springframework.boot.SpringApplication;
@@ -16,9 +17,9 @@ public class YebinApplication {
 
 		// 회원가입 test
 		UserDAO dao = new UserDAO();
-		dao.signUp("yebin","123","123");
-		dao.signUp("test2","123","123");
-		Map<String,Long> user = dao.getAllUser();
+		dao.saveUser("yebin", GradeVO.VIP);
+		dao.saveUser("test2",GradeVO.Basic);
+		Map<String,Long> user = dao.findAllUser();
 		System.out.println(user);
 		//System.out.println(user);
 	}
