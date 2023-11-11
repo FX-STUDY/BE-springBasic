@@ -1,6 +1,21 @@
 ![header](https://capsule-render.vercel.app/api?type=soft&color=auto&height=150&section=header&text=BACKEND_STUDY&fontSize=90&animation=blink&align=center)
 <a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FFX-STUDY%2FBE-STUDY%2Fhit-counter&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false"/></a>
 --
+## Mission Achievement
+
+[ haramm ] <br>
+0 / 1 <br>
+
+[ 02yebin ] <br>
+0 / 1 <br>
+
+[ SEOB ] <br>
+0 / 1 <br>
+
+[ JIUNG YANG ] <br>
+0 / 1 <br>
+
+---
 ## Communication
 ![slack](https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white)
 ![discord](https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white)
