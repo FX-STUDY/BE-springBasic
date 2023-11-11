@@ -9,15 +9,15 @@ public class UserVO {
     // 회원 아이디
     private String userId;
     // 회원 번호
-    private final Long userNumber;
+    private Long userNumber;
     // 회원 등급
-    private String userGrade;
+    private Enum userGrade;
 
     // Build Pattern ??
     public UserVO(String userId, Long userNumber, GradeVO userGrade){
         this.userId = userId;
         this.userNumber = userNumber;
-        this.userGrade = userGrade.toString();
+        this.userGrade = userGrade;
     }
 
     public String getUserId() {
@@ -28,7 +28,7 @@ public class UserVO {
         return userNumber;
     }
 
-    public String getUserGrade() {
+    public Enum getUserGrade() {
         return userGrade;
     }
 }
