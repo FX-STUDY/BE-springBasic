@@ -1,11 +1,24 @@
 package com.example.Project_1week.user;
 
+import com.example.Project_1week.item.ItemVO;
+
+import java.util.List;
+
 public class UserVO {
     private int seq;
     private String name;
     private String id;
     private String password;
     private String grade;
+    private List<ItemVO> itemList;
+
+    public List<ItemVO> getItemList() {
+        return itemList;
+    }
+
+    public void setItemList(List<ItemVO> itemList) {
+        this.itemList = itemList;
+    }
 
     public String getId() {
         return id;
