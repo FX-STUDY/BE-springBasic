@@ -4,16 +4,20 @@
 ## Mission Achievement
 
 [ haramm ] <br>
-0 / 1 <br>
+<br>
+<span style="background-color:#fff5b1"> 0 / 2 </span> <br>
 
 [ 02yebin ] <br>
-0 / 1 <br>
+<br>
+<span style='background-color:#fff5b1'> 0 / 2 </span> <br>
 
 [ SEOB ] <br>
-0 / 1 <br>
+<br>
+<span style='background-color:#fff5b1'> 0 / 2 </span> <br>
 
 [ JIUNG YANG ] <br>
-0 / 1 <br>
+<br>
+<span style='background-color:#fff5b1'> 0 / 2 </span> <br>
 
 ---
 ## Communication
