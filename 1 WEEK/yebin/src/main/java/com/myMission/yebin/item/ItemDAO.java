@@ -16,7 +16,7 @@ public class ItemDAO {
     }
 
     // 상품 이름으로 상품 가격 찾기
-    public int findItemPriceByItemName(String itemName){
+    public Integer findItemPriceByItemName(String itemName){
         return itemList.get(itemName);
     }
 
