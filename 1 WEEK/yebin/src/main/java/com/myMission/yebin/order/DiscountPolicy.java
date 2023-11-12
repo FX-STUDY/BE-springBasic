@@ -3,14 +3,14 @@ package com.myMission.yebin.order;
 import com.myMission.yebin.grade.GradeVO;
 
 public class DiscountPolicy {
-    public int setDiscountByGrade(Enum grade){
-        int discountRate = 0;
-
+    public int setDiscountByGrade(GradeVO grade){
+        // VIP 는 1000원 할인
         if (grade.equals(GradeVO.VIP)) {
-            discountRate = 1000;
+            return 1000;
         }
 
-        return discountRate;
+        // 그외는 할인 X
+        return 0;
     }
 
 
