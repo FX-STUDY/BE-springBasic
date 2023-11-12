@@ -26,4 +26,12 @@ public class UserDAO {
         return userInformationMap;
     }
 
+    public GradeVO findGradeByUserId(String userId){
+        Map<String, GradeVO> userGradeMap = new HashMap<>();
+        for(UserVO user : userList){
+            userGradeMap.put(user.getUserId(),user.getUserGrade());
+        }
+        return userGradeMap.get(userId);
+    }
+
 }
