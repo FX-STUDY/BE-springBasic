@@ -19,7 +19,7 @@
 🏃🏻‍♂️끈기, 💦열정, 🧡욕구, 👊🏻인사이트
 ## 요구사항
 [ 새로운 할인 정책 개발 ]<br><br>
-
+1. DiscountPolicy 변경 
 기획자 : <br>
 Service Open 이 일주일 남았지만 `고정 금액 할인` -> `정률 (%) 할인` 으로 변경하고 싶다.<br>
 기존엔 VIP 에게 1000원을 할인해 드렸지만, 10% 할인 정책으로 변경해 주세요.<br>
@@ -33,6 +33,11 @@ https://agilemanifesto.org/iso/ko/manifesto.html <br>
 
 개발자 :<br>
 ...<br>
+
+2. 관심사 분리
+   - 구현 객체를 생성하고, 연결하는 책임을 별도의 Class 로 구성하시오.
+
+3. 좋은 OOP 설계 5가지 원칙에 대해 공부 README 에 작성바랍니다.
 
 ## Study 방법
 [ 😎 Leader's 요구사항 ] <br>
