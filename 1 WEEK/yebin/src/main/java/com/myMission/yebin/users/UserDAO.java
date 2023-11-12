@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class UserDAO {
     //private UserVO userVO = new UserVO();
-    private ArrayList<UserVO> userList = new ArrayList<>();
+    private List<UserVO> userList = UserList.getInstance();
     private static Long userNumber = 1L;
     public void saveUser(String userId, GradeVO grade){
         UserVO userVO = new UserVO(userId, userNumber++, grade);
