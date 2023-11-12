@@ -15,6 +15,8 @@ public class Order {
         UserDAO userDAO = new UserDAO();
         ItemDAO itemDAO = new ItemDAO();
         DiscountPolicy discount = new DiscountPolicy();
+        ㄴ
+        // 상품 가격 = (itemDAO에서 상품Name으로 가격을 찾아온것) - (회원Id로 등급 찾아와서 해당하는 할인가격가져온 것)
         Integer itemPrice = itemDAO.findItemPriceByItemName(itemName)
                                 - discount.setDiscountByGrade(userDAO.findGradeByUserId(userId));
 
