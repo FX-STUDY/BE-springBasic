@@ -3,7 +3,7 @@ package com.myMission.yebin.item;
 
 public class ItemVO {
     String itemName;
-    int itemPrice;
+    Integer itemPrice;
 
     public ItemVO(String itemName, int itemPrice){
         this.itemName = itemName;
@@ -14,7 +14,7 @@ public class ItemVO {
         return itemName;
     }
 
-    public int getItemPrice() {
+    public Integer getItemPrice() {
         return itemPrice;
     }
 }
