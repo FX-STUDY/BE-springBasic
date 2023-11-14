@@ -13,5 +13,10 @@ public class DiscountPolicy {
         return 0;
     }
 
+    // 회원 등급에 따른 상품 가격 계산
+    public Integer calculateItemPrice(Integer itemPrice, GradeVO grade){
+        return itemPrice - itemPrice * (setDiscountByGrade(grade)/100);
+    }
+
 
 }
