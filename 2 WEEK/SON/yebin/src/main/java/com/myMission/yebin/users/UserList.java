@@ -3,7 +3,7 @@ package com.myMission.yebin.users;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserList {
+public class UserList{
     private static List<UserVO> userList;
 
     public static List<UserVO> getInstance(){

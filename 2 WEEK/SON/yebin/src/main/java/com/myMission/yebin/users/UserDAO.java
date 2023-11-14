@@ -17,13 +17,13 @@ public class UserDAO {
         userList.add(userVO);
     }
 
-    public List<UserVO> findAllUser(){
-//        Map<String,Long> userInformationMap = new HashMap<>();
-//
-//        for(UserVO user : userList){
-//            userInformationMap.put(user.getUserId(),user.getUserNumber());
-//        }
-        return userList;
+    public Map<String, Long> findAllUser(){
+        Map<String,Long> userInformationMap = new HashMap<>();
+
+        for(UserVO user : userList){
+            userInformationMap.put(user.getUserId(),user.getUserNumber());
+        }
+        return userInformationMap;
     }
 
     public GradeVO findGradeByUserId(String userId){
