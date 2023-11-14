@@ -44,8 +44,17 @@ https://agilemanifesto.org/iso/ko/manifesto.html <br>
 ---
 
 ## 주요 이론 요약
-
-Please provide a summary of your main theory here.
+Object Oriented Programming 설계 원칙 <br>
+<hr>
+OOP의 5원칙 ( SOLID ) <br>
+SRP ( Single Responsibility Prindiple ) : 한 클래스는 하나의 책임만 가져야 한다. <br>
+OCP ( Open-Closed Prindiple ) : 확장에는 열려있으나, 변경에는 닫혀있어야한다. <br>
+LSP ( Liskov's Substitution Principle ) : 하위객체는 상위객체와 교체할 수 있어야한다. <br>
+ISP ( Interface Segregation Principle ) : 관심사에 맞게 인터페이스를 분리해야한다. <br>
+DIP ( Dependency Inversion Principle ) : 구체화에 의존하지말고 추상화에 의존해야한다. <br>
+<hr>
+OOP의 4가지 특징 <br>
+1. 캡슐화 2. 상속 3. 추상화 4. 다형성
 
 ## ISSUE
 
