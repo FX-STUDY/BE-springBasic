@@ -8,6 +8,10 @@ public class SeobApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SeobApplication.class, args);
+
+
+
+
 	}
 
 }
