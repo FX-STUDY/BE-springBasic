@@ -1,15 +1,21 @@
 package SEOB.SEOB.domain;
 
-public class Product {
+public class Order {
 
     private Long id;
     private String name;
-    private Long price;
-    private Double discountedPrice;
+    private int price;
+    private int discountedPrice;
 
-    public Product(String name, Long price) {
+    public Order(Long id, String name, int price, int discountedPrice) {
+        this.id = id;
         this.name = name;
         this.price = price;
+        this.discountedPrice = discountedPrice;
+    }
+
+    public int calculatePrice() {
+        return price - discountedPrice;
     }
 
     public Long getId() {
@@ -28,19 +34,19 @@ public class Product {
         this.name = name;
     }
 
-    public Long getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
-    public Double getDiscountedPrice() {
+    public int getDiscountedPrice() {
         return discountedPrice;
     }
 
-    public void setDiscountedPrice(Double discountedPrice) {
+    public void setDiscountedPrice(int discountedPrice) {
         this.discountedPrice = discountedPrice;
     }
 }

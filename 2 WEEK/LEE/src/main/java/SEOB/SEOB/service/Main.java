@@ -2,7 +2,7 @@ package SEOB.SEOB.service;
 
 import SEOB.SEOB.domain.GradeType;
 import SEOB.SEOB.domain.Member;
-import SEOB.SEOB.domain.Product;
+import SEOB.SEOB.domain.Order;
 
 
 public class Main {
@@ -31,15 +31,15 @@ public class Main {
         //상품 주문
         //고객의 고유 id, 상품
         ProductService productService = new ProductService();
-        Product product1 = new Product("상품1", 10000L);//상품 이름과 가격
-        Product product2 = new Product("상품2", 20000L);
-        productService.order(id1, product1);
-        productService.order(id1, product1); //key값을 member의 id로, value에 product 주입
-        productService.order(id2, product2);
+        Order order1 = new Order("상품1", 10000L);//상품 이름과 가격
+        Order order2 = new Order("상품2", 20000L);
+        productService.order(id1, order1);
+        productService.order(id1, order1); //key값을 member의 id로, value에 product 주입
+        productService.order(id2, order2);
 
         //등급별 할인된 가격 확인
-        System.out.println(product1.getDiscountedPrice());
-        System.out.println(product2.getDiscountedPrice());
+        System.out.println(order1.getDiscountedPrice());
+        System.out.println(order2.getDiscountedPrice());
 
 
 

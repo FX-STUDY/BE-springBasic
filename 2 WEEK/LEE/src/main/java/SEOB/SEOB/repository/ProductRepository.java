@@ -1,10 +1,10 @@
 package SEOB.SEOB.repository;
 
 
-import SEOB.SEOB.domain.Product;
+import SEOB.SEOB.domain.Order;
 
 public interface ProductRepository {
-    public Product save(Long memberId, Product product);
+    public Order save(Long memberId, Order order);
 
 
 }
