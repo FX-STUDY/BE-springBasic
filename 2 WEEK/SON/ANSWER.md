@@ -58,7 +58,10 @@ OOP의 4가지 특징 <br>
 
 ## ISSUE
 
-Please enter your issue details here.
+DiscountPolicy 클래스 - OCP위반 <br>
+setDiscountByGrade(), calculateItemPrice() 메서드가 할인 정책이 바뀌면 클래스를 수정해야하므로 변경에 열려있다고 할 수 있습니다.
+
+모든 클래스 - DIP위반
 
 ## Solution
 
