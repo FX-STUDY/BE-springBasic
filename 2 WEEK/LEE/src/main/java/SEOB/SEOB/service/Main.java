@@ -7,7 +7,7 @@ import SEOB.SEOB.domain.Product;
 
 public class Main {
     public static void main(String[] args) {
-        MemberService memberSerive = new MemberService();
+        MemberServiceImpl memberSerive = new MemberServiceImpl();
 
         //회원 name, grade 지정
         Member member1 = new Member("name1", GradeType.VIP);

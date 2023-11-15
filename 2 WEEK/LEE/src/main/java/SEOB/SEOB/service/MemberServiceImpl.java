@@ -4,7 +4,7 @@ import SEOB.SEOB.domain.Member;
 import SEOB.SEOB.repository.MemberRepository;
 import SEOB.SEOB.repository.MemoryMemberRepository;
 
-public class MemberService {
+public class MemberServiceImpl {
 
 
     private final MemberRepository memberRepository = new MemoryMemberRepository();
