@@ -11,7 +11,7 @@ public class DiscountPolicy {
         return 0;
     }
     // 회원 등급에 따른 할인률 세팅
-    public int setDiscountByGrade(GradeVO grade){
+    public int discountRate(GradeVO grade){
         // VIP 는 10% 할인
         if (grade.equals(GradeVO.VIP)) {
             return 10;
