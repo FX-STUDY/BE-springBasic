@@ -49,11 +49,11 @@ Please provide a summary of your main theory here.
 
 ## ISSUE
 
-Please enter your issue details here.
+1. RateDiscountPolicy 클래스를 구현했지만 실제 적용하기 위해서는 OrderServiceImpl에서 수정작업을 해주어야 한다.
 
 ## Solution
 
-Please describe your solution in detail here.
+1. Please describe your solution in detail here.
 
 ## About
 
