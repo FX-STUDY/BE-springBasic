@@ -58,14 +58,20 @@ OOP의 4가지 특징 <br>
 
 ## ISSUE
 
-DiscountPolicy 클래스 - OCP위반 <br>
-setDiscountByGrade(), calculateItemPrice() 메서드가 할인 정책이 바뀌면 클래스를 수정해야하므로 변경에 열려있다고 할 수 있습니다.
-
-모든 클래스 - DIP위반
-
+SRP 위반 --- <br>
+ <br>
+OCP 위반 --- <br>
+ Order 클래스 - calculatedPrice() 메서드에서 아이템 가격을 바로 계산하는 것은 후에 할인 정책이 바뀌면 코드를 수정해야하므로 OCP 위반입니다. <br>
+LSP 위반 --- <br>
+ <br>
+ISP 위반 --- <br>
+ <br>
+DIP 위반 --- <br>
+ <br>
 ## Solution
 
-Please describe your solution in detail here.
+OCP 위반 --- <br>
+Order 클래스 - calculatedPrice() 메서드에서 계산을 하기보단, 정률 할인 정책을 적용한 계산 클래스와 고정 금액 할인 정책을 적용한 클래스를 생성하여 계산하도록 만들어줍니다.
 
 ## About
 
