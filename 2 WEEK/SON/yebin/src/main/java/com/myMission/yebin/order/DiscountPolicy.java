@@ -21,8 +21,16 @@ public class DiscountPolicy {
     }
 
     // 회원 등급에 따른 상품 가격 계산
-    public Integer calculateItemPrice(Integer itemPrice, GradeVO grade){
-        return itemPrice - itemPrice * (setDiscountByGrade(grade)/100);
+    public Integer calculateItemPrice(Integer itemPrice, GradeVO grade, DiscountHow how){
+        Integer calculatedItemPrice;
+        // 고정 금액 할인
+        calculatedItemPrice = itemPrice - discountFixed(grade);
+
+        // 정률 할인
+        if (how.equals(DiscountHow.RATE)){
+            calculatedItemPrice = itemPrice - (itemPrice*discountRate(grade)/100);
+        }
+        return calculatedItemPrice;
     }
 
 
