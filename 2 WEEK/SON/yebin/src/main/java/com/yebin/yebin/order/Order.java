@@ -13,10 +13,6 @@ public class Order {
         this.discountPrice = discountPrice;
     }
 
-    public float calculatePrice(){
-        return itemPrice - discountPrice;
-    }
-
     public float getDiscountPrice(){
         return discountPrice;
     }
