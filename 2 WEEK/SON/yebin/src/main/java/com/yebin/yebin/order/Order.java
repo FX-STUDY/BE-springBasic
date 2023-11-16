@@ -6,7 +6,7 @@ public class Order {
     private int itemPrice;
     private int discountPrice;
 
-    private final CalculatePrice calculatePrice= new CalculatePriceRate();
+    private final CalculatePrice calculatedPrice= new CalculatePriceRate();
 
     public Order(Long memberId, String itemName, int itemPrice, int discountPrice){
         this.memberId = memberId;
@@ -16,7 +16,7 @@ public class Order {
     }
 
     public int calculatePrice(){
-        return calculatePrice.calculatePrice(itemPrice, discountPrice);
+        return calculatedPrice.calculatePrice(itemPrice, discountPrice);
     }
 
     public int getDiscountPrice(){
