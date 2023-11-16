@@ -14,7 +14,8 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
         Member member = memberRepository.findById(memberId);
-        int discountPrice = discountPolicy.discount(member,itemPrice);
+        float discountPrice = discountPolicy.discount(member,itemPrice);
+        System.out.println("discountPrice ===>" + discountPrice);
         return new Order(memberId, itemName, itemPrice, discountPrice);
     }
 }
