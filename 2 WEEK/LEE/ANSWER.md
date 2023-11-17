@@ -53,7 +53,12 @@ Please provide a summary of your main theory here.
 
 ## Solution
 
-1. Please describe your solution in detail here.
+1. OrderServiceImpl에서 생성자를 통해 의존관계를 주입 받도록 코드를 수정한다.
+
+        public OrderServiceImpl(DiscountPolicy discountedPolicy) {
+            this.discountedPolicy = discountedPolicy;
+        }
+
 
 ## About
 
