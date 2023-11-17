@@ -68,6 +68,8 @@ https://agilemanifesto.org/iso/ko/manifesto.html <br>
 
 1. OrderServiceImpl에서 생성자를 통해 의존관계를 주입 받도록 코드를 수정한다.
 
+        private final DiscountPolicy discountedPolicy;
+
         public OrderServiceImpl(DiscountPolicy discountedPolicy) {
             this.discountedPolicy = discountedPolicy;
         }
