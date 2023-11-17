@@ -45,7 +45,20 @@ https://agilemanifesto.org/iso/ko/manifesto.html <br>
 
 ## 주요 이론 요약
 
-Please provide a summary of your main theory here.
+1. DI : 하나의 객체가 다른 객체의 의존성을 제공하는 테크닉
+   - 의존성 주입에는 3가지 방법 존재. 
+   1. 생성자 주입 (Constructor Injection) 
+      - Spring에서 권장되는 의존 관계 주입 방식
+      - 생성자 주입만이 final 키워드를 사용할 수 있음
+      - 객체의 불변성이 보장
+   2. Setter 주입 (Setter Injection) 
+      - final 키워드를 사용할 수 없어 불변성이 보장되지 않음 -> 객체가 변할 가능성이 존재
+      - JUnit 테스트가 어려워짐
+      - 단일책임원칙(SRP) 위반
+   3. 필드주입 (Field Injection)
+      - 역시 final 키워드 사용 불가
+      
+   - Spring 개발에서 생성자 주입을 사용하기!!
 
 ## ISSUE
 
