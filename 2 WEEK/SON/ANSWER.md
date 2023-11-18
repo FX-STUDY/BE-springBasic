@@ -61,7 +61,8 @@ OOP의 4가지 특징 <br>
 SRP 위반 --- <br>
  Order 클래스 - calculatedPrice() 메서드가 Order 클래스내에 있으면 Order 클래스가 여러개의 책임을 갖으므로 SRP위반이라 생각됩니다.<br>
 OCP 위반 --- <br>
-  <br>
+  OrderServiceImpl 클래스 - memeberRepository와 discountPolicy를 직접 생성해주면 나중에 정책이 바뀌었을 때,
+   이러한 변수를 선언한 코드들을 모두 수정해주어야하므로 OCP위반이라 생각됩니다.<br>
 LSP 위반 --- <br>
  <br>
 ISP 위반 --- <br>
@@ -70,8 +71,10 @@ DIP 위반 --- <br>
  <br>
 ## Solution
 
+SRP 위반 --- <br>
+ Order 클래스 - calculatedPrice()를 Order 클래스에서 빼내어 OrderService 클래스로 옮겨 책임을 한가지만 갖도록 해줍니다. <br>
 OCP 위반 --- <br>
-Order 클래스 - calculatedPrice()를 Order 클래스에서 빼내어 OrderService 클래스로 옮겨 책임을 한가지만 갖도록 해줍니다.
+ OrderServiceImplt 클래스 - 의존성을 주입해주는 클래스를 새로 만들어 정책이 바뀌었을 시, 그 클래스만 수정하면 되도록 만들어줍니다. <br>
 
 ## About
 
