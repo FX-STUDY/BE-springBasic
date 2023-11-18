@@ -4,16 +4,14 @@ import hello.core.member.Grade;
 import hello.core.member.Member;
 
 public class FlatRateDiscountPolicy implements DiscountPolicy{
-    private double FlatRateDiscount = 0.1;
+    private int FlatRateDiscount = 10;
 
     @Override
     public int discount(Member member, int price) {
 
         if (member.getGrade() == Grade.VIP) {
-            return (int) (price * FlatRateDiscount);
-        }else {
-            return 0;
+            return price * (FlatRateDiscount / 100);
         }
-
+        return 0;
     }
 }
