@@ -106,7 +106,8 @@ https://agilemanifesto.org/iso/ko/manifesto.html <br>
 ## ISSUE
 
 1. RateDiscountPolicy 클래스를 구현했지만 실제 적용하기 위해서는 OrderServiceImpl에서 수정작업을 해주어야 한다.
-
+    - OCP 위반
+    - FixDiscountPolicy(구현 클래스) 에 의존중임 -> DIP 위반
 ## Solution
 
 1. OrderServiceImpl에서 생성자를 통해 의존관계를 주입 받도록 코드를 수정한다.
