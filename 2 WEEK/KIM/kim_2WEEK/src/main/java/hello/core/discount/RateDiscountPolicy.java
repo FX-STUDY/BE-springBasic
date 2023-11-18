@@ -11,7 +11,7 @@ public class RateDiscountPolicy implements DiscountPolicy{
     public int discount(Member member, int price) {
 
         if(member.getGrade() == Grade.VIP) {
-            return (int)(price - (price * (discountRate / 100)));
+            return (int)((100 - discountRate) * 0.01 * price);
         }
         return price;
     }
