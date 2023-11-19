@@ -42,8 +42,8 @@ public class Main {
         Order order2 = orderServiceFix.createOrder(member2.getId(), "itemB", 20000); //id2
 
         //등급별 할인 가격 확인
-        System.out.println(order1.getDiscountedPrice()); // 1000
-        System.out.println(order2.getDiscountedPrice()); // 0
+        System.out.println(order1.getDiscountPrice()); // 1000
+        System.out.println(order2.getDiscountPrice()); // 0
 
 
         //RateDiscountPolicy 주입 확인
@@ -51,7 +51,7 @@ public class Main {
         Order order3 = orderServiceRate.createOrder(member3.getId(), "itemC", 10000); //id
 
 
-        System.out.println(order3.getDiscountedPrice()); // 30
+        System.out.println(order3.getDiscountPrice()); // 30
 
     }
 }

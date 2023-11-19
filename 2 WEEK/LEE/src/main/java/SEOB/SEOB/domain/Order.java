@@ -5,17 +5,17 @@ public class Order {
     private Long id;
     private String name;
     private int price;
-    private int discountedPrice;
+    private int discountPrice;
 
-    public Order(Long id, String name, int price, int discountedPrice) {
+    public Order(Long id, String name, int price, int discountPrice) {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.discountedPrice = discountedPrice;
+        this.discountPrice = discountPrice;
     }
 
     public int calculatePrice() {
-        return price - discountedPrice;
+        return price - discountPrice;
     }
 
     public Long getId() {
@@ -42,11 +42,11 @@ public class Order {
         this.price = price;
     }
 
-    public int getDiscountedPrice() {
-        return discountedPrice;
+    public int getDiscountPrice() {
+        return discountPrice;
     }
 
-    public void setDiscountedPrice(int discountedPrice) {
-        this.discountedPrice = discountedPrice;
+    public void setDiscountedPrice(int discountPrice) {
+        this.discountPrice = discountPrice;
     }
 }
