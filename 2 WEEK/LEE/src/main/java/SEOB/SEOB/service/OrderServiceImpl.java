@@ -16,7 +16,6 @@ public class OrderServiceImpl implements OrderService{
 
     private final MemberRepository memberRepository = new MemoryMemberRepository();
     private final DiscountPolicy discountPolicy;
-
     /*
     * 생성자를 통해 DiscountPolicy를 주입받도록 변경
      */
@@ -27,9 +26,11 @@ public class OrderServiceImpl implements OrderService{
     public Order createOrder(Long memberId, String name, int price) {
         Member member = memberRepository.findById(memberId);
         int discountPrice = discountPolicy.discount(member, price);
-
         return new Order(memberId, name, price, discountPrice);
     }
 
-
+    @Override
+    public Order calculatePrice() {
+        return calculatePrice();
+    }
 }

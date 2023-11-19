@@ -15,7 +15,7 @@ public class Order {
     }
 
     public int calculatePrice() {
-        return price - discountPrice;
+        return price - (price * discountPrice/100);
     }
 
     public Long getId() {
