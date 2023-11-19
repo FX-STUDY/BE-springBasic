@@ -18,35 +18,18 @@
 [ F(X) 동아리 실력 증진 ] <br><br>
 🏃🏻‍♂️끈기, 💦열정, 🧡욕구, 👊🏻인사이트
 ## 요구사항
-[ 새로운 할인 정책 개발 ]<br><br>
-1. DiscountPolicy 변경 
-기획자 : <br>
-Service Open 이 일주일 남았지만 `고정 금액 할인` -> `정률 (%) 할인` 으로 변경하고 싶다.<br>
-기존엔 VIP 에게 1000원을 할인해 드렸지만, 10% 할인 정책으로 변경해 주세요.<br>
 
-개발자 : <br>
-일주일 남았는데.... <br>
-
-기획자 : <br>
-Agile 선언 모르나요? " 계획을 따르기보다는 변화에 대응하라 " <br>
-https://agilemanifesto.org/iso/ko/manifesto.html <br>
-
-개발자 :<br>
-...<br>
-
-2. 관심사 분리
-   - 구현 객체를 생성하고, 연결하는 책임을 별도의 Class 로 구성하시오.
-
-3. 좋은 OOP 설계 5가지 원칙에 대해 공부 README 에 작성바랍니다.
+지금까지 작성된 java Code 를 Spring 으로 전환하세요.
+작성된 코드내에서 변환바랍니다.
 
 ## Study 방법
 [ 😎 Leader's 요구사항 ] <br>
-이전 코드에 `OOP 설계 원칙` 을 위반한 사례를 찾아 README 에 Update 해주세요.
-또 발견된 위반 사례를 `OOP 설계 원칙` 을 잘 지켜 수정해 주세요.
+Spring IoC, DI, 스프링 컨테이너에 대해서 공부하세요.
+스프링 컨테이너를 사용하면 어떤 장점에 대해 공부하세요.
 
 [ 🧐 Member : Study AND ] <br>
    - main fork 동기화 후 작업 진행
-   - 개인 folder 내 에서 작업 할 것
+   - 개인 folder 없습니다. 이전 Answer file 활용해서 작성 바랍니다.
    - ANSWER README 에 작성 하되, 기본 포맷은 기본으로 작성하고, 개별 Custom 후 추가 정보 기입
 
 ---
