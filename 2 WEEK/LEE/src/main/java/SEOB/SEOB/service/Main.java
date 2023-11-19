@@ -42,16 +42,15 @@ public class Main {
         Order order2 = orderServiceFix.createOrder(member2.getId(), "itemB", 20000); //id2
 
         //등급별 할인 가격 확인
-        System.out.println(order1.getDiscountPrice()); // 1000
-        System.out.println(order2.getDiscountPrice()); // 0
+        System.out.println("member1 VIP Fix 확인" + order1.getDiscountPrice()); // 1000
+        System.out.println("member1 VIP Fix 확인" + order2.getDiscountPrice()); // 0
 
 
         //RateDiscountPolicy 주입 확인
         OrderService orderServiceRate = new OrderServiceImpl(new RateDiscountPolicy());
-        Order order3 = orderServiceRate.createOrder(member3.getId(), "itemC", 10000); //id
-
-
-        System.out.println(order3.getDiscountPrice()); // 30
-        System.out.println(order3.calculatePrice()); // 7000
+        Order order3 = orderServiceRate.createOrder(member3.getId(), "itemC", 10000); //id3
+        System.out.println("member1 VIP의 Fix itemA 10000 의 할인된 가격 : " + order1.calculatePrice()); //9000
+        System.out.println("member2 NORMAL의 Fix itemB 20000 의 할인된 가격 : " + order2.calculatePrice()); //20000
+        System.out.println("member3 VIP의 Rate itemC 10000 의 할인된 가격 : " + order3.calculatePrice()); // 30퍼 할인된 7000
     }
 }
