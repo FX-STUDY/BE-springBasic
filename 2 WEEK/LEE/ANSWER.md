@@ -120,7 +120,16 @@ https://agilemanifesto.org/iso/ko/manifesto.html <br>
         public OrderServiceImpl(DiscountPolicy discountedPolicy) {
             this.discountedPolicy = discountedPolicy;
         }
-2. solution......
+
+2. 단순 RateDiscountPolicy 에서 return 값 변경으로 해결
+    - 생성했던 calculatePrice 메소드 제거
+   
+
+       return discountRateAmount;
+        # 아래처럼 변경
+       return price * discountRateAmount / 100;
+
+  
 
 ## About
 
