@@ -52,6 +52,6 @@ public class Main {
 
 
         System.out.println(order3.getDiscountPrice()); // 30
-
+        System.out.println(order3.calculatePrice()); // 7000
     }
 }
