@@ -14,437 +14,66 @@
 ## SCM
 ![GITHUB](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
 --
+# 목적
+[ F(X) 동아리 실력 증진 ] <br><br>
+🏃🏻‍♂️끈기, 💦열정, 🧡욕구, 👊🏻인사이트
 ## 요구사항
-[ 회원 ] <br>
-회원을 가입하고 조회할 수 있다. <br>
-회원등급 일반 / VIP 등급이 있다. <br>
-회원 데이터는 자체 DB를 구축할 수 있고, 외부 시스템과 연동할 수 있다. (미확정) <br>
-회원 ID (자동 생성), 회원 이름, 등급
-[ 주문과 할인 정책 ] <br>
-회원은 상품을 주문할 수 있다. <br>
-회원 등급에 따라 할인 정책을 적용할 수 있다. <br>
-할인 정책은 모든 VIP는 1000원을 할인해주는 고정 금액 할인 적용 (나중에 변경 될 수 있다.) <br>
-할인 정책은 변경 가능성이 높다. 회사의 기본 할인 정책을 아직 정하지 못했고, 오픈 직전까지 고민을 미루고 싶다. 최악의 경우 할인을 적용하지 않을 수 도 있다. (미확정) <br>
-주문 번호 (자동 생성), 상품 이름, 상품 가격, 할인 받은 가격
+[ 새로운 할인 정책 개발 ]<br><br>
+1. DiscountPolicy 변경 
+기획자 : <br>
+Service Open 이 일주일 남았지만 `고정 금액 할인` -> `정률 (%) 할인` 으로 변경하고 싶다.<br>
+기존엔 VIP 에게 1000원을 할인해 드렸지만, 10% 할인 정책으로 변경해 주세요.<br>
 
-## ANSWER
+개발자 : <br>
+일주일 남았는데.... <br>
 
-# 비즈니스 요구사항
+기획자 : <br>
+Agile 선언 모르나요? " 계획을 따르기보다는 변화에 대응하라 " <br>
+https://agilemanifesto.org/iso/ko/manifesto.html <br>
 
----
+개발자 :<br>
+...<br>
 
-### 회원
+2. 관심사 분리
+   - 구현 객체를 생성하고, 연결하는 책임을 별도의 Class 로 구성하시오.
 
-- 회원을 가입하고 조회할 수 있다.
-- 회원은 일반과 VIP 두 가지 등급
-- 회원 데이터는 자체 DB를 구출할 수 있고, 외부 시스템과 연동할 수 있다. [ 미확정 ]
+3. 좋은 OOP 설계 5가지 원칙에 대해 공부 README 에 작성바랍니다.
 
-### 주문과 할일 정책
+## Study 방법
+[ 😎 Leader's 요구사항 ] <br>
+이전 코드에 `OOP 설계 원칙` 을 위반한 사례를 찾아 README 에 Update 해주세요.
+또 발견된 위반 사례를 `OOP 설계 원칙` 을 잘 지켜 수정해 주세요.
 
-- 회원은 상품을 주문할 수 있다.
-- 회원 등급에 따라 할인 정책을 적용할 수 있다.
-- 할인 정책은 모든 VIP는 1000원을 할인 - 고정 금액 할인을 적용 [ 나중에 변경 될 수 있다. ]
-- 할인 정책은 변경 가능성이 높다.
-
-## Member Domain
-
-![스크린샷 2023-11-11 11 27 21](https://github.com/FX-STUDY/BE-springBasic/assets/100909578/893fb79a-4b90-486b-b534-da5b223f0cff)
-
-## Member Class Diagram
-
-![스크린샷 2023-11-11 11 28 30](https://github.com/FX-STUDY/BE-springBasic/assets/100909578/8a388b8e-edda-4ecb-9545-7feaf3252745)
-
-## 회원 객체 다이어그램
-
-![스크린샷 2023-11-11 11 28 36](https://github.com/FX-STUDY/BE-springBasic/assets/100909578/83699dbd-be8f-48ff-aa25-c82ec4ee0652)
-
-## 회원 도메인 개발
+[ 🧐 Member : Study AND ] <br>
+   - main fork 동기화 후 작업 진행
+   - 개인 folder 내 에서 작업 할 것
+   - ANSWER README 에 작성 하되, 기본 포맷은 기본으로 작성하고, 개별 Custom 후 추가 정보 기입
 
 ---
 
-### Grade
-
-```java
-package hello.core.member;
-
-public enum Grade {
-
-    BASIC,
-    VIP
-
-}
-```
-
-상수, enum 등은 변수명을 대문자로 사용하는 관례가 있다.
-
-### Member Entity
-
-```java
-package hello.core.member;
-
-public class Member {
-
-    private Long id;
-    private String name;
-    private Grade grade;
-
-    public Member( String name, Grade grade) {
-        this.name = name;
-        this.grade = grade;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Grade getGrade() {
-        return grade;
-    }
-
-    public void setGrade(Grade grade) {
-        this.grade = grade;
-    }
-}
-```
-
-### Member Repository Interface
-
-```java
-package hello.core.member;
-
-public interface MemberRepository {
-
-    void save(Member member);
-
-    Member findById(Long memberId);
-
-}
-```
-
-### Member Repository 구현체
-
-```java
-package hello.core.member;
-
-import java.util.HashMap;
-import java.util.Map;
-
-public class MemoryMemberRepository implements MemberRepository {
-
-    private static Map<Long,Member> store = new HashMap<>();
-    private static long SEQUENCE = 0L;
-
-    @Override
-    public void save(Member member) {
-        member.setId(++SEQUENCE);
-        store.put(member.getId(),member);
-    }
-
-    @Override
-    public Member findById(Long memberId) {
-        return store.get(memberId);
-    }
-}
-```
-
-> 참고 : `HashMap` 은 동시성 ISSUE 가 발생할 수 있다. 이런 경우 `ConcurrentHashMap` 을 사용하자.
-> 
-
-### Member Service Interface
-
-```java
-package hello.core.member;
-
-public interface MemberService {
-
-    void join(Member member);
-
-    Member findMember(Long memberId);
-
-}
-```
-
-### Member Service 구현체
-
-```java
-package hello.core.member;
-
-public class MemberServiceImpl implements MemberService{
-
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
-
-    @Override
-    public void join(Member member) {
-        memberRepository.save(member);
-    }
-
-    @Override
-    public Member findMember(Long memberId) {
-        return memberRepository.findById(memberId);
-    }
-}
-```
-
-### 회원 도메인 실행과 테스트
-
-회원 가입 main
-
-```java
-package hello.core;
-
-import hello.core.member.Grade;
-import hello.core.member.Member;
-import hello.core.member.MemberService;
-import hello.core.member.MemberServiceImpl;
-
-public class MemberApp {
-
-    public static void main(String[] args) {
-
-        MemberService memberService = new MemberServiceImpl();
-
-        Member member = new Member("memberA", Grade.VIP);
-
-        memberService.join(member);
-
-        Member findMember = memberService.findMember(1L);
-
-        System.out.println("member = " + member.getName());
-        System.out.println("findMember = " + findMember.getName());
-
-    }
-
-}
-```
-
-Application logic 으로 이렇게 Test 하는 것은 좋은 방법이 아니다. JUnit Test 를 사용하자
-
-### 회원 가입 테스트
-
-```java
-package hello.core.member;
-
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
-
-class MemberServiceTest {
-
-    MemberService memberService = new MemberServiceImpl();
-
-    @Test
-    void join() {
-        //given
-        Member member = new Member("memberA",Grade.VIP);
-
-        //when
-        memberService.join(member);
-        Member findMember = memberService.findMember(1L);
-
-        //then
-        assertThat(member).isEqualTo(findMember);
-
-    }
-}
-```
-
-# 주문과 할인 도메인 설계
-
----
-
-### 주문 도메인 협력, 역할, 책임
-
-![스크린샷 2023-11-11 11 35 34](https://github.com/FX-STUDY/BE-springBasic/assets/100909578/c107fbf7-d029-4336-bb47-1082079b8fd2)
-
-1. 주문 생성 : 클라이언트는 주문 서비스에 주문 생성을 요청한다.
-2. 회원 조회 : 할인을 위해서 회원 등급이 필요하다. 그래서 주문 서비스는 회원 저장소에서 회원을 조회한다.
-3. 할인 적용 : 주문 서비스는 회원 등급에 따른 할인 여부를 할인 정책에 위임한다.
-4. 주문 결과 반환 : 주문 서비스는 할인 결과를 포함한 주문 결과를 반환한다.
-
-### 주문 도메인 전체
-
-![스크린샷 2023-11-11 11 37 21](https://github.com/FX-STUDY/BE-springBasic/assets/100909578/f25b7df5-8930-41a9-ad03-5abf94aeb244)
-
-
-역할과 구현을 분리해서 자유롭게 구현 객체를 조립할 수 있게 설계한다.
-
-### 주문 도메인 클래스 다이어그램
-
-![스크린샷 2023-11-11 11 38 14](https://github.com/FX-STUDY/BE-springBasic/assets/100909578/b52aee65-a5d0-4a11-8dae-1b25a0b1600f)
-
-
-### 주문 도메인 객체 다이어그램1
-
-![스크린샷 2023-11-11 11 38 47](https://github.com/FX-STUDY/BE-springBasic/assets/100909578/df91550c-b8b5-47ac-a35b-ec2b468a61a4)
-
-### 주문 도메인 객체 다이어그램2
-
-![스크린샷 2023-11-11 11 38 53](https://github.com/FX-STUDY/BE-springBasic/assets/100909578/3c353294-4ba5-4f01-9752-f873f64f3d66)
-
-## 주문과 할인 도메인 개발
-
----
-
-### 할인 정책 Interface
-
-```java
-package hello.core.discount;
-
-import hello.core.member.Member;
-
-public interface DiscountPolicy {
-
-    int discount(Member member , int price);
-
-}
-```
-
-### 정액 할인 정책 구현체
-
-```java
-package hello.core.discount;
-
-import hello.core.member.Grade;
-import hello.core.member.Member;
-
-public class FixDiscountPolicy implements DiscountPolicy{
-
-    private int discountFixAmount = 1000;
-
-    @Override
-    public int discount(Member member, int price) {
-
-        if (member.getGrade() == Grade.VIP) {
-            return discountFixAmount;
-        }else {
-            return 0;
-        }
-
-    }
-}
-```
-
-### 주문 엔티티
-
-```java
-package hello.core.order;
-
-public class Order {
-
-    private Long memberId;
-    private String itemName;
-    private int itemPrice;
-    private int discountPrice;
-
-    public Order(Long memberId, String itemName, int itemPrice, int discountPrice){
-        this.memberId = memberId;
-        this.itemName = itemName;
-        this.itemPrice = itemPrice;
-        this.discountPrice = discountPrice;
-    }
-
-    public int calculatePrice(){
-        return itemPrice - discountPrice;
-    }
-
-    public int getDiscountPrice(){
-        return discountPrice;
-    }
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                "memberId=" + memberId +
-                ", itemName='" + itemName + '\'' +
-                ", itemPrice=" + itemPrice +
-                ", discountPrice=" + discountPrice +
-                '}';
-    }
-}
-```
-
-### 주문 서비스 인터페이스
-
-```java
-package hello.core.order;
-
-public interface OrderService {
-    Order createOrder(Long memberId, String itemName, int itemPrice);
-}
-```
-
-### 주문 서비스 구현체
-
-```java
-package hello.core.order;
-
-import hello.core.discount.DiscountPolicy;
-import hello.core.discount.FixDiscountPolicy;
-import hello.core.member.Member;
-import hello.core.member.MemberRepository;
-import hello.core.member.MemoryMemberRepository;
-
-public class OrderServiceImpl implements OrderService{
-
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
-    private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
-
-    @Override
-    public Order createOrder(Long memberId, String itemName, int itemPrice) {
-        Member member = memberRepository.findById(memberId);
-        int discountPrice = discountPolicy.discount(member,itemPrice);
-        return new Order(memberId, itemName, itemPrice, discountPrice);
-    }
-}
-```
-
-### 주문과 할인 정책 테스트
-
-```java
-package hello.core.order;
-
-import hello.core.member.Grade;
-import hello.core.member.Member;
-import hello.core.member.MemberService;
-import hello.core.member.MemberServiceImpl;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.mockito.internal.matchers.Or;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-class OrderServiceTest {
-
-    MemberService memberService = new MemberServiceImpl();
-    OrderService orderService = new OrderServiceImpl();
-
-    @Test
-    void createOrder() {
-
-        Member member = new Member("memberA", Grade.VIP);
-        memberService.join(member);
-
-        Order order = orderService.createOrder(member.getId(),"itemA",10000);
-        org.assertj.core.api.Assertions.assertThat(order.getDiscountPrice()).isEqualTo(1000);
-
-    }
-}
-```
-## HOME WORK
-1. 위 코드의 핵심은 무엇일까요?
-2. 위 코드의 문제점은 무엇일까요?
-3. 그 해결 방법은 무엇일까요?
+## Commit Message ROLE
+Header, Body, Footer는 빈 행으로 구분한다 <br>
+... <br>
+타입(스코프): 주제(제목) // Header(헤더) <br>
+
+본문 // Body(바디) <br>
+
+바닥글 // Footer <br>
+... <br>
+
+|타입이름|내용|
+|------|---|
+|feat|새로운 기능에 대한 커밋|
+|fix|버그 수정에 대한 커밋|
+|build|빌드 관련 파일 수정 / 모듈 설치 또는 삭제에 대한 커밋|
+|chore|그 외 자잘한 수정에 대한 커밋|
+|ci|ci 관련 설정 수정에 대한 커밋|
+|docs|문서 수정에 대한 커밋|
+|style|코드 스타일 혹은 포맷 등에 관한 커밋|
+|refactor|코드 리팩토링에 대한 커밋|
+|test|테스트 코드 수정에 대한 커밋|
+|perf|성능 개선에 대한 커밋|
+
+매주 README 커밋 -> DOCS <br>
+mission 풀이 후 커밋 -> feat <br>
+PR 후 수정 사항 커밋 -> perf <br>
