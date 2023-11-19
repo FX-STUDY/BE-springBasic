@@ -9,7 +9,7 @@ public class RateDiscountPolicy implements DiscountPolicy{
     @Override
     public int discount(Member member, int price) {
             if(member.getGrade().equals(GradeType.VIP))
-                return discountRateAmount;
+                return price * discountRateAmount / 100;
             return 0;
     }
 }

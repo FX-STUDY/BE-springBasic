@@ -15,7 +15,7 @@ public class Order {
     }
 
     public int calculatePrice() {
-        return price - (price * discountPrice/100);
+        return price - discountPrice;
     }
 
     public Long getId() {
@@ -46,7 +46,7 @@ public class Order {
         return discountPrice;
     }
 
-    public void setDiscountedPrice(int discountPrice) {
+    public void setDiscountPrice(int discountPrice) {
         this.discountPrice = discountPrice;
     }
 }

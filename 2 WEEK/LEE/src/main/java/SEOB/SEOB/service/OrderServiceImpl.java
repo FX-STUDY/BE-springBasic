@@ -29,8 +29,5 @@ public class OrderServiceImpl implements OrderService{
         return new Order(memberId, name, price, discountPrice);
     }
 
-    @Override
-    public Order calculatePrice() {
-        return calculatePrice();
-    }
+
 }
