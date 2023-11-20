@@ -1,17 +1,20 @@
 package com.yebin.yebin.order;
 
-import com.yebin.yebin.dependency.DependencyInjection;
+import com.yebin.yebin.dependency.AppConfig;
 import com.yebin.yebin.discount.DiscountPolicy;
-import com.yebin.yebin.discount.FixDiscountPolicy;
-import com.yebin.yebin.discount.RateDiscountPolicy;
 import com.yebin.yebin.member.Member;
 import com.yebin.yebin.member.MemberRepository;
-import com.yebin.yebin.member.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 public class OrderServiceImpl implements OrderService{
-    private final DependencyInjection dependencyInjection = new DependencyInjection();
-    private final MemberRepository memberRepository = dependencyInjection.memberRepository();
-    private final DiscountPolicy discountPolicy = dependencyInjection.discountPolicy();
+    private final MemberRepository memberRepository;
+    private final DiscountPolicy discountPolicy;
+
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy){
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
