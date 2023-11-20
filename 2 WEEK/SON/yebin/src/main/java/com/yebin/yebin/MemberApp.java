@@ -1,5 +1,6 @@
 package com.yebin.yebin;
 
+import com.yebin.yebin.dependency.AppConfig;
 import com.yebin.yebin.member.Grade;
 import com.yebin.yebin.member.Member;
 import com.yebin.yebin.member.MemberService;
@@ -7,8 +8,8 @@ import com.yebin.yebin.member.MemberServiceImpl;
 
 public class MemberApp {
     public static void main(String[] args) {
-
-        MemberService memberService = new MemberServiceImpl();
+        AppConfig appConfig = new AppConfig();
+        MemberService memberService =appConfig.memberService();
 
         Member member = new Member("memberA", Grade.VIP);
 
