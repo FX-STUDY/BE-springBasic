@@ -44,22 +44,104 @@ https://agilemanifesto.org/iso/ko/manifesto.html <br>
 ---
 
 ## 주요 이론 요약
+### 객체지향 설계 5대 원칙 (SOLID)
+* **단일 책임 원칙 (Single Responsibility Principle, SRP)** : 한 클래스는 하나의 책임만 가져야 한다.
+* **개방-폐쇄 원칙 (Open-Closed Principle, OCP)** : 변경에는 닫혀 있어야 하고, 확장에는 열려 있어야 한다.
+* **리스코프 교체 원칙 (Liskov Substitution Principle, LSP)** : 상위 클래스의 객체는 언제나 자신의 하위 클래스의 객체로 교체할 수 있어야 한다.
+* **인터페이스 분리 원칙 (Interface Segregation Principle, ISP)** : 클라이언트는 자신이 사용하지 않는 메서드와 의존 관계를 맺으면 안 된다.
+* **의존 관계 역전 원칙 (Dependency Inversion Principle, DIP)** : 클라이언트는 구체 클래스가 아닌 추상 클래스(인터페이스)에 의존해야 한다.
 
-Please provide a summary of your main theory here.
+###
+### 의존관계 주입 (Dependency Injection, DI)
+의존관계를 외부에서 주입해주는 것을 말하며 제어의 역행을 통해 이루어진다. <br>
+객체 간의 관계를 동적으로 주입하여 유연성을 확보하고 결합도를 낮출 수 있다.
+
+###
+### 제어의 역전 (Inversion of Control, IoC)
+제어란 객체를 생성하는 주도권을 의미한다.<br>
+프로그램의 제어 흐름을 직접 제어하는 것이 아니라 외부에서 관리하는 것을 말한다.
+
+---
 
 ## ISSUE
+### 위반 사례
+* **DIP**
+    1. MemberServiceImpl Class는 MemoryMemberRepository 구현 클래스를 의존한다.
+    2. OrderServiceImpl Class는 MemoryMemberRepository, FixDiscountPolicy 구현 클래스를 의존한다.
 
-Please enter your issue details here.
+
+* **OCP**
+    1. 할인 정책이 바뀔 경우 OrderServiceImpl 소스코드를 변경해야 한다.
+
+---
 
 ## Solution
+### MemberServiceImpl 멤버 변수 초기화 삭제 및 생성자 생성
+```java
+private final MemberRepository memberRepository;
 
-Please describe your solution in detail here.
+public MemberServiceImpl(MemberRepository memberRepository) {
+    this.memberRepository = memberRepository;
+}
+```
+###
+### OrderServiceImpl 멤버 변수 초기화 및 생성자 생성
+```java
+private final MemberRepository memberRepository;
+private final DiscountPolicy discountPolicy;
+
+public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    this.memberRepository = memberRepository;
+    this.discountPolicy = discountPolicy;
+}
+```
+###
+### 의존관계 주입 (Dependency Injection, DI)
+```java
+public class AppConfig {
+
+    public MemberService memberService() {
+        return new MemberServiceImpl(new MemoryMemberRepository());
+    }
+
+    public OrderService orderService() {
+        return new OrderServiceImpl(new MemoryMemberRepository(), new FixDiscountPolicy());
+    }
+}
+```
+
+---
 
 ## About
+### Clean Code 위반
 
-Please enter your personal feelings, what you learned, and what you need to learn here.
+```java
+if (member.getGrade() == Grade.VIP) {
+    return price * (FlatRateDiscount / 100);
+} else {
+    return 0;    
+}
+```
+### 해결
+
+```java
+if (member.getGrade() == Grade.VIP)
+    return price * (FlatRateDiscount / 100);
+    
+return 0;
+```
+
+###
+### 멤버 변수 직관성 저하
+```java
+private double FlatRateDiscount = 0.1;
+```
+### 해결
+```java
+private int FlatRateDiscount = 10;
+```
+
+---
 
 ## Question To Reader
-
-After completing the mission, please enter any suggestions or questions.
-
+    -  Nothing
