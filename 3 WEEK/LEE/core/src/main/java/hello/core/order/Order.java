@@ -1,8 +1,10 @@
 package hello.core.order;
 
+import lombok.AllArgsConstructor;
 import lombok.ToString;
 
 @ToString
+@AllArgsConstructor
 public class Order {
 
     private Long memberId;
@@ -10,12 +12,6 @@ public class Order {
     private int itemPrice;
     private int discountPrice;
 
-    public Order(Long memberId, String itemName, int itemPrice, int discountPrice){
-        this.memberId = memberId;
-        this.itemName = itemName;
-        this.itemPrice = itemPrice;
-        this.discountPrice = discountPrice;
-    }
 
     public int calculatePrice(){
         return itemPrice - discountPrice;
