@@ -6,16 +6,23 @@ import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrderServiceImpl implements OrderService{
+    @Autowired
+    private MemberRepository memberRepository;
+    @Autowired
+    @Qualifier("rateDiscountPolicy")
+    private DiscountPolicy discountPolicy;
 
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
-    private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
 
     @Override
-    public Order createOrder(Long memberId, String itemName, int itemPrice) {
-        Member member = memberRepository.findById(memberId);
-        int discountPrice = discountPolicy.discount(member,itemPrice);
-        return new Order(memberId, itemName, itemPrice, discountPrice);
+    public Order createOrder(Long memberID, String itemName, int itemPrice) {
+        Member member = memberRepository.findById(memberID);
+        int discountPrice = discountPolicy.discount(memberID,itemPrice);
+        return new Order(memberID, itemName, itemPrice, discountPrice);
     }
 }
