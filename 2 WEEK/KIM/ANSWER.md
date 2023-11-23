@@ -84,6 +84,26 @@ Please describe your solution in detail here.
    - dependency inversion principle ->
       의존 역전의 원칙, 의존관계에 있어서 수정 가능성이 높은 것보다 낮은 것에 의존해야 한다. 객체지향 관점에서 볼 때 수정 가능성이 높은 것은 주로 구체화된 클래스들을 뜻하고, 수정 가능성이 낮은 것들은 추상클래스나 인터페이스를 뜻한다. -> 코드의 재사용성과 유연성을 향상시킬 수 있다.
 
+   3Week study
+   
+   DI -> Dependency Injection(의존성 주입) ->
+      스프링이 다른 프레임워크와 차별화되어 제공하는 기능, 객체를 직접 생성하지 않고 외부에서 생성 후 주입시키는 방식. -> 모듈 간 결합도가 낮아지고 유연성이 높아진다.
+
+   IOC -> Inversion of Control(제어의 역전) ->
+      메소드,객체의 호출작업을 개발자가 아닌 외부에서 결정하는 것. -> 객체의 의존성을 역전시켜 객체 간의 결합도를 낮추고 유연한 코드를 작성 가능하게 하여 가독성 향상, 코드 중복 방지, 유지 보수 용이 의 장점존재.
+      -> 모든 의존성 객체를 스프링이 생성하여 주입시킴으로써 모든 의존성 객체들은 SingleTone Pattern 특징을 갖는다.
+
+   Spring Container ->
+      스프링 컨테이너는 스프링 프레임워크의 핵심 컴포넌트로 자바 객체(bean)의 생명 주기를 관리한다.
+      스프링 컨테이너는 BeanFactory, ApplicationContext 두 종류의 인터페이스로 구현되어있다.
+
+      BeanFactory -> 빈의 생성, 관계설정 같은 제어를 담당하는 IOC 오브젝트, getBean() 메서드를 통해 빈을 인스턴스화 할 수 있다.
+
+      ApplicationContext -> BeanFactory를 좀더 확장한 것. (주로 사용됨)
+      
+      사용 목적(장점) ->
+         객체를 컨테이너에서 생성하여 주입함으로써 객체 간의 의존성,결합도를 낮추고 캡슐화 기능을 향상시킨다.
+
 ## Question To Reader
 
 After completing the mission, please enter any suggestions or questions.
