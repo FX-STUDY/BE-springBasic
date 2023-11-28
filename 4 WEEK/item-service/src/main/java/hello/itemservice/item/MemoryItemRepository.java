@@ -12,4 +12,8 @@ public class MemoryItemRepository implements ItemRepository {
         store.put(item.getId(),item);
     }
 
+    @Override
+    public Item findById(Long itemId) {
+        return store.get(itemId);
+    }
 }
