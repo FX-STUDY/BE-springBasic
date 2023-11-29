@@ -15,6 +15,13 @@ public class ItemServiceImpl implements ItemService{
         itemRepository.save(item);
     }
 
+    @Override
+    public void updateItem(Item item, String itemName, double itemPrice, long itemQuantity) {
+        item.setName(itemName);
+        item.setPrice(itemPrice);
+        item.setQuantity(itemQuantity);
+        itemRepository.update(item.getId(), item);
+    }
 
     @Override
     public Item findItem(Long itemId) {
