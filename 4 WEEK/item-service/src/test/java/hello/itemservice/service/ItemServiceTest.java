@@ -1,0 +1,41 @@
+package hello.itemservice.service;
+
+import hello.itemservice.domain.Item;
+import hello.itemservice.repository.ItemRepository;
+import hello.itemservice.repository.MemoryItemRepository;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+class ItemServiceTest {
+
+    ItemServiceImpl itemService;
+
+
+    @BeforeEach
+    void beforeEach() {
+        ItemRepository itemRepository = new MemoryItemRepository();
+        itemService = new ItemServiceImpl(itemRepository);
+    }
+    @Test
+    void add() {
+        //상품 등록
+        //given
+        Item item = new Item("HTTP BOOK", 10000, 10); //상품명, 가격, 수량
+
+        //when
+        itemService.add(item);
+        Item findItem = itemService.findItem(1L);
+
+        //then
+        assertThat(item).isEqualTo(findItem);
+    }
+
+
+
+    @Test
+    void findItem() {
+    }
+}
