@@ -16,4 +16,14 @@ public class MemoryItemRepository implements ItemRepository {
     public Item findById(Long itemId) {
         return store.get(itemId);
     }
+
+    @Override
+    public void update(long itemId, String itemName, double itemPrice, long itemQuantity) {
+        Item item = store.get(itemId);
+        item.setName(itemName);
+        item.setPrice(itemPrice);
+        item.setQuantity(itemQuantity);
+        store.replace(item.getId(),item);
+    }
+
 }
