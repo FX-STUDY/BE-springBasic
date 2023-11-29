@@ -18,12 +18,8 @@ public class MemoryItemRepository implements ItemRepository {
     }
 
     @Override
-    public void update(long itemId, String itemName, double itemPrice, long itemQuantity) {
-        Item item = store.get(itemId);
-        item.setName(itemName);
-        item.setPrice(itemPrice);
-        item.setQuantity(itemQuantity);
-        store.replace(item.getId(),item);
+    public void update(long itemId, Item updatedItem) {
+        store.replace(itemId,updatedItem);
     }
 
 }
