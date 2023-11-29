@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 public interface ItemRepository {
     void save(Item item);
     Item findById(Long itemId);
-    void update(long itemId, String itemName, double itemPrice, long itemQuantity);
+    void update(long itemId, Item updatedItem);
 }
