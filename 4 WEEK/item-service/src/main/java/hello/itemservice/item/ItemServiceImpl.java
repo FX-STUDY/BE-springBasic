@@ -9,4 +9,10 @@ public class ItemServiceImpl implements ItemService{
     public ItemServiceImpl(ItemRepository itemRepository) {
         this.itemRepository = itemRepository;
     }
+
+    @Override
+    public void join(Item item) {
+        itemRepository.save(item);
+    }
+
 }
