@@ -1,5 +1,6 @@
 package hello.itemservice.service;
 
+import hello.itemservice.AppConfig;
 import hello.itemservice.domain.Item;
 import hello.itemservice.repository.ItemRepository;
 import hello.itemservice.repository.MemoryItemRepository;
@@ -11,13 +12,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ItemServiceTest {
 
-    ItemServiceImpl itemService;
+    ItemService itemService;
 
 
     @BeforeEach
     void beforeEach() {
-        ItemRepository itemRepository = new MemoryItemRepository();
-        itemService = new ItemServiceImpl(itemRepository);
+        AppConfig appConfig = new AppConfig();
+        itemService = appConfig.itemService();
+
     }
     @Test
     void add() {
