@@ -3,7 +3,7 @@ package hello.itemservice.service;
 import hello.itemservice.domain.Item;
 import hello.itemservice.repository.ItemRepository;
 
-public class ItemServiceImpl {
+public class ItemServiceImpl implements ItemService{
 
     private final ItemRepository itemRepository;
 
