@@ -2,6 +2,8 @@ package hello.itemservice.repository;
 
 import hello.itemservice.domain.Item;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class MemoryItemRepository implements ItemRepository{
@@ -19,4 +21,9 @@ public class MemoryItemRepository implements ItemRepository{
     public Item findByItemId(Long itemId) {
         return store.get(itemId);
     }
+
+    public List<Item> findAll() {
+        return new ArrayList<>(store.values());
+    }
+
 }
