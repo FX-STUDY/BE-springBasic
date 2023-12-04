@@ -32,9 +32,9 @@ class ItemRepositoryTest {
         Item item3 = new Item("Spring BOOK", 20000, 100); //상품명, 가격, 수량
 
         //when
-        itemService.add(item1);
-        itemService.add(item2);
-        itemService.add(item3);
+        itemService.addItem(item1);
+        itemService.addItem(item2);
+        itemService.addItem(item3);
         Item findItem = itemService.findItem(1L);
 
         //then

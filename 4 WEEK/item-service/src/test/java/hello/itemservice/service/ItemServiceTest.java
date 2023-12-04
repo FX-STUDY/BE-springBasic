@@ -28,7 +28,7 @@ class ItemServiceTest {
         Item item = new Item("HTTP BOOK", 10000, 10); //상품명, 가격, 수량
 
         //when
-        itemService.add(item);
+        itemService.addItem(item);
         Item findItem = itemService.findItem(1L);
 
         //then

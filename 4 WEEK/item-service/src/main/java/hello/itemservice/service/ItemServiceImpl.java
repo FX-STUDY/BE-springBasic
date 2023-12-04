@@ -12,7 +12,7 @@ public class ItemServiceImpl implements ItemService{
     }
 
     //상품 목록 추가
-    public void add(Item item) {
+    public void addItem(Item item) {
         itemRepository.save(item);
     }
 
