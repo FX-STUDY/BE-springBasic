@@ -6,6 +6,8 @@ import hello.itemservice.repository.MemoryItemRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -39,5 +41,24 @@ class ItemServiceTest {
 
     @Test
     void findItem() {
+    }
+
+
+    @Test
+    void findAll() {
+        //상품 등록
+        //given
+        Item item1 = new Item("HTTP BOOK", 10000, 10); //상품명, 가격, 수량
+        Item item2 = new Item("JPA BOOK", 43000, 5); //상품명, 가격, 수량
+        Item item3 = new Item("Spring BOOK", 20000, 100); //상품명, 가격, 수량
+
+        //when
+        itemService.addItem(item1);
+        itemService.addItem(item2);
+        itemService.addItem(item3);
+
+        //then
+        List<Item> allItems = itemService.findAll();
+        assertThat(allItems).contains(item1, item2, item3);
     }
 }

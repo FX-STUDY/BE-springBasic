@@ -3,6 +3,9 @@ package hello.itemservice.service;
 import hello.itemservice.domain.Item;
 import hello.itemservice.repository.ItemRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 @Service
 public class ItemServiceImpl implements ItemService{
 
@@ -22,4 +25,9 @@ public class ItemServiceImpl implements ItemService{
     public Item findItem(Long itemId) {
         return itemRepository.findByItemId(itemId);
     }
+
+    public List<Item> findAll() {
+        return itemRepository.findAll();
+    }
+
 }
