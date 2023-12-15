@@ -1,8 +1,11 @@
 package hello.itemservice.item;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.HashMap;
 import java.util.Map;
 
+@Repository
 public class MemoryItemRepository implements ItemRepository {
     private static Map<Long, Item> store = new HashMap<>();
     private static long SEQUENCE = 0L;
