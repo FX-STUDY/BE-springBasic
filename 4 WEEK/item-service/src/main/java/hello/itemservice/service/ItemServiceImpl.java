@@ -2,7 +2,8 @@ package hello.itemservice.service;
 
 import hello.itemservice.domain.Item;
 import hello.itemservice.repository.ItemRepository;
-
+import org.springframework.stereotype.Service;
+@Service
 public class ItemServiceImpl implements ItemService{
 
     private final ItemRepository itemRepository;
@@ -12,6 +13,7 @@ public class ItemServiceImpl implements ItemService{
     }
 
     //상품 목록 추가
+
     public void addItem(Item item) {
         itemRepository.save(item);
     }

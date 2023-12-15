@@ -1,11 +1,13 @@
 package hello.itemservice.repository;
 
 import hello.itemservice.domain.Item;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
+@Repository
 public class MemoryItemRepository implements ItemRepository{
     private static ConcurrentHashMap<Long, Item> store = new ConcurrentHashMap<>();
 

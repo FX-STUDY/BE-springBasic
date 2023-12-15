@@ -1,6 +1,5 @@
 package hello.itemservice.service;
 
-import hello.itemservice.AppConfig;
 import hello.itemservice.domain.Item;
 import hello.itemservice.repository.ItemRepository;
 import hello.itemservice.repository.MemoryItemRepository;
@@ -17,8 +16,9 @@ class ItemServiceTest {
 
     @BeforeEach
     void beforeEach() {
-        AppConfig appConfig = new AppConfig();
-        itemService = appConfig.itemService();
+//        AppConfig appConfig = new AppConfig();
+//        itemService = appConfig.itemService();
+        itemService = new ItemServiceImpl(new MemoryItemRepository());
 
     }
     @Test

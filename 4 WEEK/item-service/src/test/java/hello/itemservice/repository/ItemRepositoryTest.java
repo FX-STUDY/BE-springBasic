@@ -1,8 +1,8 @@
 package hello.itemservice.repository;
 
-import hello.itemservice.AppConfig;
 import hello.itemservice.domain.Item;
 import hello.itemservice.service.ItemService;
+import hello.itemservice.service.ItemServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,10 +17,11 @@ class ItemRepositoryTest {
     ItemRepository itemRepository;
     @BeforeEach
     void beforeEach() {
-        AppConfig appConfig = new AppConfig();
-        itemService = appConfig.itemService();
+//        AppConfig appConfig = new AppConfig();
+//        itemService = appConfig.itemService();
 
         itemRepository = new MemoryItemRepository();
+        itemService = new ItemServiceImpl(new MemoryItemRepository());
 
     }
     @Test
