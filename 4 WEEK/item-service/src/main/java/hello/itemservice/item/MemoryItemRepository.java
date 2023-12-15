@@ -19,7 +19,7 @@ public class MemoryItemRepository implements ItemRepository {
 
     @Override
     public void update(long itemId, Item updatedItem) {
-        store.replace(itemId,updatedItem);
+        store.put(itemId,updatedItem);
     }
 
 }
