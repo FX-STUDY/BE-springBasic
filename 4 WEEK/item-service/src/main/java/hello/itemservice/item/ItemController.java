@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.List;
+
 @Controller
 public class ItemController {
 
@@ -18,7 +20,9 @@ public class ItemController {
 
 
     @GetMapping("/itemList")
-    public String getItemListForm(){
+    public String getItemListForm(Model model){
+        List<Item> itemList = itemRepository.findAll();
+        model.addAttribute("itemList",itemList);
         return "ItemListForm";
     }
 
