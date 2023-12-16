@@ -2,7 +2,9 @@ package hello.itemservice.item;
 
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -23,6 +25,10 @@ public class MemoryItemRepository implements ItemRepository {
     @Override
     public void update(long itemId, Item updatedItem) {
         store.put(itemId,updatedItem);
+    }
+
+    public List<Item> findAll(){
+        return new ArrayList<>(store.values());
     }
 
 }
