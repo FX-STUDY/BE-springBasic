@@ -11,4 +11,9 @@ public class ItemController {
         return "ItemListForm";
     }
 
+    @GetMapping("/itemDetail")
+    public String getItemDetailForm(){
+        return "ItemDetailForm";
+    }
+
 }
