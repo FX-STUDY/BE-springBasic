@@ -21,4 +21,8 @@ public class ItemController {
         return "ItemSaveForm";
     }
 
+    @GetMapping("/itemUpdate")
+    public String getItemUpdateForm(){
+        return "ItemUpdateForm";
+    }
 }
