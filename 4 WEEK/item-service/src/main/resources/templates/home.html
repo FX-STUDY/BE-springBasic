@@ -25,8 +25,8 @@
     <table>
         <th>ID</th> <th>상품명</th> <th>가격</th> <th>수량</th>
         <tr th:each="item : ${findAll}">
-            <td th:text="${item.itemId}"></td>
-            <td th:text="${item.itemName}"></td>
+            <td><a href="itemDetailForm.html" th:href="@{/{itemId}(itemId=${item.itemId})}"  th:text="${item.itemId}"></a></td>
+            <td><a href="itemDetailForm.html" th:href="${item.itemId}" th:text="${item.itemName}"></a></td>
             <td th:text="${item.quantity}"></td>
             <td th:text="${item.price}"></td>
         </tr>
