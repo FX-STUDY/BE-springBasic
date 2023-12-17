@@ -25,6 +25,7 @@
     <table>
         <th>ID</th> <th>상품명</th> <th>가격</th> <th>수량</th>
         <tr th:each="item : ${findAll}">
+            <td th:text="${item.itemId}"></td>
             <td th:text="${item.itemName}"></td>
             <td th:text="${item.quantity}"></td>
             <td th:text="${item.price}"></td>
