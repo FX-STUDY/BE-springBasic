@@ -14,7 +14,7 @@ public interface ItemService {
 
     List<Item> findAll();
 
-    void editItem(Item item, String itemName, int price, int quantity);
+    void editItem(Long itemId, Item item);
 }
 
 

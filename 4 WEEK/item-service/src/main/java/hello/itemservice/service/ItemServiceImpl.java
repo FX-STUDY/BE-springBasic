@@ -30,10 +30,7 @@ public class ItemServiceImpl implements ItemService{
         return itemRepository.findAll();
     }
 
-    public void editItem(Item item, String itemName, int price, int quantity) {
-        item.setItemName(itemName);
-        item.setPrice(price);
-        item.setQuantity(quantity);
-        itemRepository.editItem(item.getItemId(), item);
+    public void editItem(Long itemId, Item item) {
+        itemRepository.editItem(itemId, item);
     }
 }
