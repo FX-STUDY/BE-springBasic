@@ -70,7 +70,8 @@ class ItemServiceTest {
         itemService.addItem(item1);
 
         //when
-        itemService.editItem(item1, "JSP BOOK", 5000, 5);
+        Item editItem = new Item("JSP BOOK", 5000, 5);
+        itemService.editItem(1L, editItem);
 
         //then
         Item editedItem = itemService.findItem(item1.getItemId()); // 수정 후 아이템 조회
