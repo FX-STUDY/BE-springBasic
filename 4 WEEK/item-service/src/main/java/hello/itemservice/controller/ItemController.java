@@ -48,4 +48,24 @@ public class ItemController {
         model.addAttribute("item", item);
         return "/itemDetailForm";
     }
+
+    //상품 수정
+    @GetMapping("/{itemId}/editItem")
+    public String editItemForm(@PathVariable("itemId") long itemId, Model model) {
+        Item findById = itemRepository.findByItemId(itemId);
+
+        model.addAttribute("item", findById);
+        return "/editItemForm";
+    }
+
+    @PostMapping("/{itemId}/editItem")
+    public String editItemForm(@PathVariable("itemId") long itemId, ItemForm form) {
+        Item item = new Item(
+                form.getItemName(),
+                form.getPrice(),
+                form.getQuantity()
+        );
+        itemService.editItem(itemId, item);
+        return "redirect:/";
+    }
 }
