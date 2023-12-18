@@ -30,7 +30,8 @@ public class MemoryItemRepository implements ItemRepository{
 
     //상품 수정
     public void editItem(Long itemId, Item editedItem) {
-        store.put(itemId, editedItem);
+        editedItem.setItemId(itemId);
+        store.put(editedItem.getItemId(), editedItem);
     }
 
 }
