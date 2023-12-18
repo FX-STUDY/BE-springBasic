@@ -47,7 +47,9 @@ public class ItemController {
     }
 
     @GetMapping("/itemUpdateForm")
-    public String getItemUpdateForm(){
+    public String getItemUpdateForm(Item item, Model model){
+        Item updateItem = itemRepository.findById(item.getId());
+        model.addAttribute("updateItem",updateItem);
         return "ItemUpdateForm";
     }
 
