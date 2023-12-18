@@ -22,7 +22,7 @@ public class ItemServiceImpl implements ItemService{
         item.setName(itemName);
         item.setPrice(itemPrice);
         item.setQuantity(itemQuantity);
-        itemRepository.update(item.getId(), item);
+        itemRepository.update(item);
     }
 
     @Override
