@@ -19,7 +19,7 @@ public class ItemController {
     }
 
 
-    @GetMapping("/itemList")
+    @GetMapping("/itemListForm")
     public String getItemListForm(Model model){
         List<Item> itemList = itemRepository.findAll();
         model.addAttribute("itemList",itemList);
@@ -33,12 +33,12 @@ public class ItemController {
         return "ItemDetailForm";
     }
 
-    @GetMapping("/itemSave")
+    @GetMapping("/itemSaveForm")
     public String getItemSaveForm(){
         return "ItemSaveForm";
     }
 
-    @GetMapping("/itemUpdate")
+    @GetMapping("/itemUpdateForm")
     public String getItemUpdateForm(){
         return "ItemUpdateForm";
     }
