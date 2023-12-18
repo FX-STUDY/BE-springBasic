@@ -13,6 +13,8 @@ public interface ItemService {
     Item findItem(Long itemId);
 
     List<Item> findAll();
+
+    void editItem(Item item, String itemName, int price, int quantity);
 }
 
 
