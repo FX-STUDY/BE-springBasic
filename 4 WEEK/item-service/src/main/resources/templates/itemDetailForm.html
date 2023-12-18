@@ -17,5 +17,7 @@
             <td th:text="${item.price}"></td>
         </tr>
     </table>
+    <button type="button" th:onclick="|location.href='@{{itemId}/editItem(itemId=${item.itemId})}'|">상품 수정</button>
+
 </body>
 </html>
