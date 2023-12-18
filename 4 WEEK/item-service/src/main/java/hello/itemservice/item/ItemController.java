@@ -38,6 +38,14 @@ public class ItemController {
         return "ItemSaveForm";
     }
 
+    @GetMapping("/itemSave")
+    public String itemSave(Item item, Model model){
+        itemRepository.save(item);
+        List<Item> itemList = itemRepository.findAll();
+        model.addAttribute("itemList",itemList);
+        return "ItemListForm";
+    }
+
     @GetMapping("/itemUpdateForm")
     public String getItemUpdateForm(){
         return "ItemUpdateForm";
