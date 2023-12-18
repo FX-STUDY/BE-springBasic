@@ -61,4 +61,23 @@ class ItemServiceTest {
         List<Item> allItems = itemService.findAll();
         assertThat(allItems).contains(item1, item2, item3);
     }
+
+    @Test
+    void editItem() {
+        //상품등록
+        //given
+        Item item1 = new Item("HTTP BOOK", 10000, 10); //상품명, 가격, 수량
+        itemService.addItem(item1);
+
+        //when
+        itemService.editItem(item1, "JSP BOOK", 5000, 5);
+
+        //then
+        Item editedItem = itemService.findItem(item1.getItemId()); // 수정 후 아이템 조회
+        assertThat(editedItem.getItemId()).isEqualTo(1);
+        assertThat(editedItem.getItemName()).isEqualTo("JSP BOOK");
+        assertThat(editedItem.getPrice()).isEqualTo(5000);
+        assertThat(editedItem.getQuantity()).isEqualTo(5);
+
+    }
 }
