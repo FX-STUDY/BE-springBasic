@@ -11,4 +11,6 @@ public interface ItemRepository {
     Item findByItemId(Long itemId);
 
     List<Item> findAll();
+
+    void editItem(Long itemId, Item editedItem);
 }

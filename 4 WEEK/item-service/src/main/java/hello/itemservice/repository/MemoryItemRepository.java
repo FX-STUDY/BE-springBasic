@@ -28,4 +28,9 @@ public class MemoryItemRepository implements ItemRepository{
         return new ArrayList<>(store.values());
     }
 
+    //상품 수정
+    public void editItem(Long itemId, Item editedItem) {
+        store.put(itemId, editedItem);
+    }
+
 }
