@@ -18,7 +18,7 @@ public class ItemServiceImpl implements ItemService{
     }
 
     @Override
-    public void updateItem(Item item, String itemName, double itemPrice, long itemQuantity) {
+    public void updateItem(Item item, String itemName, double itemPrice, int itemQuantity) {
         item.setName(itemName);
         item.setPrice(itemPrice);
         item.setQuantity(itemQuantity);
