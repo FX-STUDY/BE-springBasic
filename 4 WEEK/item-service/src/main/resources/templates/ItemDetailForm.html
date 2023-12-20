@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>상품 상세</title>
@@ -15,15 +15,15 @@
   </header>
   <form>
     상품 ID<br>
-    <input type="text" name="itemID"><br>
+    <input type="text" name="itemID" disabled th:text="${item.getId()}"><br>
     상품명<br>
-    <input type="text" name="itemName"><br>
+    <input type="text" name="itemName" disabled th:text="${item.getName()}"><br>
     가격<br>
-    <input type="text" name="itemPrice"><br>
+    <input type="text" name="itemPrice" disabled th:text="${item.getPrice()}"><br>
     수량<br>
-    <input type="text" name="itemQuantity"><br>
+    <input type="text" name="itemQuantity" disabled th:text="${item.getQuantity()}"><br>
     <hr>
-    <button onclick="location.href='/itemUpdate'">상품 수정</button>
+    <button onclick="location.href='/itemUpdateForm'">상품 수정</button>
     <button onclick="location.href='/itemList'">목록으로</button>
   </form>
 
