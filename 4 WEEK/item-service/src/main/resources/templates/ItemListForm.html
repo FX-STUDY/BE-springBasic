@@ -28,19 +28,11 @@
                 <th>수량</th>
             </tr>
             </thead>
-            <tr>
-                <td>
-                    ID
-                </td>
-                <td>
-                    상품 이름
-                </td>
-                <td>
-                    000
-                </td>
-                <td>
-                    999
-                </td>
+            <tr th:each="item : ${itemList}">
+                <td><a th:href="'/item/itemDetailForm/'+${item.getId()}" th:text="${item.getId()}"></a></td>
+                <td><a th:href="'/item/itemDetailForm/'+${item.getId()}" th:text="${item.getName()}"></a></td>
+                <td th:text="${item.getPrice()}"></td>
+                <td th:text="${item.getQuantity()}"></td>
             </tr>
         </table>
     </article>
