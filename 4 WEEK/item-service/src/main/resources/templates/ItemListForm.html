@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>상품 목록</title>
@@ -16,7 +16,7 @@
     <header align="center">
         <h1>상품 목록</h1>
     </header>
-    <nav align="right"><button onclick="location.href='/itemSaveForm'">상품 등록</button></nav>
+    <nav align="right"><button th:onclick="|location.href='@{/item/itemSaveForm}'|">상품 등록</button></nav>
     <hr>
     <article>
         <table style="width: 100%">
