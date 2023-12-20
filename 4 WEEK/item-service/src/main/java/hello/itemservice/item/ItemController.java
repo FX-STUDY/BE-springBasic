@@ -28,7 +28,7 @@ public class ItemController {
         return "ItemListForm";
     }
 
-    @GetMapping("/{itemId}")
+    @GetMapping("/itemDetailForm/{itemId}")
     public String getItemDetailForm(@PathVariable Long itemId, Model model){
         Item item = itemRepository.findById(itemId);
         model.addAttribute("item",item);
