@@ -9,8 +9,9 @@ public class Item {
     private Long id;
     private String name;
     private double price;
-    private Long quantity;
-    public void Item(String name, double price, Long quantity){
+    private int quantity;
+
+    public Item(String name, double price, int quantity){
         this.name = name;
         this.price = price;
         this.quantity = quantity;
