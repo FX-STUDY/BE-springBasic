@@ -1,5 +1,10 @@
 package hello.itemservice.item;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Item {
 
     private long id;
@@ -13,33 +18,5 @@ public class Item {
         this.itemPrice = itemPrice;
         this.itemCount = itemCount;
     }
-    public long getId() {
-        return id;
-    }
-    public void setId(long id) {
-        this.id = id;
-    }
-    public String getItemName() {
-        return itemName;
-    }
 
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
-    }
-
-    public long getItemPrice() {
-        return itemPrice;
-    }
-
-    public void setItemPrice(long itemPrice) {
-        this.itemPrice = itemPrice;
-    }
-
-    public long getItemCount() {
-        return itemCount;
-    }
-
-    public void setItemCount(long itemCount) {
-        this.itemCount = itemCount;
-    }
 }
