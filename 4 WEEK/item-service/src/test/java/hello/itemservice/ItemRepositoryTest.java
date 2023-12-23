@@ -31,4 +31,21 @@ public class ItemRepositoryTest {
         assertThat(findItem).isEqualTo(savedItem);
     }
 
+    @Test
+    void findAllTest(){
+        //given
+        Item item1 = new Item("item1",10000,10);
+        Item item2 = new Item("item2",2000,20);
+
+        itemRepository.save(item1);
+        itemRepository.save(item2);
+
+        //when
+        List<Item> itemList = itemRepository.findAll();
+
+        //then
+        assertThat(itemList.size()).isEqualTo(2);
+        assertThat(itemList).contains(item1,item2);
+    }
+
 }
