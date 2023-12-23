@@ -49,7 +49,7 @@ public class ItemController {
     @GetMapping("/{itemId}/itemUpdate")
     public String getItemUpdateForm(@PathVariable Long itemId, Model model){
         Item updateItem = itemRepository.findById(itemId);
-        model.addAttribute("Item",updateItem);
+        model.addAttribute("item",updateItem);
         return "ItemUpdateForm";
     }
 
