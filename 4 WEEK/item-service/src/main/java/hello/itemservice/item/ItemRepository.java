@@ -10,4 +10,5 @@ public interface ItemRepository {
     Item findById(Long itemId);
     void update(Long itemId, Item updatedItem);
     List<Item> findAll();
+    void clearStore();
 }
