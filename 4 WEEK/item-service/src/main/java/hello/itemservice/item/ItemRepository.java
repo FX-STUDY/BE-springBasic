@@ -8,6 +8,6 @@ import java.util.List;
 public interface ItemRepository {
     void save(Item item);
     Item findById(Long itemId);
-    void update(Item updatedItem);
+    void update(Long itemId, Item updatedItem);
     List<Item> findAll();
 }
