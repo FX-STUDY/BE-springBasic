@@ -40,12 +40,10 @@ public class ItemController {
         return "ItemSaveForm";
     }
 
-    public String itemSave(Item item, Model model){
     @PostMapping("/itemSave")
+    public String itemSave(@ModelAttribute Item item){
         itemRepository.save(item);
-        List<Item> itemList = itemRepository.findAll();
-        model.addAttribute("itemList",itemList);
-        return "ItemListForm";
+        return "ItemDetailForm";
     }
 
     public String getItemUpdateForm(Item item, Model model){
