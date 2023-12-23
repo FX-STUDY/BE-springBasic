@@ -23,8 +23,9 @@
     수량<br>
     <input type="text" name="itemQuantity" disabled th:value="${item.quantity}"><br>
     <hr>
-    <button onclick="location.href='/itemUpdateForm'">상품 수정</button>
     <button onclick="location.href='/itemList'">목록으로</button>
+    <button onclick="location.href='ItemUpdateForm.html'"
+            th:onclick="|location.href='@{/item/{itemId}/itemUpdate(itemId=${item.id})}'|" type="button">상품 수정</button>
   </form>
 
 
