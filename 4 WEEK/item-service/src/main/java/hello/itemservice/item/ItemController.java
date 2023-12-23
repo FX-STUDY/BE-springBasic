@@ -20,7 +20,6 @@ public class ItemController {
         this.itemRepository = itemRepository;
     }
 
-
     @GetMapping("/itemListForm")
     public String getItemListForm(Model model){
         List<Item> itemList = itemRepository.findAll();
@@ -53,12 +52,11 @@ public class ItemController {
         return "ItemUpdateForm";
     }
 
-    public String itemUpdate(Item item, Model model){
-        itemRepository.update(item);
     @PostMapping("/{itemId}/itemUpdate")
-        Item updatedItem = itemRepository.findById(item.getId());
-        model.addAttribute("item",updatedItem);
-        return "ItemDetailForm";
+    public String itemUpdate(@PathVariable Long itemId, @ModelAttribute Item item){
+        itemRepository.update(itemId, item);
+        return "redirect:/item/{itemId}";
+    }
 
     @PostConstruct
     public void init(){
