@@ -30,10 +30,10 @@
             </tr>
             </thead>
             <tr th:each="item : ${itemList}">
-                <td><a th:href="'/item/itemDetailForm/'+${item.getId()}" th:text="${item.getId()}"></a></td>
-                <td><a th:href="'/item/itemDetailForm/'+${item.getId()}" th:text="${item.getName()}"></a></td>
-                <td th:text="${item.getPrice()}"></td>
-                <td th:text="${item.getQuantity()}"></td>
+                <td><a href="ItemDetailForm.html" th:href="@{/item/{itemId}(itemId=${item.id})}" th:text="${item.id}">상품id</a></td>
+                <td><a href="ItemDetailForm.html" th:href="@{|/item/${item.id}|}" th:text="${item.name}">상품명</a></td>
+                <td th:text="${item.price}"></td>
+                <td th:text="${item.quantity}"></td>
             </tr>
         </table>
     </article>
