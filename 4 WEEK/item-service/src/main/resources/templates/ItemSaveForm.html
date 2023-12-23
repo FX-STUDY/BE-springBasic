@@ -13,14 +13,14 @@
     <header align="center">
         <h1>상품 등록 폼</h1>
     </header>
-    <form>
+    <form action="ItemListForm.html" th:action method="post">
         <h2>상품 입력</h2>
         상품명<br>
-        <input type="text" name="itemName"> <br>
+        <input type="text" name="name"> <br>
         가격<br>
-        <input type="text" name="itemPrice"> <br>
+        <input type="text" name="price"> <br>
         수량<br>
-        <input type="text" name="itemQuantity"> <br>
+        <input type="text" name="quantity"> <br>
         <hr>
         <button type="submit">상품 등록</button>
         <button onclick="location.href='ItemListForm.html'"
