@@ -8,10 +8,10 @@ import lombok.Setter;
 public class Item {
     private Long id;
     private String name;
-    private double price;
-    private int quantity;
+    private Integer price;
+    private Integer quantity;
 
-    public Item(String name, double price, int quantity){
+    public Item(String name, Integer price, Integer quantity){
         this.name = name;
         this.price = price;
         this.quantity = quantity;
