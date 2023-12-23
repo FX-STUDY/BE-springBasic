@@ -13,15 +13,15 @@
   <header align="center">
     <h1>상품 수정 폼</h1>
   </header>
-  <form>
+  <form action="ItemListForm.html" th:action method="post">
     상품 ID<br>
-    <input type="text" name="itemID" disabled th:value="${Item.id}"> <br>
+    <input type="text" name="itemId" disabled th:value="${item.id}"> <br>
     상품명<br>
-    <input type="text" name="itemName" th:value="${Item.name}"> <br>
+    <input type="text" name="name" th:value="${item.name}"> <br>
     가격<br>
-    <input type="text" name="itemPrice" th:value="${Item.price}"> <br>
+    <input type="text" name="price" th:value="${item.price}"> <br>
     수량<br>
-    <input type="text" name="itemQuantity" th:value="${Item.quantity}"> <br>
+    <input type="text" name="quantity" th:value="${item.quantity}"> <br>
     <hr>
     <button type="submit">저장</button>
     <button onclick="location.href='ItemListForm.html'"
