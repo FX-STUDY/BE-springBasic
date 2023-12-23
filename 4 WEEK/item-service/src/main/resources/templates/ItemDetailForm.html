@@ -15,13 +15,13 @@
   </header>
   <form>
     상품 ID<br>
-    <input type="text" name="itemID" disabled th:text="${item.getId()}"><br>
+    <input type="text" name="itemID" disabled th:value="${item.id}"><br>
     상품명<br>
-    <input type="text" name="itemName" disabled th:text="${item.getName()}"><br>
+    <input type="text" name="itemName" disabled th:value="${item.name}"><br>
     가격<br>
-    <input type="text" name="itemPrice" disabled th:text="${item.getPrice()}"><br>
+    <input type="text" name="itemPrice" disabled th:value="${item.price}"><br>
     수량<br>
-    <input type="text" name="itemQuantity" disabled th:text="${item.getQuantity()}"><br>
+    <input type="text" name="itemQuantity" disabled th:value="${item.quantity}"><br>
     <hr>
     <button onclick="location.href='/itemUpdateForm'">상품 수정</button>
     <button onclick="location.href='/itemList'">목록으로</button>
