@@ -24,8 +24,8 @@ public class MemoryItemRepository implements ItemRepository {
     }
 
     @Override
-    public void update(Item updatedItem) {
-        Item findItem = findById(updatedItem.getId());
+    public void update(Long itemId, Item updatedItem) {
+        Item findItem = findById(itemId);
         findItem.setName(updatedItem.getName());
         findItem.setPrice(updatedItem.getPrice());
         findItem.setQuantity(updatedItem.getQuantity());
