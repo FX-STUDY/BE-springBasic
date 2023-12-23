@@ -18,4 +18,17 @@ public class ItemRepositoryTest {
         itemRepository.clearStore();
     }
 
+    @Test
+    void saveTest(){
+        //given
+        Item item = new Item("itemA",1000,10);
+
+        //when
+        Item savedItem = itemRepository.save(item);
+
+        //then
+        Item findItem = itemRepository.findById(item.getId());
+        assertThat(findItem).isEqualTo(savedItem);
+    }
+
 }
