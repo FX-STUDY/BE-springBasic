@@ -36,4 +36,10 @@ public class MemoryItemRepository implements ItemRepository {
         return new ArrayList<>(store.values());
     }
 
+    @Override
+    public void clearStore(){
+        store.clear();
+        SEQUENCE = 0L;
+    }
+
 }
