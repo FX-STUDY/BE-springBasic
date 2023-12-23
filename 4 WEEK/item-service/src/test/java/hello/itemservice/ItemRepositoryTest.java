@@ -48,4 +48,23 @@ public class ItemRepositoryTest {
         assertThat(itemList).contains(item1,item2);
     }
 
+    @Test
+    void updateTest(){
+        //given
+        Item item = new Item("item1",10000,10);
+
+        Item savedItem = itemRepository.save(item);
+        Long itemId = savedItem.getId();
+
+        //when
+        Item updateItem = new Item("item2", 20000, 30);
+        itemRepository.update(itemId, updateItem);
+
+        Item findItem = itemRepository.findById(itemId);
+
+        //then
+        assertThat(findItem.getName()).isEqualTo(updateItem.getName());
+        assertThat(findItem.getPrice()).isEqualTo(updateItem.getPrice());
+        assertThat(findItem.getQuantity()).isEqualTo(updateItem.getQuantity());
+    }
 }
