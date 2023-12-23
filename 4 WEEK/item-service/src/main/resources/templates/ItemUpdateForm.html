@@ -23,8 +23,9 @@
     수량<br>
     <input type="text" name="itemQuantity" th:value="${Item.quantity}"> <br>
     <hr>
-    <button onclick="location.href='/itemListForm'">취소</button>
     <button type="submit">저장</button>
+    <button onclick="location.href='ItemListForm.html'"
+            th:onclick="|location.href='@{/item/{itemId}(itemId=${item.id})}'|" type="button">취소</button>
   </form>
 </body>
 </html>
