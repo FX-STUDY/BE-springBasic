@@ -59,5 +59,10 @@ public class ItemController {
         Item updatedItem = itemRepository.findById(item.getId());
         model.addAttribute("item",updatedItem);
         return "ItemDetailForm";
+
+    @PostConstruct
+    public void init(){
+        itemRepository.save(new Item("testA",1000,10));
+        itemRepository.save(new Item("testB",2000,20));
     }
 }
