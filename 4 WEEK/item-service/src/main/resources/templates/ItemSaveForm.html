@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>상품 등록</title>
@@ -22,8 +22,9 @@
         수량<br>
         <input type="text" name="itemQuantity"> <br>
         <hr>
-        <button>상품 등록</button>
-        <button onclick="location.href='/itemList'">취소</button>
+        <button type="submit">상품 등록</button>
+        <button onclick="location.href='ItemListForm.html'"
+                th:onclick="|location.href='@{/item/itemListForm}'|" type="button">취소</button>
     </form>
 </body>
 </html>
