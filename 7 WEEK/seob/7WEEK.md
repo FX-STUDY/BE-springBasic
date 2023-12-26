@@ -288,3 +288,124 @@ close: http://hello-spring.dev
 - 이 추론 기능은 `close`, `shutdown`라는 이름의 메서드를 자동으로 호출해준다. 이름 그대로 종료 메서드를 추론해서 호출해준다.
 - 따라서 직접 스프링 빈으로 등록하면 종료 메서드는 따로 적어주지 않아도 잘 동작한다.
 - 추론 기능을 사용하기 싫으면 `destroyMethod=""`처럼 빈 공백을 지정하면 된다.
+  
+<br><br>
+
+### 애노테이션 @PostConstruct, @PreDestroy
+```java
+package week7.seob.lifecycle;
+
+
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+
+public class NetworkClient {
+
+    private String url;
+
+    public NetworkClient() {
+        System.out.println("생성자 호출, url = " + url);
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    //서비스 시작시 호출
+    public void connect() {
+        System.out.println("connect: " + url);
+    }
+
+    public void call(String message) {
+        System.out.println("call: " + url + " message = " + message);
+    }
+
+    //서비스 종료시 호출
+    public void disconnect() {
+        System.out.println("close: " + url);
+    }
+
+    //의존관계 주입이 끝난 후
+    @PostConstruct
+    public void init() {
+        System.out.println("\nNetworkClient.init");
+        connect();
+        call("초기화 연결 메시지");
+    }
+
+    //Bean이 종료될 때
+    @PreDestroy
+    public void close() {
+        System.out.println("\nNetworkClient.close");
+        disconnect();
+    }
+}
+```
+
+```java
+package week7.seob.lifecycle;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+public class BeanLifeCycleTest {
+
+
+    @Test
+    public void lifeCycleTest() {
+        ConfigurableApplicationContext ac = new AnnotationConfigApplicationContext(LifeCycleConfig.class);
+        NetworkClient client = ac.getBean(NetworkClient.class);
+        ac.close();
+    }
+
+
+    @Configuration
+    static class LifeCycleConfig {
+        @Bean //(initMethod = "init", destroyMethod = "close")
+        public NetworkClient networkClient() {
+            NetworkClient networkClient = new NetworkClient();
+            networkClient.setUrl("http://hello-spring.dev");
+            return networkClient;
+        }
+    }
+}
+```
+
+실행결과
+```
+생성자 호출, url = null
+
+NetworkClient.init
+connect: http://hello-spring.dev
+call: http://hello-spring.dev message = 초기화 연결 메시지
+
+NetworkClient.close
+close: http://hello-spring.dev
+```
+
+`@PostConstruct`, `@PreDestroy`이 두 애노페이션을 사용하면 가장 편리하게 초기화와 종료를 실행할 수 있다.
+
+
+**@PostConstruct, @PreDestroy 애노테이션 특징**
+- 최신 스프링에서 가장 권장하는 방법.
+- 애노테이션 하나만 붙이면 되므로 매우 편리.
+- 패키지가 `javax.annotation.PostConstruct`이다. 스프리에 종속적인 기술이 아니라 JSR-250라는 자바 표준이다.
+따라서 스프링이 아닌 다른 컨테이너에서도 동작한다.
+- 컴포넌트 스캔과 잘 어울린다.
+- 유일한 단점 : 외부 라이브러리에 적용하지 못함. 외부 라이브러리 초기화, 종료를 해야 한다면 `@Bean` 의 기능을 사용해야한다.
+
+**정리**
+- **@PostConstruct, @PreDestroy 애노테이션을 사용하자**
+- 코드를 고칠 수 없는 외부 라이브러리 초기화, 종료를 해야한다면 `@Bean` 의 `initMethod`, `destroyMethod`를 사용하자.
+
+
+
+<br><br>
+<br><br>
+
+___
+
+ 
