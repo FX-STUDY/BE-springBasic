@@ -1,6 +1,9 @@
 package week7.seob.lifecycle;
 
 
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+
 public class NetworkClient {
 
     private String url;
@@ -28,6 +31,7 @@ public class NetworkClient {
     }
 
     //의존관계 주입이 끝난 후
+    @PostConstruct
     public void init() {
         System.out.println("\nNetworkClient.init");
         connect();
@@ -35,6 +39,7 @@ public class NetworkClient {
     }
 
     //Bean이 종료될 때
+    @PreDestroy
     public void close() {
         System.out.println("\nNetworkClient.close");
         disconnect();
