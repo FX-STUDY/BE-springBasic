@@ -492,5 +492,99 @@ singletonBean1 = week7.seob.scope.SingletonTest$SingletonBean@773f7880
 singletonBean2 = week7.seob.scope.SingletonTest$SingletonBean@773f7880
 SingletonBean.destroy
 ```
-싱글톤 스코프인 경우 같은 인스턴트를 반환하는것을 확인할 수 있다.
+싱글톤 스코프인 경우 같은 인스턴스를 반환하는것을 확인할 수 있다.
 
+## 프로토타입 스코프
+**싱글톤 스코프의 빈을 조회하면 스프링 컨테이너는 항상 같은 인스턴스의 스프링 빈을 반환.** 반면에 
+**프로토타입 스코프를 스프링 컨테이너에 조회하면 스프링 컨테이너는 항상 다른 인스턴스를 생성해서 반환**
+
+**싱글톤 빈 요청**
+1. 싱글톤 스코프의 빈을 스프링 컨테이너에 요청
+2. 스프링 컨테이너는 본인이 관리하는 스프링 빈을 반환
+3. 이후에 스프링 컨테이너에 같은 요청이 와도 같은 객체 인스턴스의 스프링 빈을 반환한다.
+
+**프로토타입 빈 요청1**
+1. 프로토타입 스코프의 빈을 스프링 컨테이너에 요청.
+2. 스프링 컨테이너는 이 시점에 프로토타입 빈을 생성, 필요한 의존관계를 주입.
+
+**프로토타입 빈 요청2**
+3. 스프링 컨테이너는 생성한 프로토타입 빈을 클라이언트에 반환.(관리는 X)
+4. 이후에 스프링 컨테이너에 같은 요청이 오면 항상 새로운 프로토타입 빈을 생성해서 반환
+
+**정리**<br>
+**핵심은 스프링 컨테이너는 프로토타입 빈을 생성, 의존관계 주입, 초기화 까지만 처리** 클라이언트에 빈을 반환하고,
+이후 스프링 컨테이너는 생성된 프로토타입 빈을 관리하지 않는다. 프로토타입 빈을 관리할 책임은 프로토타입 빈을
+받은 클라이언트에 있다. **그래서 `@PreDestroy`같은 종료 메서드가 호출되지 않는다.**
+
+
+
+```java
+package week7.seob.scope;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Scope;
+
+public class PrototypeTest {
+
+    @Test
+    void prototypeBeanFind() {
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(PrototypeBean.class);
+        System.out.println("find prototypeBean1");
+        PrototypeBean prototypeBean1 = ac.getBean(PrototypeBean.class);
+        System.out.println("find prototypeBean2");
+        PrototypeBean prototypeBean2 = ac.getBean(PrototypeBean.class);
+
+        System.out.println("prototypeBean1 = " + prototypeBean1);
+        System.out.println("prototypeBean2 = " + prototypeBean2);
+        Assertions.assertThat(prototypeBean1).isNotSameAs(prototypeBean2);
+
+        ac.close();
+    }
+
+    @Scope("prototype")
+    static class PrototypeBean {
+        @PostConstruct
+        public void init() {
+            System.out.println("PrototypeBean.init");
+        }
+
+        @PreDestroy
+        public void destroy() {
+            System.out.println("PrototypeBean.destroy");
+        }
+    }
+}
+```
+실행결과
+```
+find prototypeBean1
+PrototypeBean.init
+find prototypeBean2
+PrototypeBean.init
+prototypeBean1 = week7.seob.scope.PrototypeTest$PrototypeBean@773f7880
+prototypeBean2 = week7.seob.scope.PrototypeTest$PrototypeBean@878452d
+```
+
+- 싱글톤 빈은 스프링 컨테이너 생성 시점에 초기화 메서드가 실행되지만, 프로토타입 스코프의 빈은 스프링 컨테이너에서
+빈을 조회할 때 생성되고, 초기화 메서드도 실행된다.
+- 프로타입 빈을 2번 조회했으므로 완전히 다른 스프링 빈이 생성되고, 초기화도 2번 실행된 것을 확인할 수 있다.
+- 싱글톤 빈은 스프링 컨테이너가 관리하기 때문에 스프링 컨테이너가 종료될 때 빈의 종료 메서드가 실행되지만,
+**프로토타입 빈은 스프링 컨테이너가 생성과 의존관계 주입 그리고 초기화 까지만 관여하고, 더는 관리하지 않는다.
+따라서 프로토타입 빈은 스프링 컨테이너가 종료될 때 `@PreDestroy`같은 종료 메서드가 전혀 실행되지 않는다.**
+
+
+**프로토타입 빈의 특징 정리**
+- 스프링 컨테이너에 요청할 떄 마다 새로 생성
+- 스프링 컨테이너는 프로토타입 빈의 생성과 의존관계 주입, 초기화까지만 관여 
+- 종료 메서드가 호출되지 않음
+- 프로토타입 빈은 프로토타입 빈을 조회한 클라이언트가 관리해야한다. 종료 메서드에 대한 호출도 클라이언트가 직접 해야한다.
+
+```java
+prototypeBean1.destoroy();
+prototypeBean2.destoroy();
+```
+위와 같이 직접 destroy()를 호출하여 직접 종료할 수 있음.
