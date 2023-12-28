@@ -588,3 +588,81 @@ prototypeBean1.destoroy();
 prototypeBean2.destoroy();
 ```
 위와 같이 직접 destroy()를 호출하여 직접 종료할 수 있음.
+
+
+
+## 프로토타입 스코프 - 싱글톤 빈과 함께 사용시 문제 
+스프링 컨테이너에 프로토타입 스코프의 빈을 요청하면 항상 새로운 객체 인스턴스를 생성해서 반환<br>
+하지만 싱글톤 빈과 함께 사용할 때는 의도한 대로 잘 동작하지 않으므로 주의해야함
+
+### 프르토타입 빈 직접 요청
+```java
+package week7.seob.scope;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Scope;
+
+public class SingletonWithPrototypeTest1 {
+
+    @Test
+    void prototypeFind() {
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(PrototypeBean.class);
+
+        PrototypeBean prototypeBean1 = ac.getBean(PrototypeBean.class);
+        prototypeBean1.addCount();
+
+        PrototypeBean prototypeBean2 = ac.getBean(PrototypeBean.class);
+        prototypeBean2.addCount();
+
+        Assertions.assertThat(prototypeBean1.getCount()).isEqualTo(1);
+        Assertions.assertThat(prototypeBean2.getCount()).isEqualTo(1);
+    }
+
+
+    @Scope("prototype")
+    static class PrototypeBean {
+        private int count = 0;
+
+        public void addCount() {
+            count++;
+        }
+
+        public int getCount() {
+            return count;
+        }
+
+        @PostConstruct
+        public void init() {
+            System.out.println("PrototypeBean.init " + this);
+        }
+
+        @PreDestroy
+        public void destroy() {//호출 X
+            System.out.println("PrototypeBean.destory "+ this);
+        }
+    }
+}
+```
+실행결과
+```
+PrototypeBean.init week7.seob.scope.SingletonWithPrototypeTest1$PrototypeBean@51e8e6e6
+PrototypeBean.init week7.seob.scope.SingletonWithPrototypeTest1$PrototypeBean@878452d
+```
+
+<br>
+스프링 컨테이너에 프로토타입 빈 직접 요청 1.
+1. prototypeBean1는 스프링 컨테이너에 스프링 빈을 요청
+2. 스프링 컨테이너는 프로토타입 빈을 새로 생성해서 반환(**PrototypeBean@51e8e6e6**)한다. 해당 빈의 count 값은 0.
+3. prototypeBean1는 조회한 프로토타입 빈에 `addCount()` 호출 -> count 필드가 1 증가.
+<br>
+스프링 컨테이너에 프로토타입 빈 직접 요청 2.
+1. prototypeBean1는 스프링 컨테이너에 스프링 빈을 요청
+2. 스프링 컨테이너는 프로토타입 빈을 새로 생성해서 반환(**PrototypeBean@51e8e6e6**)한다. 해당 빈의 count 값은 0.
+3. prototypeBean1는 조회한 프로토타입 빈에 `addCount()` 호출 -> count 필드가 1 증가.
+
+**결론**
+- 프로토타입 빈은 요청시 항상 새로운 빈을 생성하기 때문에 서로 다른 필드라 생각하면 됨
