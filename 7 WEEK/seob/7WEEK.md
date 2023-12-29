@@ -780,4 +780,39 @@ PrototypeBean.init week7.seob.scope.SingletonWithPrototypeTest1$PrototypeBean@25
 > clientA. clientB가 각각 의존관계 주입을 받으면 각각 다른 인스턴스의 프로토타입 빈을 주입 받는다.<br>
 > clientA -> prototypeBean@x01
 > clientB -> prototypeBean@x02<br>
-> 물론 사용할 때 마다 새로 생성되는 것은 아니다.
+> 물론 사용할 때 마다 새로 생성되는 것은 아니다.> 물론 사용할 때 마다 새로 생성되는 것은 아니다.
+
+
+
+## 프로토타입 스코프 - 싱글톤 빈과 함께 사용시 Provider로 문제 해결
+싱글톤 빈과 프로토타입 빈을 함께 사용할때 Provider를 사용하면 항상 새로운 프로토타입 빈을 생성할 수 있다.
+
+
+가장 간단한 방법은 싱글톤 빈이 프로토타입 빈을 사용할 때 마다 스프링 컨테이너에 새로 요청하는 것이다.
+```java
+    @Scope("singleton")
+    static class ClientBean{
+    
+        @Autowired
+        private ApplicationContext ac;
+
+        public int logic() {
+            PrototypeBean prototypeBean = ac.getBean(PrototypeBean.class);
+            prototypeBean.addCount();
+            int count = prototypeBean.getCount();
+            return count;
+        }
+    }
+```
+실행결과
+```
+PrototypeBean.init week7.seob.scope.SingletonWithPrototypeTest1$PrototypeBean@77602954
+PrototypeBean.init week7.seob.scope.SingletonWithPrototypeTest1$PrototypeBean@6fff253c
+```
+
+- `ac.getBean()`을 통해 항상 새로운 프로토타입 빈을 불러오는 것을 확인할 수 있다.
+- 의존관계를 외부에서 주입(DI)받는게 아니라 위처럼 직접 필요한 의존관계를 찾는 것을 
+**Dependency Lookup(DL)** 의존관계 조회(탐색) 이라고 한다.
+- 그런데 스프링의 애플리케이션 컨텍스트 전체를 주입받게 되면, 스프링 컨테이너에 종속적인 코드가 되고, 단위 테스트가 어려워진다.
+- 현재 필요한 기능 -> 지정한 프로토타입 빈을 컨테이너에서 대신 찾아주는 DL 정도의 기능만 제공하는 무언가가 있으면 된다.
+
