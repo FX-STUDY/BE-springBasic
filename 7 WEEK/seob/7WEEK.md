@@ -905,3 +905,303 @@ PrototypeBean.init week7.seob.scope.SingletonWithPrototypeTest1$PrototypeBean@46
 > 
 > 스프링을 사용하다보면 다른 기능들도 자바 표준과 스프링이 제공하는 기능이 겹칠 때가 있다. 대부분 스프링이 더 다양하고
 > 편리한 기능을 제공해주기 때문에, 특별히 다른 컨테이너를 사용할 일이 없다면, 스프링이 제공하는 기능을 쓰자!
+
+
+
+
+## 웹 스코프
+싱글톤은 스프링 컨테이너의 시작과 끝까지 함꼐하는 매우 긴 스코프, 프로토타입은 생성과 의존관계 주입, 그리고 초기화 까지만 진행하는 특별한 스코프
+
+**웹 스코프의 특징**
+- 웝 스코프는 웹 환경에서만 동작
+- 웹 스코프는 프로토타입과 다르게 스프링이 해당 스코프의 종료시점까지 관리. 따라서 종료 메서드 호출
+
+**웹 스코프 종류**
+- **request** : HTTP요청 하나가 들어오고 나갈 때 까지 유지되는 스코프, 각각의 HTTP요청마다 별도의 빈 인스턴트가 생성, 관리된다.
+- **session** : HTTP Session과 동일한 생명주기를 가지는 스코프
+- **application** : 서블릿 컨텍스트(`ServletContext`) 와 동일한 생명주기를 갖는 스코프
+- **websocket** : 웹 소켓과 동일한 생명주기를 가지는 스코프
+
+
+## request 스코프 예제
+
+### 웹 환경 추가 
+웹 스코프는 웹 환경에서만 동작함. 따라서 web환경이 동작하도록 라이브러리를 추가한다.
+```groovy
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+```
+> **참고** : `spring-boot-starter-web` 라이브러리를 추가하면 스프링 부트는 내장 톰켓 서버를 활용해 웹 서버와 스프링을 함께 실행시킨다.
+
+> **참고** : 스프링 부트는 웹 라이브러리가 없으면 `AnnotationConfigApplicationContext`를 기반으로
+> 웹 애플리케이션을 구동한다. 웹 라이브러리가 추가되면 웹과 관련된 추카 설정과 환경들이 필요하므로
+> `AnnotationConfigServletWebServerApplicationContext`를 기반으로 애플리케이션을 구동한다.
+
+### request 스코프 예제 개발
+동시에 여러 HTTP 요청이 오면 정확히 어떤 요청이 남긴 로그인지 구분하기 어렵다. <br>
+이럴 때 사용하기 좋은 것이 request 스코프이다.
+
+```java
+package week7.seob.common;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import java.util.UUID;
+
+@Component
+@Scope(value = "request")
+public class MyLogger {
+
+    private String uuid;
+    private String requestURL;
+
+    public void setRequestURL(String requestURL) {
+        this.requestURL = requestURL;
+    }
+
+    public void log(String message) {
+        System.out.println("[" + uuid + "][" + requestURL + "]" + message);
+    }
+
+    @PostConstruct
+    public void init() {
+        uuid = UUID.randomUUID().toString();
+        System.out.println("[" + uuid + "] request scope bean create : " + this);
+    }
+
+    @PreDestroy
+    public void close() {
+        System.out.println("");
+        System.out.println("[" + uuid + "] request scope bean close : " + this);
+    }
+}
+```
+- 로그를 출력하기 위한 `MyLogger` 클래스
+- `@Scope(value="request)"`를 사용해 request 스코프를 지정. 이 빈은 HTTP 요청 당 하나씩 생성되고,
+요청이 끝나는 시점에 소멸된다.
+- 이 빈이 생성되는 시점에 자동으로 `@PostConstruct`초기화 메서드를 사용해 uuid를 생성 및 저장한다. 
+이 빈은 HTTP 요청 당 하나씩 생성되기 때문에 uud를 저장해두면 다른 HTTP요청과 구분이 가능하다.
+- 이 빈이 소멸되는 시점에 `@PreDestroy`를 사용해 종료 매시지를 남긴다.
+- `requestURL`은 이 빈이 생성되는 시점에는 알 수 없어 외부에서 setter로 입력받는다.
+
+
+*MyLogger*
+```java
+package week7.seob.common;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import java.util.UUID;
+
+@Component
+@Scope(value = "request")
+public class MyLogger {
+
+    private String uuid;
+    private String requestURL;
+
+    public void setRequestURL(String requestURL) {
+        this.requestURL = requestURL;
+    }
+
+    public void log(String message) {
+        System.out.println("[" + uuid + "][" + requestURL + "]" + message);
+    }
+
+    @PostConstruct
+    public void init() {
+        uuid = UUID.randomUUID().toString();
+        System.out.println("[" + uuid + "] request scope bean create : " + this);
+    }
+
+    @PreDestroy
+    public void close() {
+        System.out.println("");
+        System.out.println("[" + uuid + "] request scope bean close : " + this);
+    }
+}
+```
+- 로그를 출력하기 위한 클래스.
+- `@Scope(value = "request")`로 requset 스코프 지정. 이 빈은 HTTP 요청 당 하나씩 생성되고, HTTP 요청이 끝나는 시점에 소멸
+- 이 빈이 생성되는 시점에 자동으로 `@PostConstruct` 초기화 메서드를 사용해 uuid를 생성해서 저장.
+이 빈은 HTTP 요총 당 하나씩 생성되므로 uuid를 저장해두면 다른 HTTP 요청과 구분할 수 있다.
+- 이 빈이 소멸되는 시점에 `@PreDestroy`를 사앵해서 종료 메시지를 남긴다.
+- `requestURL`은 이 빈이 생성되는 시점에는 알 수 없으므로, 외부에서 setter로 입력받는다.
+
+
+*LogDemoController*
+```java
+package week7.seob.web;
+
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import week7.seob.common.MyLogger;
+
+@Controller
+public class LogDemoController {
+    private final LogDemoService logDemoService;
+    private final MyLogger myLogger;
+
+    @Autowired
+    public LogDemoController(LogDemoService logDemoService, MyLogger myLogger) {
+        this.logDemoService = logDemoService;
+        this.myLogger = myLogger;
+    }
+
+    @RequestMapping("log-demo")
+    @ResponseBody
+    public String logDemo(HttpServletRequest request) {
+        String requestURL = request.getRequestURL().toString();
+        myLogger.setRequestURL(requestURL);
+
+        myLogger.log("controller test");
+        logDemoService.logic("testId");
+        return "OK";
+    }
+
+}
+```
+- 로거가 잘 작동하는 확인하는 테스트용 컨트롤러 
+- 여기서 HttpServletRequest를 통해서 요청 URL을 받았다.
+  - requestURL 값 `http://localhost:8080/log-demo`
+- 이렇게 받은 requestURL 값을 myLogger에 저장한다. myLogger는 HTTP 요청 당 각각 구분되므로
+다른 HTTP요청 때문에 값이 섞이는 걱정은 하지 않아도 된다.
+- 컨트롤러에서 controller test라는 로그를 남긴다.
+
+
+*LogDemoService*
+```java
+package week7.seob.web;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import week7.seob.common.MyLogger;
+
+@Service
+public class LogDemoService {
+
+    private final MyLogger myLogger;
+
+    @Autowired
+    public LogDemoService(MyLogger myLogger) {
+        this.myLogger = myLogger;
+    }
+
+    public void logic(String id) {
+        myLogger.log("service id = " + id);
+    }
+}
+```
+- request scope를 사용하지 않고 파라미터로 이 모든 정보를 서비스 계층에 넘긴다면, 파라미터가 많아
+지저분해진다. 더 문제는 requestURL 같은 웹과 관련된 정보가 웹과 관련없는 서비스 계층까지 넘어가게 된다.
+웹과 관련된 부분은 컨트롤러 까지만 사용해야 한다. 서비스 계층은 웹 기술에 종속되지 않고, 가급적 순수하게 유지하는 것이
+유지보수 과점에서 좋다.
+- request scope의 MyLogger 덕분에 이런 부분을 파라미터로 넘기지 않고, MyLogger의 멤버변수에 저장해서
+코드와 계층을 깔끔하게 유지할 수 있다.
+
+실행 시
+```
+Error creating bean with name 'myLogger': Scope 'request' is not active for the current thread; consider defining a scoped proxy for this bean if you intend to refer to it from a singleton
+```
+
+오류가 발생한다. 왜냐하면 request 가 와야 myLogger를 사용할 수 있지만 아직 request가 오지도 않은 상태에서 스프링이 myLogger를 요청했기 때문이다.
+<br>
+스프링 애플리케이션을 실행하는 시점에 싱글톤 빈은 생성해서 주입이 가능하지만, request 스코프 빈은 아직 생성되지 않는다.
+이 빈은 실제 고객의 요청이 와야 생성할 수 있다.
+
+
+## 스코프와 Provider
+위의 문제의 첫 번째 해결방법은 Provider를 사용하는 것 이다.
+
+*LogDemoController*
+```java
+package week7.seob.web;
+
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import week7.seob.common.MyLogger;
+
+@Controller
+public class LogDemoController {
+    private final LogDemoService logDemoService;
+    private final ObjectProvider<MyLogger> myLoggerProvider;
+
+    @Autowired
+    public LogDemoController(LogDemoService logDemoService, ObjectProvider<MyLogger> myLogger) {
+        this.logDemoService = logDemoService;
+        this.myLoggerProvider = myLogger;
+    }
+
+    @RequestMapping("log-demo")
+    @ResponseBody
+    public String logDemo(HttpServletRequest request) {
+        String requestURL = request.getRequestURL().toString();
+        MyLogger myLogger = myLoggerProvider.getObject();
+        myLogger.setRequestURL(requestURL);
+
+        myLogger.log("controller test");
+        logDemoService.logic("testId");
+        return "OK";
+    }
+
+}
+```
+
+*LogDemoService*
+```java
+package week7.seob.web;
+
+import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import week7.seob.common.MyLogger;
+
+@Service
+public class LogDemoService {
+
+    private final ObjectProvider<MyLogger> myLoggerProvider;
+
+    @Autowired
+    public LogDemoService(ObjectProvider<MyLogger> myLogger) {
+        this.myLoggerProvider = myLogger;
+    }
+
+    public void logic(String id) {
+        MyLogger myLogger = myLoggerProvider.getObject();
+        myLogger.log("service id = " + id);
+    }
+}
+
+```
+
+
+실행결과 (두 번 요청)
+```
+[ae14a061-798d-4f36-a0a4-12e304ed743f] request scope bean create : week7.seob.common.MyLogger@10437b22
+[ae14a061-798d-4f36-a0a4-12e304ed743f][http://localhost:8080/log-demo]controller test
+[ae14a061-798d-4f36-a0a4-12e304ed743f][http://localhost:8080/log-demo]service id = testId
+[ae14a061-798d-4f36-a0a4-12e304ed743f] request scope bean close : week7.seob.common.MyLogger@10437b22
+
+[ba090d99-d6c4-4708-8fac-a74c01dd6efe] request scope bean create : week7.seob.common.MyLogger@5f0bf03
+[ba090d99-d6c4-4708-8fac-a74c01dd6efe][http://localhost:8080/log-demo]controller test
+[ba090d99-d6c4-4708-8fac-a74c01dd6efe][http://localhost:8080/log-demo]service id = testId
+[ba090d99-d6c4-4708-8fac-a74c01dd6efe] request scope bean close : week7.seob.common.MyLogger@5f0bf03
+```
+
+- `@ObjectProvider` 덕분에 `ObjectProvider.getObject()`를 호출하는 시점까지 request scope 
+**빈의 생성을 지연**할 수 있다.
+- `ObjectProvider.getObject()`를 호출하는 시점에는 HTTP요청이 진행중이므로 request scope 빈의 생성이 정상 처리된다.
+- `ObjectProvider.getObject()`를 `LogDemoController`, `LogDemoService`에서 각각 한 번씩 따로 호출해도
+같은 HTTP 요청이면 같은 스프링이 반환된다.
