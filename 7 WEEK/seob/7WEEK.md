@@ -780,7 +780,8 @@ PrototypeBean.init week7.seob.scope.SingletonWithPrototypeTest1$PrototypeBean@25
 > clientA. clientB가 각각 의존관계 주입을 받으면 각각 다른 인스턴스의 프로토타입 빈을 주입 받는다.<br>
 > clientA -> prototypeBean@x01
 > clientB -> prototypeBean@x02<br>
-> 물론 사용할 때 마다 새로 생성되는 것은 아니다.> 물론 사용할 때 마다 새로 생성되는 것은 아니다.
+> 물론 사용할 때 마다 새로 생성되는 것은 아니다.
+
 
 
 
@@ -815,4 +816,39 @@ PrototypeBean.init week7.seob.scope.SingletonWithPrototypeTest1$PrototypeBean@6f
 **Dependency Lookup(DL)** 의존관계 조회(탐색) 이라고 한다.
 - 그런데 스프링의 애플리케이션 컨텍스트 전체를 주입받게 되면, 스프링 컨테이너에 종속적인 코드가 되고, 단위 테스트가 어려워진다.
 - 현재 필요한 기능 -> 지정한 프로토타입 빈을 컨테이너에서 대신 찾아주는 DL 정도의 기능만 제공하는 무언가가 있으면 된다.
+
+
+### ObjectFactory, ObjectProvider
+지정한 빈을 컨테이너에서 대신 찾아주는 DL 서비스를 제공하는 것이 `ObjectProvider`이다. <br>
+과거에는 `ObjectFactory`가 존재했는데, 여기에 편의 기능을 추가한 `ObjectProvider`가 만들어졌다.
+
+```java
+    @Scope("singleton")
+    static class ClientBean{
+
+        @Autowired
+        private ObjectProvider<PrototypeBean> prototypeBeanProvider;
+
+        public int logic() {
+            PrototypeBean prototypeBean = prototypeBeanProvider.getObject();
+            prototypeBean.addCount();
+            int count = prototypeBean.getCount();
+            return count;
+        }
+    }
+```
+실행결과
+```java
+PrototypeBean.init week7.seob.scope.SingletonWithPrototypeTest1$PrototypeBean@10fde30a
+PrototypeBean.init week7.seob.scope.SingletonWithPrototypeTest1$PrototypeBean@72f46e16
+```
+- `prototypeBeanProvider.getObject()`를 통해서 항상 새로운 프로토타입 빈이 생성된다.
+- `ObjectProvider`의 `getObject()`를 호출하면 내부에서는 스프링 컨테이너를 통해 해당 빈을 찾아 반환한다.(**DL**)
+- 기능이 단순하므로 단위테스트 및 mock 코드를 만들기 훨씬 쉽다.<br>
+mock : 실제 객체를 만들기에는 비용과 시간이 많이 들거나 의존성이 크게 걸쳐져 있어서 테스트 시 제대로 구현하기 어려울 경우 가짜 객체를 만들어서 사용하는 기술.
+- `ObjectProvider`는 지금 딱 필요한 DL정도의 기능만 제공한다.
+
+**특징**
+- ObjectFactory : 기능이 단순,별도의 라이브러리 필요 없음, 스프링에 의존
+- ObjectProvider : ObjectFactory 상속, 옵션, 스트림 처리등 편의 기능이 많고, 별도의 라이브러리 필요 없음, 스프링에 의존
 
