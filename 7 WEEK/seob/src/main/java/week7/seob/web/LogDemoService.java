@@ -8,15 +8,14 @@ import week7.seob.common.MyLogger;
 @Service
 public class LogDemoService {
 
-    private final ObjectProvider<MyLogger> myLoggerProvider;
+    private final MyLogger myLogger;
 
     @Autowired
-    public LogDemoService(ObjectProvider<MyLogger> myLogger) {
-        this.myLoggerProvider = myLogger;
+    public LogDemoService(MyLogger myLogger) {
+        this.myLogger = myLogger;
     }
 
     public void logic(String id) {
-        MyLogger myLogger = myLoggerProvider.getObject();
         myLogger.log("service id = " + id);
     }
 }
