@@ -11,19 +11,19 @@ import week7.seob.common.MyLogger;
 @Controller
 public class LogDemoController {
     private final LogDemoService logDemoService;
-    private final ObjectProvider<MyLogger> myLoggerProvider;
+    private final MyLogger myLogger;
 
     @Autowired
-    public LogDemoController(LogDemoService logDemoService, ObjectProvider<MyLogger> myLogger) {
+    public LogDemoController(LogDemoService logDemoService, MyLogger myLogger) {
         this.logDemoService = logDemoService;
-        this.myLoggerProvider = myLogger;
+        this.myLogger = myLogger;
     }
 
     @RequestMapping("log-demo")
     @ResponseBody
     public String logDemo(HttpServletRequest request) {
         String requestURL = request.getRequestURL().toString();
-        MyLogger myLogger = myLoggerProvider.getObject();
+        System.out.println("myLogger = " + myLogger.getClass());
         myLogger.setRequestURL(requestURL);
 
         myLogger.log("controller test");
