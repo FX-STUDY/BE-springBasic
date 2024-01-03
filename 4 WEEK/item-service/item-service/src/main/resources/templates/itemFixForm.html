@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <h2>상품 수정 폼</h2>
+  <form action="itemDetail.html" method="post">
+    <div>
+      <label for="id">상품 ID</label>
+      <input type="text" id="id" name="id">
+    </div>
+
+    <div>
+      <label for="itemName">상품명</label>
+      <input type="text" id="itemName" name="itemName">
+    </div>
+
+    <div>
+      <label for="price">가격</label>
+      <input type="text" id="price" name="price">
+    </div>
+
+    <div>
+      <label for="quantity">수량</label>
+      <input type="text" id="quantity" name="quantity">
+    </div>
+    <div>
+      <div>
+        <button type="submit">저장
+        </button>
+      </div>
+      <div>
+        <button onclick="location.href='itemList.html'" type="button">취소</button> </div>
+    </div>
+  </form>
+</body>
+</html>
