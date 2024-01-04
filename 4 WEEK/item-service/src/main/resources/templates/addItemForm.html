@@ -1,0 +1,30 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>상품 상세</h1>
+    <form class="form-group" action="/addItem" method="post">
+        <label for="itemName">상품명</label>
+        <input type="text" id="itemName" name="itemName">
+        <br>
+        <label for="price">가격</label>
+        <input type="text" id="price" name="price">
+        <br>
+        <label for="quantity">수량</label>
+        <input type="text" id="quantity" name="quantity">
+        <br>
+        <button type="submit">상품 등록</button>
+    </form>
+</div>
+</body>
+</html>

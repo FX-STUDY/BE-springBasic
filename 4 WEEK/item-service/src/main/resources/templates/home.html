@@ -1,0 +1,38 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .addBtn {
+            margin-left: auto;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="title">상품목록</h1><br>
+    <table>
+        <th>ID</th> <th>상품명</th> <th>가격</th> <th>수량</th>
+        <tr th:each="item : ${findAll}">
+            <td><a href="itemDetailForm.html" th:href="@{/{itemId}(itemId=${item.itemId})}"  th:text="${item.itemId}"></a></td>
+            <td><a href="itemDetailForm.html" th:href="${item.itemId}" th:text="${item.itemName}"></a></td>
+            <td th:text="${item.quantity}"></td>
+            <td th:text="${item.price}"></td>
+        </tr>
+    </table>
+    <button class="addBtn" onclick="location.href='/addItem'">상품등록</button>
+
+</div>
+</body>
+</html>

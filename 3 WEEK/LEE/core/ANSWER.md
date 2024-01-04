@@ -86,7 +86,7 @@ https://agilemanifesto.org/iso/ko/manifesto.html <br>
    
 
 
-
+---
 
 ### DI : 하나의 객체가 다른 객체의 의존성을 제공하는 테크닉
    - 의존성 주입에는 3가지 방법 존재. 
@@ -102,6 +102,63 @@ https://agilemanifesto.org/iso/ko/manifesto.html <br>
       - 역시 final 키워드 사용 불가
       
    - Spring 개발에서 생성자 주입을 사용하기!!
+   - DI는 IoC의 한 종류임
+
+
+
+### IoC : 메소드나 객체의 호출작업을 개발자가 결정하는 것이 아니라, 외부에서 결정되는 것
+- IoC(Inversion of Control)는 "제어의 역전" 이라는 의미로, 말 그대로 메소드나 객체의 호출작업을 개발자가 결정하는 것이 아니라, 외부에서 셜정되는 것을 의미
+- 객체의 의존성을 역전시켜 객체 간의 결합도를 줄이고 유연한 코드를 작성할 수 있게 하여 가독성 및 코드 중복, 유지 보수를 편하게 할 수 있게 한다. 
+
+- 기존방법(개발자가 직접 의존성을 만듬)
+  1. 객체 생성
+  2. 의존성 객체 생성(클래스 내부에 생성)
+  3. 의존성 객체 메소드 호출
+
+- 스프링에서
+  1. 객체 생성
+  2. 의존성 객체 주입(스스로가 만드는것 x, 제어권을 스프링에게 위임, 스프링이 만들어 놓은 객체 주입)
+  3. 의존성 객체 메소드 호출
+
+제어의 흐름을 사용자가 컨트롤 하는 것이 아니라 스프링에게 맡겨 작업을 처리하게 된다.
+
+
+
+### 스프링 컨테이너 : 스프링에서 자바 객체들을 관리하는 공간을 말함.
+- 스프링 컨테이너는 빈의 생성부터 소멸까지 개발자 대신 관리해줌
+
+`@Configuration` : 구성정보를 담당하는 것을 설정할 때 @Configuration 를 등록<br>
+`@Bean` : 각 메서드에 @Bean을 등록하면 스프링 컨테이너에 자동으로 등록이 됨. 자바 객체를 Bean 이라고 함.
+
+
+
+스프링 컨테이너는 BeanFactory와 ApplicationContext가 있다.
+1. `BeanFactory`는 빈을 등록하고 생성하고 조회하고 돌려주는 등 빈을 관리하는 역할을 한다. getBean() 메소드를 통해 빈을 인스턴스화할 수 있다.
+2. ` ApplicationContext`는 BeanFactory의 기능을 상속받아 제공한다.
+   따라서, 빈을 관리하고 검색하는 기능을 BeanFactory가 제공하고, 그 외의 부가 기능을 제공한다.
+   - ApplicationContext를 스프링 컨테이너라고 한다.(ApplicationContext는 인터페이스)<br>
+   - 구현할때는 `new AnnotationConfigApplicationContext(클래스이름.class)` 를 사용.
+   - .getBean(빈 이름, class타입)
+   
+스프링 컨테이너 사용 이유
+- 객체를 생성하기 위해서는 new 생성자를 사용해야함. 그로 인해 애플리케이션에서는 수많은 객체가 존재하고 서로를 참조하게 됨 -> 객체간의 참조가 많으면 많을수록 의존성을 높아짐
+-> 이는 객체지향 프로그래밍과 맞지 않음
+- 따라서 객체 간의 의존성을 낮추어 결합도를 낮추고, 높은 캡슐화를 위해 스프링 컨테이너를 사용한다.
+
+
+
+
+### 수동 등록과 자동등록의 차이
+
+`@Configuration + @Bean`(수동방식) VS `@ComponentScan + @Component`(자동방식) <br>
+1. 수동방식 
+    - AppConfig.class 에 @Configuration을 적용했다면, 수동으로 각 @Bean을 적용할 메서드를 작성해야함
+    - 수동등록은 Config클래스 안에 @Bean을 추가한 메서드로 직접 빈을 등록, 의존성 주입도 여기서 진행함
+2. 자동방식
+   - AppConfig.class 에 @Component을 적용했다면, @ComponentScan으로 어떤 패키지부터 Scan을 시작할 건지 작성하고, 
+   해당 패키지 하위에 @Component로 설정된 클래스가 있다면 클래스들을 SpringContainer에 Bean으로 등록된다.
+   - 자동등록은 Config 클래스에 @@ComponentScan 을 추가한다. 스프링은 @Component가 붙은 클래스의 객체를 스프링 빈으로 추가한다.
+
 
 ## ISSUE
 
