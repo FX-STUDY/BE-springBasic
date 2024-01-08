@@ -44,16 +44,37 @@ https://agilemanifesto.org/iso/ko/manifesto.html <br>
 ---
 
 ## 주요 이론 요약
-
-Please provide a summary of your main theory here.
+Object Oriented Programming 설계 원칙 <br>
+<hr>
+OOP의 5원칙 ( SOLID ) <br>
+SRP ( Single Responsibility Prindiple ) : 한 클래스는 하나의 책임만 가져야 한다. <br>
+OCP ( Open-Closed Prindiple ) : 확장에는 열려있으나, 변경에는 닫혀있어야한다. <br>
+LSP ( Liskov's Substitution Principle ) : 하위객체는 상위객체와 교체할 수 있어야한다. <br>
+ISP ( Interface Segregation Principle ) : 관심사에 맞게 인터페이스를 분리해야한다. <br>
+DIP ( Dependency Inversion Principle ) : 구체화에 의존하지말고 추상화에 의존해야한다. <br>
+<hr>
+OOP의 4가지 특징 <br>
+1. 캡슐화 2. 상속 3. 추상화 4. 다형성
 
 ## ISSUE
 
-Please enter your issue details here.
-
+SRP 위반 --- <br>
+ Order 클래스 - calculatedPrice() 메서드가 Order 클래스내에 있으면 Order 클래스가 여러개의 책임을 갖으므로 SRP위반이라 생각됩니다.<br>
+OCP 위반 --- <br>
+  OrderServiceImpl 클래스 - memeberRepository와 discountPolicy를 직접 생성해주면 나중에 정책이 바뀌었을 때,
+   이러한 변수를 선언한 코드들을 모두 수정해주어야하므로 OCP위반이라 생각됩니다.<br>
+LSP 위반 --- <br>
+ <br>
+ISP 위반 --- <br>
+ <br>
+DIP 위반 --- <br>
+ <br>
 ## Solution
 
-Please describe your solution in detail here.
+SRP 위반 --- <br>
+ Order 클래스 - calculatedPrice()를 Order 클래스에서 빼내어 OrderService 클래스로 옮겨 책임을 한가지만 갖도록 해줍니다. <br>
+OCP 위반 --- <br>
+ OrderServiceImplt 클래스 - 의존성을 주입해주는 클래스를 새로 만들어 정책이 바뀌었을 시, 그 클래스만 수정하면 되도록 만들어줍니다. <br>
 
 ## About
 
