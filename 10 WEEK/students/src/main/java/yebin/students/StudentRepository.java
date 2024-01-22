@@ -22,3 +22,7 @@ public class StudentRepository {
         return store.get(id);
     }
 
+    public List<Students> findAll(){
+        return new ArrayList<>(store.values());
+    }
+
