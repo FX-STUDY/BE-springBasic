@@ -37,3 +37,7 @@ public class StudentRepository {
         store.remove(id);
     }
 
+    public void clearStore(){
+        store.clear();
+    }
+}
