@@ -26,3 +26,10 @@ public class StudentRepository {
         return new ArrayList<>(store.values());
     }
 
+    public void update(Long id, Students updateStudent){
+        Students findStudent = findById(id);
+        findStudent.setName(updateStudent.getName());
+        findStudent.setGrade(updateStudent.getGrade());
+        findStudent.setMajor(updateStudent.getMajor());
+    }
+
