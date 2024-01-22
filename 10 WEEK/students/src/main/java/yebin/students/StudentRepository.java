@@ -33,3 +33,7 @@ public class StudentRepository {
         findStudent.setMajor(updateStudent.getMajor());
     }
 
+    public void delete(Long id){
+        store.remove(id);
+    }
+
