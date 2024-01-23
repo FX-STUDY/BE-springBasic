@@ -6,14 +6,16 @@ package fx.studentManagement.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class Student {
 
     private String stuName;
-    private String stuNum;
-    private String stuGrade;
+    private Long stuNum;
+    private int stuGrade;
     private String stuMajort; //ENUM처리 고려
 
 }
