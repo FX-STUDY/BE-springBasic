@@ -21,18 +21,21 @@ class StudentServiceTest {
 
     @BeforeEach
     public void BeforeEach() {
-        Student stu1 = new Student();
-        stu1.setStuNum(2100000L);
-        stu1.setStuName("PARK");
-        stu1.setStuGrade(2);
-        stu1.setStuMajor("SoftwareDept");
+        Student stu1 = Student.builder()
+                .stuNum(2100000L)
+                .stuName("PARK")
+                .stuGrade(2)
+                .stuMajor("SoftwareDept")
+                .build();
         studentService.signUp(stu1);
 
-        Student stu2 = new Student();
-        stu2.setStuNum(1900000L);
-        stu2.setStuName("KIM");
-        stu2.setStuGrade(4);
-        stu2.setStuMajor("SoftwareDept");
+
+        Student stu2 = Student.builder()
+                .stuNum(1900000L)
+                .stuName("KIM")
+                .stuGrade(4)
+                .stuMajor("SoftwareDept")
+                .build();
         studentService.signUp(stu2);
     }
 
@@ -44,11 +47,13 @@ class StudentServiceTest {
     @Test
     void signUp() {
         //give
-        Student stu = new Student();
-        stu.setStuNum(2000000L);
-        stu.setStuName("LEE");
-        stu.setStuGrade(3);
-        stu.setStuMajor("SoftwareDept");
+        Student stu = Student.builder()
+                .stuNum(2000000L)
+                .stuName("LEE")
+                .stuGrade(3)
+                .stuMajor("SoftwareDept")
+                .build();
+
 
         //when
         studentService.signUp(stu);
@@ -120,10 +125,11 @@ class StudentServiceTest {
     @Test
     void updateStudent() {
         //give
-        Student updateStu = new Student();
-        updateStu.setStuName("PARK");
-        updateStu.setStuGrade(1);
-        updateStu.setStuMajor("ComputerDept");
+        Student updateStu = Student.builder()
+                .stuName("PARK")
+                .stuGrade(1)
+                .stuMajor("ComputerDept")
+                .build();
 
         //when
         studentService.updateStudent(2100000L, updateStu);
