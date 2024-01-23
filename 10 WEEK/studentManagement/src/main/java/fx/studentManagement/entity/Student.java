@@ -16,6 +16,6 @@ public class Student {
     private String stuName;
     private Long stuNum;
     private int stuGrade;
-    private String stuMajort; //ENUM처리 고려
+    private String stuMajor; //ENUM처리 고려
 
 }

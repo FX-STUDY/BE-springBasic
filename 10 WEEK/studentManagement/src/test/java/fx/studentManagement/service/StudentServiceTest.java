@@ -25,14 +25,14 @@ class StudentServiceTest {
         stu1.setStuNum(2100000L);
         stu1.setStuName("PARK");
         stu1.setStuGrade(2);
-        stu1.setStuMajort("SoftwareDept");
+        stu1.setStuMajor("SoftwareDept");
         studentService.signUp(stu1);
 
         Student stu2 = new Student();
         stu2.setStuNum(1900000L);
         stu2.setStuName("KIM");
         stu2.setStuGrade(4);
-        stu2.setStuMajort("SoftwareDept");
+        stu2.setStuMajor("SoftwareDept");
         studentService.signUp(stu2);
     }
 
@@ -48,7 +48,7 @@ class StudentServiceTest {
         stu.setStuNum(2000000L);
         stu.setStuName("LEE");
         stu.setStuGrade(3);
-        stu.setStuMajort("SoftwareDept");
+        stu.setStuMajor("SoftwareDept");
 
         //when
         studentService.signUp(stu);
@@ -57,7 +57,7 @@ class StudentServiceTest {
         Assertions.assertThat(stu.getStuNum()).isEqualTo(2000000L);
         Assertions.assertThat(stu.getStuName()).isEqualTo("LEE");
         Assertions.assertThat(stu.getStuGrade()).isEqualTo(3);
-        Assertions.assertThat(stu.getStuMajort()).isEqualTo("SoftwareDept");
+        Assertions.assertThat(stu.getStuMajor()).isEqualTo("SoftwareDept");
     }
 
     @Test
@@ -72,12 +72,12 @@ class StudentServiceTest {
         Assertions.assertThat(stu1.getStuNum()).isEqualTo(2100000L);
         Assertions.assertThat(stu1.getStuName()).isEqualTo("PARK");
         Assertions.assertThat(stu1.getStuGrade()).isEqualTo(2);
-        Assertions.assertThat(stu1.getStuMajort()).isEqualTo("SoftwareDept");
+        Assertions.assertThat(stu1.getStuMajor()).isEqualTo("SoftwareDept");
 
         Assertions.assertThat(stu2.getStuNum()).isEqualTo(1900000L);
         Assertions.assertThat(stu2.getStuName()).isEqualTo("KIM");
         Assertions.assertThat(stu2.getStuGrade()).isEqualTo(4);
-        Assertions.assertThat(stu2.getStuMajort()).isEqualTo("SoftwareDept");
+        Assertions.assertThat(stu2.getStuMajor()).isEqualTo("SoftwareDept");
     }
 
     @Test
@@ -123,7 +123,7 @@ class StudentServiceTest {
         Student updateStu = new Student();
         updateStu.setStuName("PARK");
         updateStu.setStuGrade(1);
-        updateStu.setStuMajort("ComputerDept");
+        updateStu.setStuMajor("ComputerDept");
 
         //when
         studentService.updateStudent(2100000L, updateStu);
@@ -131,7 +131,7 @@ class StudentServiceTest {
         //then
         Assertions.assertThat(student.getStuName()).isEqualTo("PARK");
         Assertions.assertThat(student.getStuGrade()).isEqualTo(1);
-        Assertions.assertThat(student.getStuMajort()).isEqualTo("ComputerDept");
+        Assertions.assertThat(student.getStuMajor()).isEqualTo("ComputerDept");
 
     }
 
