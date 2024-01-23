@@ -64,3 +64,48 @@
 `@BeforeEach`를 활용하여 각 단위 테스트에서 필요한 `save` 중복 코드를 방지했다.
 또한, `@AfterEach`를 이용하여 각 단위 테스트가 종료될 때 초기화를 수행함으로써
 통합 테스트를 효과적으로 수행할 수 있게 구현하였다.
+
+## Builder Pattern
+
+빌더 패턴 장점 
+- 필요한 데이터만 설정 가능
+- 유연성 확보 가능
+- 가독성이 높아짐
+- 불변성 확보 가능
+
+*Student*
+```
+@Builder
+public class Student
+```
+
+*StudentServiceTest*
+```java
+    public void BeforeEach() {
+        Student stu1 = Student.builder()
+                .stuNum(2100000L)
+                .stuName("PARK")
+                .stuGrade(2)
+                .stuMajor("SoftwareDept")
+                .build();
+        studentService.signUp(stu1);
+
+
+        Student stu2 = Student.builder()
+                .stuNum(1900000L)
+                .stuName("KIM")
+                .stuGrade(4)
+                .stuMajor("SoftwareDept")
+                .build();
+        studentService.signUp(stu2);
+    }
+```
+
+이전 코드보다 훨씬 직관적이다.
+
+
+
+
+
+
+
