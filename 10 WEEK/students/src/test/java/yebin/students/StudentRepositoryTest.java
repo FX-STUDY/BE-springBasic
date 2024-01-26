@@ -55,3 +55,16 @@ public class StudentRepositoryTest {
         Assertions.assertThat(findStudent.getMajor()).isEqualTo(updateStudent.getMajor());
     }
 
+    @Test
+    void delete(){
+        //given
+        Students student = new Students("yebin", 4, "소프트웨어학과");
+        Students savedStudent = studentRepository.save(student);
+        Long studentId = savedStudent.getId();
+        //when
+        studentRepository.delete(studentId);
+        List<Students> students = studentRepository.findAll();
+        //then
+        Assertions.assertThat(students.size()).isEqualTo(0);
+    }
+}
