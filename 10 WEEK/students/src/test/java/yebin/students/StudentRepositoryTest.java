@@ -39,3 +39,19 @@ public class StudentRepositoryTest {
         Assertions.assertThat(students).contains(student1,student2);
     }
 
+    @Test
+    void update(){
+        //given
+        Students student = new Students("yebin", 4, "소프트웨어학과");
+        Students savedStudent = studentRepository.save(student);
+        Long studentId = savedStudent.getId();
+        //when
+        Students updateStudent = new Students("son", 2, "전자공학과");
+        studentRepository.update(studentId,updateStudent);
+        Students findStudent = studentRepository.findById(studentId);
+        //then
+        Assertions.assertThat(findStudent.getName()).isEqualTo(updateStudent.getName());
+        Assertions.assertThat(findStudent.getGrade()).isEqualTo(updateStudent.getGrade());
+        Assertions.assertThat(findStudent.getMajor()).isEqualTo(updateStudent.getMajor());
+    }
+
