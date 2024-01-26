@@ -9,9 +9,8 @@ public class Students {
     private Integer grade;
     private String major;
 
-    public Students(String name, Long id, Integer grade, String major){
+    public Students(String name, Integer grade, String major){
         this.name = name;
-        this.id = id;
         this.grade = grade;
         this.major = major;
     }
