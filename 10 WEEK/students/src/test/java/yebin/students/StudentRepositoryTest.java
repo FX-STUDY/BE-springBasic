@@ -14,3 +14,14 @@ public class StudentRepositoryTest {
         studentRepository.clearStore();
     }
 
+    @Test
+    void save(){
+        //given
+        Students student = new Students("yebin", 4, "소프트웨어학과");
+        //when
+        Students saveStudent = studentRepository.save(student);
+        //then
+        Students findStudent = studentRepository.findById(student.getId());
+        Assertions.assertThat(findStudent).isEqualTo(saveStudent);
+    }
+
