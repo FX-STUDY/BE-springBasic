@@ -29,4 +29,10 @@ public class StudentServiceImpl implements StudentService{
         studentRepository.update(studentId, updateStudent);
     }
 
+    @Override
+    public void multiDeleteStudent(List<Long> studentId){
+        for (Long id : studentId) {
+            studentRepository.delete(id);
+        }
+    }
 }
