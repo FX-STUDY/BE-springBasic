@@ -9,4 +9,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StudentServiceImpl implements StudentService{
     private final StudentRepository studentRepository;
+    @Override
+    public void join(Students student) {
+        studentRepository.save(student);
+    }
+
 }
