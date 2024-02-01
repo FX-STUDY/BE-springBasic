@@ -3,11 +3,11 @@ package fx.studentManagement.controller;
 import fx.studentManagement.entity.Student;
 import fx.studentManagement.service.StudentService;
 import jakarta.annotation.PostConstruct;
-import jakarta.annotation.PreDestroy;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -26,9 +26,13 @@ public class StudentController {
         }
     }
 
-    @GetMapping("/students/{stuNum}") // 단일 학생 조회
-    public Student showStudent(@PathVariable Long stuNum) {
-        return studentService.showStudent(stuNum);
+    @GetMapping("/students/{studentNumber}") // 단일 학생 조회
+    public ResponseEntity showStudent(@PathVariable Long studentNumber) {
+        try {
+            return new ResponseEntity<>(studentService.showStudent(studentNumber), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("존재하지 않는 학생입니다.", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("/students") // 모든 학생 조회

@@ -3,12 +3,14 @@ package fx.studentManagement.service;
 import fx.studentManagement.entity.Student;
 import fx.studentManagement.repository.StudentRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class StudentService {
 
     private final StudentRepository studentRepository;
@@ -21,8 +23,10 @@ public class StudentService {
         studentRepository.save(student);
     }
 
-    public Student showStudent(Long stuNum) { //단일 학생 조회
-        return studentRepository.findByStuNum(stuNum);
+    public Student showStudent(Long studentNumber) { //단일 학생 조회
+        if (studentRepository.findByStudentNumber(studentNumber) == null)
+            throw new RuntimeException("존재하지 않는 학생입니다.");
+        return studentRepository.findByStudentNumber(studentNumber);
     }
 
     public List<Student> showAllStudent() { //모든 학생 조회

@@ -18,8 +18,8 @@ public class StudentRepository {
         return student;
     }
 
-    public Student findByStuNum(Long stuNum) {
-        return store.get(stuNum);
+    public Student findByStudentNumber(Long studentNumber) {
+        return store.get(studentNumber);
     }
 
     public List<Student> findAll() {
