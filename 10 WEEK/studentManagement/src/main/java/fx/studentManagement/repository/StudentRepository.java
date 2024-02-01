@@ -34,22 +34,8 @@ public class StudentRepository {
         store.clear();
     }
 
-    public Student updateStu(Long stuNum, Student stu) {
-        Student existData = store.get(stuNum);
-        if(stu.getStuNum() == null)
-            stu.setStuNum(existData.getStuNum());
-        if (stu.getStuName() == null)
-            stu.setStuName(existData.getStuName());
-
-        Integer stuGrade = stu.getStuGrade();
-        if (stuGrade == null)
-            stu.setStuGrade(existData.getStuGrade());
-
-        if (stu.getStuMajor() == null)
-            stu.setStuMajor(existData.getStuMajor());
-
-
-        return store.replace(stuNum, stu);
+    public Student updateStudent(Long studentNumber, Student student) {
+        return store.replace(studentNumber, student);
     }
 
     public int countStu() {

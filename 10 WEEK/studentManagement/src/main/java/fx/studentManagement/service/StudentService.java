@@ -45,8 +45,10 @@ public class StudentService {
         studentRepository.deleteAll();
     }
 
-    public Student updateStudent(Long stuNum, Student stu) { //단일 학생 정보 수정
-        return studentRepository.updateStu(stuNum, stu);
+    public Student updateStudent(Long studentNumber, Student student) { //단일 학생 정보 수정
+        if(studentRepository.findByStudentNumber(studentNumber) == null)
+            throw new RuntimeException("존재하지 않는 학생입니다.");
+        return studentRepository.updateStudent(studentNumber, student);
     }
 
     public int countAllStudent() {

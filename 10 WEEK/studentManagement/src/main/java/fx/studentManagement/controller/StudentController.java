@@ -60,10 +60,15 @@ public class StudentController {
         return new ResponseEntity<>("학생 전체 정보가 삭제되었습니다.", HttpStatus.OK);
     }
 
-    @PatchMapping("/students/{stuNum}") // 단일 학생 정보 수정
-    public Student updateStudent(@PathVariable Long stuNum, @RequestBody Student stu) {
-        studentService.updateStudent(stuNum, stu);
-        return studentService.showStudent(stuNum);
+    @PatchMapping("/students/{studentNumber}") // 단일 학생 정보 수정
+    public ResponseEntity updateStudent(@PathVariable Long studentNumber, @RequestBody Student student) {
+        try{
+            Student updateStudent = studentService.updateStudent(studentNumber, student);
+            return new ResponseEntity<>(updateStudent, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("학생 정보 수정에 실패했습니다.", HttpStatus.BAD_REQUEST);
+        }
+
     }
 
     @GetMapping("/students/count") // 총 학생 조회
