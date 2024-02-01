@@ -52,7 +52,7 @@ public class StudentService {
     }
 
     public int countAllStudent() {
-        return studentRepository.countStu();
+        return studentRepository.countStudent();
     }
 
 }

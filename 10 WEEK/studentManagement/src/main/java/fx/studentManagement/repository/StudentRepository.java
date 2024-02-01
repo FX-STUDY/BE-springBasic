@@ -38,7 +38,7 @@ public class StudentRepository {
         return store.replace(studentNumber, student);
     }
 
-    public int countStu() {
+    public int countStudent() {
         return store.size();
     }
 }
