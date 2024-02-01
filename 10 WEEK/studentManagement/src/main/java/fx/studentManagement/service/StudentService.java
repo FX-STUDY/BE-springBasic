@@ -30,6 +30,8 @@ public class StudentService {
     }
 
     public List<Student> showAllStudent() { //모든 학생 조회
+        if(studentRepository.findAll() == null)
+            throw new RuntimeException("존재하는 학생이 없습니다.");
         return studentRepository.findAll();
     }
 

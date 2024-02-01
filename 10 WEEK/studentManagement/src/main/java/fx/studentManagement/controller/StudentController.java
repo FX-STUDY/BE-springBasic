@@ -36,8 +36,12 @@ public class StudentController {
     }
 
     @GetMapping("/students") // 모든 학생 조회
-    public List<Student> showAllStudent() {
-        return studentService.showAllStudent();
+    public ResponseEntity showAllStudent() {
+        try {
+            return new ResponseEntity<>(studentService.showAllStudent(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("존재하는 학생이 없습니다.", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @DeleteMapping("/students/{stuNum}") // 단일 학생 삭제
