@@ -17,9 +17,13 @@ public class StudentController {
 
 
     @PostMapping("/students") //학생 등록
-    public List<Student> signUp(@RequestBody Student student) {
-        studentService.signUp(student);
-        return studentService.showAllStudent(); //학생 등록 확인을 위해 전체 출력
+    public ResponseEntity signUp(@RequestBody Student student) {
+        try {
+            studentService.signUp(student);
+            return new ResponseEntity<>("학생 등록 성공", HttpStatus.OK); // 학생 등록 확인을 위해 전체 출력
+        } catch (Exception e) {
+            return new ResponseEntity<>("이미 존재하는 학생입니다.", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("/students/{stuNum}") // 단일 학생 조회

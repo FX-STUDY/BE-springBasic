@@ -13,9 +13,9 @@ public class StudentRepository {
 
     private static Map<Long, Student> store = new ConcurrentHashMap<>();
 
-    public Student save(Student stu) {
-        store.put(stu.getStuNum(), stu);
-        return stu;
+    public Student save(Student student) {
+        store.put(student.getStudentNumber(), student);
+        return student;
     }
 
     public Student findByStuNum(Long stuNum) {

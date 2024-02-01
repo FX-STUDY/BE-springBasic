@@ -13,8 +13,12 @@ public class StudentService {
 
     private final StudentRepository studentRepository;
 
-    public void signUp(Student stu) { //학생 입력
-        studentRepository.save(stu);
+    public void signUp(Student student) { //학생 입력
+
+        if(studentRepository.findByStudentNumber(student.getStudentNumber()) != null)
+            throw new RuntimeException("이미 존재하는 학생입니다.");
+
+        studentRepository.save(student);
     }
 
     public Student showStudent(Long stuNum) { //단일 학생 조회
