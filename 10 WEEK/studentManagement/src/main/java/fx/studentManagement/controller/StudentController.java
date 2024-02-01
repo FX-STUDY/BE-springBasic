@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("/students")
 public class StudentController {
 
     private final StudentService studentService;
 
 
-    @PostMapping("/students") //학생 등록
+    @PostMapping //학생 등록
     public ResponseEntity signUp(@RequestBody Student student) {
         try {
             studentService.signUp(student);
@@ -26,7 +27,7 @@ public class StudentController {
         }
     }
 
-    @GetMapping("/students/{studentNumber}") // 단일 학생 조회
+    @GetMapping("/{studentNumber}") // 단일 학생 조회
     public ResponseEntity showStudent(@PathVariable Long studentNumber) {
         try {
             return new ResponseEntity<>(studentService.showStudent(studentNumber), HttpStatus.OK);
@@ -35,7 +36,7 @@ public class StudentController {
         }
     }
 
-    @GetMapping("/students") // 모든 학생 조회
+    @GetMapping // 모든 학생 조회
     public ResponseEntity showAllStudent() {
         try {
             return new ResponseEntity<>(studentService.showAllStudent(), HttpStatus.OK);
@@ -44,7 +45,7 @@ public class StudentController {
         }
     }
 
-    @DeleteMapping("/students/{studentNumber}") // 단일 학생 삭제
+    @DeleteMapping("/{studentNumber}") // 단일 학생 삭제
     public ResponseEntity deleteStudent(@PathVariable Long studentNumber) {
         try {
             studentService.deleteStudent(studentNumber);
@@ -54,13 +55,13 @@ public class StudentController {
         }
     }
 
-    @DeleteMapping("/students") // 다중 학생 삭제
+    @DeleteMapping // 다중 학생 삭제
     public ResponseEntity deleteAllStudent() {
         studentService.deleteAllStudent();
         return new ResponseEntity<>("학생 전체 정보가 삭제되었습니다.", HttpStatus.OK);
     }
 
-    @PatchMapping("/students/{studentNumber}") // 단일 학생 정보 수정
+    @PatchMapping("/{studentNumber}") // 단일 학생 정보 수정
     public ResponseEntity updateStudent(@PathVariable Long studentNumber, @RequestBody Student student) {
         try{
             Student updateStudent = studentService.updateStudent(studentNumber, student);
@@ -71,7 +72,7 @@ public class StudentController {
 
     }
 
-    @GetMapping("/students/count") // 총 학생 조회
+    @GetMapping("/count") // 총 학생 조회
     public int countStudent() {
         return studentService.countAllStudent();
     }
@@ -79,19 +80,19 @@ public class StudentController {
     @PostConstruct
     public void post() {
         Student stu1 = Student.builder()
-                .stuNum(2100000L)
-                .stuName("PARK")
-                .stuGrade(2)
-                .stuMajor("SoftwareDept")
+                .studentNumber(2100000L)
+                .studentName("PARK")
+                .studentGrade(2)
+                .studentMajor("SoftwareDept")
                 .build();
         studentService.signUp(stu1);
 
 
         Student stu2 = Student.builder()
-                .stuNum(1900000L)
-                .stuName("KIM")
-                .stuGrade(4)
-                .stuMajor("SoftwareDept")
+                .studentNumber(1900000L)
+                .studentName("KIM")
+                .studentGrade(4)
+                .studentMajor("SoftwareDept")
                 .build();
         studentService.signUp(stu2);
     }
