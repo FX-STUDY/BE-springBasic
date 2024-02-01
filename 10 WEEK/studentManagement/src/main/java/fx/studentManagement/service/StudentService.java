@@ -35,8 +35,10 @@ public class StudentService {
         return studentRepository.findAll();
     }
 
-    public void deleteStudent(Long stuNum) { // 단일 학생 삭제
-        studentRepository.delteByStuNum(stuNum);
+    public void deleteStudent(Long studentNumber) { // 단일 학생 삭제
+        if(studentRepository.findByStudentNumber(studentNumber) == null)
+            throw new RuntimeException("존재하지 않는 학생입니다.");
+        studentRepository.delteByStudentNumber(studentNumber);
     }
 
     public void deleteAllStudent() { // 다중 학생 삭제

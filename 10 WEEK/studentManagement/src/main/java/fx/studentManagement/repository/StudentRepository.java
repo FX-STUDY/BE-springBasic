@@ -26,8 +26,8 @@ public class StudentRepository {
         return new ArrayList<>(store.values());
     }
 
-    public void delteByStuNum(Long stuNum) {
-        store.remove(stuNum);
+    public void delteByStudentNumber(Long studentNumber) {
+        store.remove(studentNumber);
     }
 
     public void deleteAll() {

@@ -44,10 +44,14 @@ public class StudentController {
         }
     }
 
-    @DeleteMapping("/students/{stuNum}") // 단일 학생 삭제
-    public List<Student> deleteStudent(@PathVariable Long stuNum) {
-        studentService.deleteStudent(stuNum);
-        return studentService.showAllStudent(); //확인을 위해 전체 출력
+    @DeleteMapping("/students/{studentNumber}") // 단일 학생 삭제
+    public ResponseEntity deleteStudent(@PathVariable Long studentNumber) {
+        try {
+            studentService.deleteStudent(studentNumber);
+            return new ResponseEntity<>("학번 : " + studentNumber + " 정보 삭제 성공", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("존재하지 않는 학생입니다.", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @DeleteMapping("/students") // 다중 학생 삭제
