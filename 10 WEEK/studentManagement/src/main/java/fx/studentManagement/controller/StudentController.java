@@ -55,9 +55,9 @@ public class StudentController {
     }
 
     @DeleteMapping("/students") // 다중 학생 삭제
-    public List<Student> deleteAllStudent() {
+    public ResponseEntity deleteAllStudent() {
         studentService.deleteAllStudent();
-        return studentService.showAllStudent();
+        return new ResponseEntity<>("학생 전체 정보가 삭제되었습니다.", HttpStatus.OK);
     }
 
     @PatchMapping("/students/{stuNum}") // 단일 학생 정보 수정
