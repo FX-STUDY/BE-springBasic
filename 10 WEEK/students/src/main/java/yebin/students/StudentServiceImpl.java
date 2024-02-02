@@ -33,6 +33,8 @@ public class StudentServiceImpl implements StudentService{
     public boolean multiDeleteStudentInForById(List<Long> studentId){
         for (Long id : studentId) {
             studentRepository.delete(id);
+            return true;
         }
+        return false;
     }
 }
