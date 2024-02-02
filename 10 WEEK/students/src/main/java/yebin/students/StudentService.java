@@ -4,8 +4,8 @@ import java.util.List;
 
 public interface StudentService {
     public void join(Students student);
-    public Students findStudent(Long studentId);
-    public void deleteStudent(Long studentId);
-    public void updateStudent(Long studentId, Students updateStudent);
-    public void multiDeleteStudent(List<Long> studentId);
+    public Students showStudentInForById(Long studentId);
+    public void deleteStudentInFortById(Long studentId);
+    public void updateStudentInForById(Long studentId, Students updateStudent);
+    public boolean multiDeleteStudentInForById(List<Long> studentId);
 }

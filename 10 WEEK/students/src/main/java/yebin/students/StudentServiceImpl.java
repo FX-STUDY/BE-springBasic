@@ -15,22 +15,22 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public Students findStudent(Long studentId) {
+    public Students showStudentInForById(Long studentId) {
         return studentRepository.findById(studentId);
     }
 
     @Override
-    public void deleteStudent(Long studentId) {
+    public void deleteStudentInFortById(Long studentId) {
         studentRepository.delete(studentId);
     }
 
     @Override
-    public void updateStudent(Long studentId, Students updateStudent) {
+    public void updateStudentInForById(Long studentId, Students updateStudent) {
         studentRepository.update(studentId, updateStudent);
     }
 
     @Override
-    public void multiDeleteStudent(List<Long> studentId){
+    public boolean multiDeleteStudentInForById(List<Long> studentId){
         for (Long id : studentId) {
             studentRepository.delete(id);
         }
