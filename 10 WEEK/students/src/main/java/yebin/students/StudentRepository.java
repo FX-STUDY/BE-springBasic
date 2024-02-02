@@ -26,11 +26,16 @@ public class StudentRepository {
     }
 
     public void update(Long id, Students updateStudent){
-        Students findStudent = findById(id);
+        //DB 에서 회원 정보를 찾는다 [ 이미 별도 메서드로 구분 되어 있음 ] 추상화 레벨 2
+        Students findStudent = store.get(id);
+        //Entity 정보를 수정한다. : 추상화 레벨 2
         findStudent.setName(updateStudent.getName());
         findStudent.setGrade(updateStudent.getGrade());
         findStudent.setMajor(updateStudent.getMajor());
+        //DB 에 새로운 정보를 저장한다. : [ 이미 별도 메서드로 구분 되어 있음 ] 추상화 레벨 2
+        save(findStudent);
     }
+
 
     public void delete(Long id){
         store.remove(id);
