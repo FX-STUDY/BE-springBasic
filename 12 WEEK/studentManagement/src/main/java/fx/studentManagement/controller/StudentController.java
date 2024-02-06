@@ -73,6 +73,7 @@ public class StudentController {
             return new ResponseEntity<>("학생 정보 수정에 실패했습니다.", HttpStatus.BAD_REQUEST);
         }
 
+    public ResponseEntity updateStudent(@PathVariable Long studentNumber,@Valid @RequestBody EditStudentForm editStudentForm) {
     }
 
     @GetMapping("/count") // 총 학생 조회
