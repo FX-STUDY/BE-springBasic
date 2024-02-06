@@ -5,6 +5,7 @@ import fx.studentManagement.controller.form.SignUpForm;
 import fx.studentManagement.entity.Student;
 import fx.studentManagement.service.StudentService;
 import jakarta.annotation.PostConstruct;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class StudentController {
 
 
     @PostMapping //학생 등록
-    public ResponseEntity signUp(@RequestBody SignUpForm signUpForm) {
+    public ResponseEntity signUp(@Valid @RequestBody SignUpForm signUpForm) {
         try {
             studentService.signUp(signUpForm);
             return new ResponseEntity<>("학생 등록 성공", HttpStatus.OK); // 학생 등록 확인을 위해 전체 출력
