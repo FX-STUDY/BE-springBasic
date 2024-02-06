@@ -66,9 +66,9 @@ public class StudentService {
 
 
     private static Student saveStudent(SignUpForm signUpForm) {
-        int year = signUpForm.getStudentBirth().getYear() + 1900;
-        int month = signUpForm.getStudentBirth().getMonth() + 1;
-        int day = signUpForm.getStudentBirth().getDay(); //여기서 약간 계산오류 발생. 변경하기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        int year = signUpForm.getStudentBirth().getYear();
+        int month = signUpForm.getStudentBirth().getMonthValue();
+        int day = signUpForm.getStudentBirth().getDayOfMonth();
 
         Student student = Student.builder()
                 .studentNumber(signUpForm.getStudentNumber())
