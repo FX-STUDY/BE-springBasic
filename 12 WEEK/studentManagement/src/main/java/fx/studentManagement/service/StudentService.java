@@ -50,9 +50,13 @@ public class StudentService {
         studentRepository.deleteAll();
     }
 
-    public Student updateStudent(Long studentNumber, Student student) { //단일 학생 정보 수정
-        if(studentRepository.findByStudentNumber(studentNumber) == null)
+    public Student updateStudent(Long studentNumber, EditStudentForm editStudentForm) { //단일 학생 정보 수정
+        Student existsStudent = studentRepository.findByStudentNumber(studentNumber);
+        if(existsStudent == null)
             throw new RuntimeException("존재하지 않는 학생입니다.");
+
+        Student student = editStudentInfo(editStudentForm, existsStudent);
+
         return studentRepository.updateStudent(studentNumber, student);
     }
 
@@ -80,6 +84,22 @@ public class StudentService {
                 .studentMajor(signUpForm.getStudentMajor())
                 .studentSemester(signUpForm.getStudentSemester())
                 .studentAddress(signUpForm.getStudentAddress())
+                .build();
+        return student;
+    }
+
+
+    private static Student editStudentInfo(EditStudentForm editStudentForm, Student existsStudent) {
+        Student student = Student.builder()
+                .studentNumber(existsStudent.getStudentNumber())
+                .studentGrade(existsStudent.getStudentGrade())
+                .studentName(editStudentForm.getStudentName())
+                .studentBirthYear(existsStudent.getStudentBirthYear())
+                .studentBirthMonth(existsStudent.getStudentBirthMonth())
+                .studentBirthDay(existsStudent.getStudentBirthDay())
+                .studentMajor(existsStudent.getStudentMajor())
+                .studentSemester(existsStudent.getStudentSemester())
+                .studentAddress(editStudentForm.getStudentAddress())
                 .build();
         return student;
     }

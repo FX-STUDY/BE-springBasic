@@ -64,9 +64,9 @@ public class StudentController {
     }
 
     @PatchMapping("/{studentNumber}") // 단일 학생 정보 수정
-    public ResponseEntity updateStudent(@PathVariable Long studentNumber, @RequestBody Student student) {
+    public ResponseEntity updateStudent(@PathVariable Long studentNumber, @RequestBody EditStudentForm editStudentForm) {
         try{
-            Student updateStudent = studentService.updateStudent(studentNumber, student);
+            Student updateStudent = studentService.updateStudent(studentNumber, editStudentForm);
             return new ResponseEntity<>(updateStudent, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("학생 정보 수정에 실패했습니다.", HttpStatus.BAD_REQUEST);
