@@ -44,8 +44,8 @@ https://agilemanifesto.org/iso/ko/manifesto.html <br>
 ---
 
 ## 주요 이론 요약
+   개방 폐쇄 원칙에 따라 수정을 지양하여 FixDiscountPolicy의 수정 대신 DiscountPolicy를 구현한 RateDiscountPolicy를 구현하여 해결하였다. 또한 의존 역전 원칙을 준수하여 인터페이스를 구현하여 생성하였고, 가격의 정률 할인이라는 하나의 기능만을 구현하여 단일 책임 원칙을 준수하였다.
 
-Please provide a summary of your main theory here.
 
 ## ISSUE
 
@@ -56,8 +56,53 @@ Please enter your issue details here.
 Please describe your solution in detail here.
 
 ## About
+   solid 원칙 -> single responsibility principle, open-closed principle, liskov substitution principle, interface segregation principle, dependency inversion principle 5가지 원칙의 앞 이니셜을 따서 solid원칙이라 부른다.
 
-Please enter your personal feelings, what you learned, and what you need to learn here.
+   - single responsibility principle ->
+      단일 책임 원칙, 하나의 요소가 하나의 책임만을 가져야 한다 -> 코드의 가독성을 높이고, 버그를 예방한다. 
+
+   - open-closed principle ->
+      개방 폐쇄 원칙, 확장에는 열려있고 수정에는 닫혀 있다는 개념 -> 추상화와 다형성을 활용하여 클래스 설계한다.
+
+   - liskov substitution principle ->
+      리스코프 치환 원칙, 자식 클래스가 항상 부모 클래스를 대신 할 수 있다는 개념 ->
+         ex) 도형 클래스(부모)                               사각형 클래스(자식)
+            1) 도형은 넓이를 가진다            ===>         1) 사각형은 넓이를 가진다
+            2) 도형은 둘레를 가진다            ===>         2) 사각형은 둘레를 가진다
+            3) 도형은 각을 가진다                           3) 사각형은 각을 가진다
+
+            도형 클래스(부모)                                 원 클래스(자식)
+            1) 도형은 넓이를 가진다            ===>         1) 원은 넓이를 가진다
+            2) 도형은 둘레를 가진다            ===>         2) 원은 둘레를 가진다
+            3) 도형은 각을 가진다                           3) 원은 각을 가진다
+            
+            이때 원 클래스가 부모의 3번 메소드를 수행하지 못하므로 해당 클래스는 자식 클래스가 부모 클래스를 대체하지 못하여 리스코프 치환원칙을 준수하지 못하고 있다고 할 수 있다. 따라서 3번의 메소드를 삭제, 또는 수정하여 리스코프 치환원칙을 준수 하게끔 할 수 있다.
+
+   - interface segregation principle ->
+      인터페이스 분리 법칙, 클래스 내에 사용하지 않는 인터페이스는 구현하지 않는다, 즉 자신이 사용하지 않는 메소드에 의존하지 않는다 -> 불필요한 의존도성을 줄이고 코드의 결합도를 낮출 수 있다. 
+
+   - dependency inversion principle ->
+      의존 역전의 원칙, 의존관계에 있어서 수정 가능성이 높은 것보다 낮은 것에 의존해야 한다. 객체지향 관점에서 볼 때 수정 가능성이 높은 것은 주로 구체화된 클래스들을 뜻하고, 수정 가능성이 낮은 것들은 추상클래스나 인터페이스를 뜻한다. -> 코드의 재사용성과 유연성을 향상시킬 수 있다.
+
+   3Week study
+   
+   DI -> Dependency Injection(의존성 주입) ->
+      스프링이 다른 프레임워크와 차별화되어 제공하는 기능, 객체를 직접 생성하지 않고 외부에서 생성 후 주입시키는 방식. -> 모듈 간 결합도가 낮아지고 유연성이 높아진다.
+
+   IOC -> Inversion of Control(제어의 역전) ->
+      메소드,객체의 호출작업을 개발자가 아닌 외부에서 결정하는 것. -> 객체의 의존성을 역전시켜 객체 간의 결합도를 낮추고 유연한 코드를 작성 가능하게 하여 가독성 향상, 코드 중복 방지, 유지 보수 용이 의 장점존재.
+      -> 모든 의존성 객체를 스프링이 생성하여 주입시킴으로써 모든 의존성 객체들은 SingleTone Pattern 특징을 갖는다.
+
+   Spring Container ->
+      스프링 컨테이너는 스프링 프레임워크의 핵심 컴포넌트로 자바 객체(bean)의 생명 주기를 관리한다.
+      스프링 컨테이너는 BeanFactory, ApplicationContext 두 종류의 인터페이스로 구현되어있다.
+
+      BeanFactory -> 빈의 생성, 관계설정 같은 제어를 담당하는 IOC 오브젝트, getBean() 메서드를 통해 빈을 인스턴스화 할 수 있다.
+
+      ApplicationContext -> BeanFactory를 좀더 확장한 것. (주로 사용됨)
+      
+      사용 목적(장점) ->
+         객체를 컨테이너에서 생성하여 주입함으로써 객체 간의 의존성,결합도를 낮추고 캡슐화 기능을 향상시킨다.
 
 ## Question To Reader
 
