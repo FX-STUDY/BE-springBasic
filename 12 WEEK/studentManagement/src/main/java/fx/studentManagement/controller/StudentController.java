@@ -1,5 +1,7 @@
 package fx.studentManagement.controller;
 
+import fx.studentManagement.controller.form.EditStudentForm;
+import fx.studentManagement.controller.form.SignUpForm;
 import fx.studentManagement.entity.Student;
 import fx.studentManagement.service.StudentService;
 import jakarta.annotation.PostConstruct;
@@ -18,9 +20,9 @@ public class StudentController {
 
 
     @PostMapping //학생 등록
-    public ResponseEntity signUp(@RequestBody Student student) {
+    public ResponseEntity signUp(@RequestBody SignUpForm signUpForm) {
         try {
-            studentService.signUp(student);
+            studentService.signUp(signUpForm);
             return new ResponseEntity<>("학생 등록 성공", HttpStatus.OK); // 학생 등록 확인을 위해 전체 출력
         } catch (Exception e) {
             return new ResponseEntity<>("이미 존재하는 학생입니다.", HttpStatus.BAD_REQUEST);

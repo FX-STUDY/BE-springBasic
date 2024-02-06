@@ -1,5 +1,7 @@
 package fx.studentManagement.service;
 
+import fx.studentManagement.controller.form.EditStudentForm;
+import fx.studentManagement.controller.form.SignUpForm;
 import fx.studentManagement.entity.Student;
 import fx.studentManagement.repository.StudentRepository;
 import lombok.AllArgsConstructor;
@@ -15,13 +17,16 @@ public class StudentService {
 
     private final StudentRepository studentRepository;
 
-    public void signUp(Student student) { //학생 입력
+    public void signUp(SignUpForm signUpForm) { //학생 입력
 
-        if(studentRepository.findByStudentNumber(student.getStudentNumber()) != null)
+        if(studentRepository.findByStudentNumber(signUpForm.getStudentNumber()) != null)
             throw new RuntimeException("이미 존재하는 학생입니다.");
+
+        Student student = saveStudent(signUpForm);
 
         studentRepository.save(student);
     }
+
 
     public Student showStudent(Long studentNumber) { //단일 학생 조회
         if (studentRepository.findByStudentNumber(studentNumber) == null)
@@ -53,5 +58,29 @@ public class StudentService {
 
     public int countAllStudent() {
         return studentRepository.countStudent();
+    }
+
+
+
+
+
+
+    private static Student saveStudent(SignUpForm signUpForm) {
+        int year = signUpForm.getStudentBirth().getYear() + 1900;
+        int month = signUpForm.getStudentBirth().getMonth() + 1;
+        int day = signUpForm.getStudentBirth().getDay(); //여기서 약간 계산오류 발생. 변경하기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+        Student student = Student.builder()
+                .studentNumber(signUpForm.getStudentNumber())
+                .studentGrade(signUpForm.getStudentGrade())
+                .studentName(signUpForm.getStudentName())
+                .studentBirthYear(year)
+                .studentBirthMonth(month)
+                .studentBirthDay(day)
+                .studentMajor(signUpForm.getStudentMajor())
+                .studentSemester(signUpForm.getStudentSemester())
+                .studentAddress(signUpForm.getStudentAddress())
+                .build();
+        return student;
     }
 }
