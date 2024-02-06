@@ -70,17 +70,16 @@ public class StudentService {
 
 
     private static Student saveStudent(SignUpForm signUpForm) {
-        int year = signUpForm.getStudentBirth().getYear();
-        int month = signUpForm.getStudentBirth().getMonthValue();
-        int day = signUpForm.getStudentBirth().getDayOfMonth();
+
+        String[] studentBirth = signUpForm.getStudentBirth().split("_");
 
         Student student = Student.builder()
                 .studentNumber(signUpForm.getStudentNumber())
                 .studentGrade(signUpForm.getStudentGrade())
                 .studentName(signUpForm.getStudentName())
-                .studentBirthYear(year)
-                .studentBirthMonth(month)
-                .studentBirthDay(day)
+                .studentBirthYear(Integer.parseInt(studentBirth[0]))
+                .studentBirthMonth(Integer.parseInt(studentBirth[1]))
+                .studentBirthDay(Integer.parseInt(studentBirth[2]))
                 .studentMajor(signUpForm.getStudentMajor())
                 .studentSemester(signUpForm.getStudentSemester())
                 .studentAddress(signUpForm.getStudentAddress())
