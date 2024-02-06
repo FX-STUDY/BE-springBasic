@@ -6,6 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class EditStudentForm {
-    private String name;
-    private String address;
+    private String StudentName;
+    private String StudentAddress;
 }
