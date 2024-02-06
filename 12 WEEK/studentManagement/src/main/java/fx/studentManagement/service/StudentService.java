@@ -1,5 +1,7 @@
 package fx.studentManagement.service;
 
+import fx.studentManagement.common.exception.DuplicateStudentException;
+import fx.studentManagement.common.exception.NotFoundStudentException;
 import fx.studentManagement.controller.form.EditStudentForm;
 import fx.studentManagement.controller.form.SignUpForm;
 import fx.studentManagement.entity.Student;
@@ -20,7 +22,7 @@ public class StudentService {
     public void signUp(SignUpForm signUpForm) { //학생 입력
 
         if(studentRepository.findByStudentNumber(signUpForm.getStudentNumber()) != null)
-            throw new RuntimeException("이미 존재하는 학생입니다.");
+            throw new DuplicateStudentException();
 
         Student student = saveStudent(signUpForm);
 
@@ -30,19 +32,19 @@ public class StudentService {
 
     public Student showStudent(Long studentNumber) { //단일 학생 조회
         if (studentRepository.findByStudentNumber(studentNumber) == null)
-            throw new RuntimeException("존재하지 않는 학생입니다.");
+            throw new NotFoundStudentException();
         return studentRepository.findByStudentNumber(studentNumber);
     }
 
     public List<Student> showAllStudent() { //모든 학생 조회
         if(studentRepository.findAll() == null)
-            throw new RuntimeException("존재하는 학생이 없습니다.");
+            throw new NotFoundStudentException();
         return studentRepository.findAll();
     }
 
     public void deleteStudent(Long studentNumber) { // 단일 학생 삭제
         if(studentRepository.findByStudentNumber(studentNumber) == null)
-            throw new RuntimeException("존재하지 않는 학생입니다.");
+            throw new NotFoundStudentException();
         studentRepository.delteByStudentNumber(studentNumber);
     }
 
@@ -53,7 +55,7 @@ public class StudentService {
     public Student updateStudent(Long studentNumber, EditStudentForm editStudentForm) { //단일 학생 정보 수정
         Student existsStudent = studentRepository.findByStudentNumber(studentNumber);
         if(existsStudent == null)
-            throw new RuntimeException("존재하지 않는 학생입니다.");
+            throw new NotFoundStudentException();
 
         Student student = editStudentInfo(editStudentForm, existsStudent);
 
