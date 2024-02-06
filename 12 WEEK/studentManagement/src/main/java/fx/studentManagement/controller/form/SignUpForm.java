@@ -5,14 +5,15 @@ import fx.studentManagement.entity.enums.ValidEnum;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Range;
 
 @Getter
 @Setter
 public class SignUpForm {
 //학번, 이름, 생년월일, 학과, 학기, 주소, 학년
 
-//    @Pattern(regexp = "\\d{7}") //숫자만 가능
-    @Digits(integer = 7, fraction = 0, message = "- 7자리, 숫자 ( 영문 , 특수 기호 금지 )")
+    //https://coderanch.com/t/586580/java/validate-length-number
+    @Range(min=7, max=7, message = "- 7자리, 숫자 ( 영문 , 특수 기호 금지 )")
     private Long studentNumber;
 
     @Size(min =2, max = 7)
