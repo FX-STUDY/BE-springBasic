@@ -52,7 +52,7 @@ public class StudentService {
         studentRepository.deleteAll();
     }
 
-    public Student updateStudent(Long studentNumber, EditStudentForm editStudentForm) { //단일 학생 정보 수정
+    public Student editStudentInformation(Long studentNumber, EditStudentForm editStudentForm) { //단일 학생 정보 수정
         Student existsStudent = studentRepository.findByStudentNumber(studentNumber);
         if(existsStudent == null)
             throw new NotFoundStudentException();
