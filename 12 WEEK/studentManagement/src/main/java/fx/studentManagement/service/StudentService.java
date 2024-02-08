@@ -24,7 +24,7 @@ public class StudentService {
         if(studentRepository.findByStudentNumber(signUpForm.getStudentNumber()) != null)
             throw new DuplicateStudentException();
 
-        Student student = saveStudent(signUpForm);
+        Student student = convertSignUpFormToStudent(signUpForm);
 
         studentRepository.save(student);
     }
@@ -71,7 +71,7 @@ public class StudentService {
 
 
 
-    private static Student saveStudent(SignUpForm signUpForm) {
+    private static Student convertSignUpFormToStudent(SignUpForm signUpForm) {
 
         String[] studentBirth = signUpForm.getStudentBirth().split("_");
 
