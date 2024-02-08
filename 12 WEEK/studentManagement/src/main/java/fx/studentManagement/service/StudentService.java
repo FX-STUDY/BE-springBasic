@@ -52,14 +52,14 @@ public class StudentService {
         studentRepository.deleteAll();
     }
 
-    public Student editStudentInformation(Long studentNumber, EditStudentForm editStudentForm) { //단일 학생 정보 수정
-        Student existsStudent = studentRepository.findByStudentNumber(studentNumber);
+    public Student editStudentInformation(EditStudentForm editStudentForm) { //단일 학생 정보 수정
+        Student existsStudent = studentRepository.findByStudentNumber(editStudentForm.getStudentNumber());
         if(existsStudent == null)
             throw new NotFoundStudentException();
 
-        Student student = editStudentInfo(editStudentForm, existsStudent);
+        Student student = convertEditFormToStudent(editStudentForm, existsStudent);
 
-        return studentRepository.updateStudent(studentNumber, student);
+        return studentRepository.updateStudent(student);
     }
 
     public int countAllStudent() {
@@ -90,7 +90,7 @@ public class StudentService {
     }
 
 
-    private static Student editStudentInfo(EditStudentForm editStudentForm, Student existsStudent) {
+    private static Student convertEditFormToStudent(EditStudentForm editStudentForm, Student existsStudent) {
         Student student = Student.builder()
                 .studentNumber(existsStudent.getStudentNumber())
                 .studentGrade(existsStudent.getStudentGrade())

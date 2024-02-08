@@ -54,13 +54,13 @@ public class StudentController {
         return new ResponseEntity<>(ResponseMessage.SUCCESS_DELETE_ALL_STUDENT.getMessage(), HttpStatus.OK);
     }
 
-    @PatchMapping("/{studentNumber}") // 단일 학생 정보 수정
-    public ResponseEntity editStudentInformation(@PathVariable Long studentNumber,@Valid @RequestBody EditStudentForm editStudentForm, BindingResult bindingResult) {
+    @PatchMapping // 단일 학생 정보 수정
+    public ResponseEntity editStudentInformation(@Valid @RequestBody EditStudentForm editStudentForm, BindingResult bindingResult) {
 
         if(bindingResult.hasErrors())
             return new ResponseEntity<>(bindingResult.getAllErrors(), HttpStatus.BAD_REQUEST);
 
-        Student updateStudent = studentService.editStudentInformation(studentNumber, editStudentForm);
+        Student updateStudent = studentService.editStudentInformation(editStudentForm);
         return new ResponseEntity<>(updateStudent, HttpStatus.OK);
     }
 
