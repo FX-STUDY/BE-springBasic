@@ -21,7 +21,7 @@ public class StudentService {
 
     public void signUp(SignUpForm signUpForm) { //학생 입력
 
-        if(studentRepository.findByStudentNumber(signUpForm.getStudentNumber()) != null)
+        if(studentRepository.existsStudent(signUpForm.getStudentNumber()))
             throw new DuplicateStudentException();
 
         Student student = convertSignUpFormToStudent(signUpForm);
@@ -31,7 +31,7 @@ public class StudentService {
 
 
     public Student showStudent(Long studentNumber) { //단일 학생 조회
-        if (studentRepository.findByStudentNumber(studentNumber) == null)
+        if(!studentRepository.existsStudent(studentNumber))
             throw new NotFoundStudentException();
         return studentRepository.findByStudentNumber(studentNumber);
     }
@@ -43,7 +43,7 @@ public class StudentService {
     }
 
     public void deleteStudent(Long studentNumber) { // 단일 학생 삭제
-        if(studentRepository.findByStudentNumber(studentNumber) == null)
+        if(!studentRepository.existsStudent(studentNumber))
             throw new NotFoundStudentException();
         studentRepository.delteByStudentNumber(studentNumber);
     }
@@ -53,10 +53,11 @@ public class StudentService {
     }
 
     public Student editStudentInformation(EditStudentForm editStudentForm) { //단일 학생 정보 수정
-        Student existsStudent = studentRepository.findByStudentNumber(editStudentForm.getStudentNumber());
-        if(existsStudent == null)
+
+        if(!studentRepository.existsStudent(editStudentForm.getStudentNumber()))
             throw new NotFoundStudentException();
 
+        Student existsStudent = studentRepository.findByStudentNumber(editStudentForm.getStudentNumber());
         Student student = convertEditFormToStudent(editStudentForm, existsStudent);
 
         return studentRepository.updateStudent(student);

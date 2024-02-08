@@ -34,11 +34,15 @@ public class StudentRepository {
         store.clear();
     }
 
-    public Student updateStudent(Long studentNumber, Student student) {
-        return store.replace(studentNumber, student);
+    public Student updateStudent(Student student) {
+        return store.replace(student.getStudentNumber(), student);
     }
 
     public int countStudent() {
         return store.size();
+    }
+
+    public Boolean existsStudent(Long studentNumber) {
+        return store.get(studentNumber) != null;
     }
 }
