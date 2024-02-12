@@ -19,4 +19,14 @@ public class ValidateStudent {
         return true;
     }
 
+    public boolean validateStudentName(String studentName){
+        if(!Pattern.matches("^[ㄱ-ㅎ가-힣]*$",studentName)){
+            return false;
+        }
+        if(studentName.length() >= 2 && studentName.length() <= 7){
+            return false;
+        }
+        return true;
+    }
+
 }
