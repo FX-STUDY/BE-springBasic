@@ -25,6 +25,12 @@ public class StudentRepository {
         return new ArrayList<>(store.values());
     }
 
+    public void update(Long studentId, Student updateStudent){
+        Student findStudent = findById(studentId);
+        updateStudentInformation(findStudent,updateStudent);
+        save(findStudent);
+    }
+
     private void updateStudentInformation(Student findStudent, Student updateStudent){
         findStudent.setName(updateStudent.getName());
         findStudent.setAddress(updateStudent.getAddress());
