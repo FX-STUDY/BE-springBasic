@@ -21,6 +21,13 @@ public class StudentController {
         return "/addStudentForm";
     }
 
+    @GetMapping("/{studentId}")
+    public String showStudentByStudentId(@PathVariable Long studentId, Model model){
+        Object findStudent = studentService.showStudentByStudentId(studentId);
+        model.addAttribute("findStudent",findStudent);
+        return "/findStudentForm";
+    }
+
 
 
 }
