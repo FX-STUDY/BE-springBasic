@@ -1,0 +1,32 @@
+package com.yebin.yebin.order;
+
+import com.yebin.yebin.dependency.AppConfig;
+import com.yebin.yebin.discount.DiscountPolicy;
+import com.yebin.yebin.member.Member;
+import com.yebin.yebin.member.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+
+public class OrderServiceImpl implements OrderService{
+    private final MemberRepository memberRepository;
+    private final DiscountPolicy discountPolicy;
+
+
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy){
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
+
+    @Override
+    public Order createOrder(Long memberId, String itemName, int itemPrice) {
+        Member member = memberRepository.findById(memberId);
+        float discountPrice = discountPolicy.discount(member,itemPrice);
+        return new Order(memberId, itemName, itemPrice, discountPrice);
+    }
+
+    @Override
+    public float calculatePrice(int itemPrice, float discountPrice) {
+        return itemPrice - discountPrice;
+    }
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>상품 목록</title>
+    <style>
+        th{
+          border-bottom: 2px solid black;
+        }
+        td{
+            border-bottom: 1px solid gray;
+        }
+    </style>
+</head>
+<body>
+    <header align="center">
+        <h1>상품 목록</h1>
+    </header>
+    <nav align="right"><button onclick="location.href='ItemSaveForm.html'"
+                               th:onclick="|location.href='@{/item/itemSave}'|" type="button">상품 등록</button></nav>
+    <hr>
+    <article>
+        <table style="width: 100%">
+            <thead style="border-bottom: 1px solid black">
+            <tr>
+                <th>ID</th>
+                <th>상품명</th>
+                <th>가격</th>
+                <th>수량</th>
+            </tr>
+            </thead>
+            <tr th:each="item : ${itemList}">
+                <td><a href="ItemDetailForm.html" th:href="@{/item/{itemId}(itemId=${item.id})}" th:text="${item.id}">상품id</a></td>
+                <td><a href="ItemDetailForm.html" th:href="@{|/item/${item.id}|}" th:text="${item.name}">상품명</a></td>
+                <td th:text="${item.price}"></td>
+                <td th:text="${item.quantity}"></td>
+            </tr>
+        </table>
+    </article>
+
+</body>
+</html>
