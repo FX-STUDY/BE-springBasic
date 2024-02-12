@@ -56,4 +56,15 @@ public class StudentServiceImpl implements StudentService{
         return findStudent;
     }
 
+    @Override
+    public List<Student> showAllStudents() {
+        List<Student> students = studentRepository.findAll();
+        // 찾으려는 학생의 정보가 없다면 null 반환
+        if (Objects.isNull(students)){
+            return null;
+        }
+
+        return studentRepository.findAll();
+    }
+
 }
