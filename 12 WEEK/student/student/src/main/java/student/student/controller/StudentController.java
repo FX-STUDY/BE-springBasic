@@ -35,6 +35,11 @@ public class StudentController {
         return "/findStudentForm";
     }
 
+    @PatchMapping("/{studentId}")
+    public String updateStudentByStudentId(@PathVariable Long studentId, @ModelAttribute Student updateStudent){
+        studentService.updateStudentByStudentId(studentId, updateStudent);
+        return "/updateStudentForm";
+    }
 
 
 }
