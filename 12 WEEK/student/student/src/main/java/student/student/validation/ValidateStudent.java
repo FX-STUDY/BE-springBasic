@@ -37,4 +37,12 @@ public class ValidateStudent {
         return true;
     }
 
+    public boolean validateSemester(Semester studentSemester){
+        // 위와 동일,,
+        if(studentSemester != Semester.first || studentSemester != Semester.second){
+            return false;
+        }
+        return true;
+    }
+
 }
