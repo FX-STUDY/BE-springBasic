@@ -15,6 +15,12 @@ import java.util.List;
 public class StudentController {
     private final StudentService studentService;
 
+    @PostMapping
+    public String addStudent(@ModelAttribute Student student){
+        Object saveStudentData = studentService.saveStudent(student);
+        return "/addStudentForm";
+    }
+
 
 
 }
