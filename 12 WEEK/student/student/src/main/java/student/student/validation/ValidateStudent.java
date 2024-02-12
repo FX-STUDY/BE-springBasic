@@ -45,4 +45,11 @@ public class ValidateStudent {
         return true;
     }
 
+    public boolean validateGrade(Grade studentGrade){
+        // 위와 동일,,
+        if(studentGrade != Grade.freshman || studentGrade != Grade.sophomore || studentGrade != Grade.junior || studentGrade != Grade.senior || studentGrade !=Grade.the_5th){
+            return false;
+        }
+        return true;
+    }
 }
