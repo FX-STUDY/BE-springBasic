@@ -45,4 +45,15 @@ public class StudentServiceImpl implements StudentService{
         return studentRepository.save(student);
     }
 
+    @Override
+    public Student showStudentByStudentId(Long studentId) {
+        Student findStudent = studentRepository.findById(studentId);
+        // 찾으려는 학생의 정보가 없다면 null 반환?
+        if(Objects.isNull(findStudent)){
+            return null;
+        }
+
+        return findStudent;
+    }
+
 }
