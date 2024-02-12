@@ -17,5 +17,9 @@ public class StudentRepository {
         return student;
     }
 
+    public Student findById(Long studentId){
+        return store.get(studentId);
+    }
+
 }
 
