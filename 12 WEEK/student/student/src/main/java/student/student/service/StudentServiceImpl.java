@@ -67,4 +67,18 @@ public class StudentServiceImpl implements StudentService{
         return studentRepository.findAll();
     }
 
+    @Override
+    public Object updateStudentByStudentId(Long studentId, Student updateStudent) {
+        Student findStudent = studentRepository.findById(studentId);
+        if(Objects.isNull(findStudent)){
+            return null;
+        }
+        // 수정하려는 학생의 이름이 요구사항을 충족하지 못했다면 이름 반환
+        if(validateStudent.validateStudentName(updateStudent.getName())){
+            return updateStudent.getName();
+        }
+
+        studentRepository.update(studentId,updateStudent);
+        return updateStudent;
+    }
 }
