@@ -28,6 +28,13 @@ public class StudentController {
         return "/findStudentForm";
     }
 
+    @GetMapping
+    public String showAllStudents(Model model){
+        List<Student> students = studentService.showAllStudents();
+        model.addAttribute("findAllStudents",students);
+        return "/findStudentForm";
+    }
+
 
 
 }
