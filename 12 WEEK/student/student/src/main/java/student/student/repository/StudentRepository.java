@@ -21,5 +21,9 @@ public class StudentRepository {
         return store.get(studentId);
     }
 
+    public List<Student> findAll(){
+        return new ArrayList<>(store.values());
+    }
+
 }
 
