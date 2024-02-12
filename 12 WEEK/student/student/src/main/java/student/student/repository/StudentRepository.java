@@ -12,5 +12,10 @@ import java.util.Map;
 public class StudentRepository {
     private static final Map<Long, Student> store = new HashMap<>();
 
+    public Student save(Student student){
+        store.put(student.getId(), student);
+        return student;
+    }
+
 }
 
