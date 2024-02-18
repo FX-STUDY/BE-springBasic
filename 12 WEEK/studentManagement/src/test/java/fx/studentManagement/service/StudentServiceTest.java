@@ -1,6 +1,9 @@
 package fx.studentManagement.service;
 
+import fx.studentManagement.controller.form.EditStudentForm;
+import fx.studentManagement.controller.form.SignUpForm;
 import fx.studentManagement.entity.Student;
+import fx.studentManagement.entity.enums.Major;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,20 +22,26 @@ class StudentServiceTest {
 
     @BeforeEach
     public void BeforeEach() {
-        Student stu1 = Student.builder()
-                .studentNumber(21000L)
+        SignUpForm stu1 = SignUpForm.builder()
+                .studentNumber(2100000L)
                 .studentName("PARK")
-                .studentGrade(2)
-                .studentMajor("SoftwareDept")
+                .studentBirth("2001_01_01")
+                .studentMajor(Major.valueOf("SoftwareDept"))
+                .studentSemester(2)
+                .studentAddress("충주시")
+                .studentGrade(1)
                 .build();
         studentService.signUp(stu1);
 
 
-        Student stu2 = Student.builder()
-                .studentNumber(19000L)
+        SignUpForm stu2 = SignUpForm.builder()
+                .studentNumber(2200000L)
                 .studentName("KIM")
-                .studentGrade(4)
-                .studentMajor("SoftwareDept")
+                .studentBirth("2001_01_01")
+                .studentMajor(Major.valueOf("SoftwareDept"))
+                .studentSemester(2)
+                .studentAddress("충주시")
+                .studentGrade(1)
                 .build();
         studentService.signUp(stu2);
     }
@@ -45,22 +54,24 @@ class StudentServiceTest {
     @Test
     void signUp() {
         //give
-        Student stu = Student.builder()
-                .studentNumber(20000L)
+        SignUpForm stu = SignUpForm.builder()
+                .studentNumber(2300000L)
                 .studentName("LEE")
+                .studentBirth("2001_01_01")
+                .studentMajor(Major.valueOf("SoftwareDept"))
+                .studentSemester(2)
+                .studentAddress("충주시")
                 .studentGrade(3)
-                .studentMajor("SoftwareDept")
                 .build();
-
 
         //when
         studentService.signUp(stu);
 
         //then
-        Assertions.assertThat(stu.getStudentNumber()).isEqualTo(20000L);
+        Assertions.assertThat(stu.getStudentNumber()).isEqualTo(2300000L);
         Assertions.assertThat(stu.getStudentName()).isEqualTo("LEE");
         Assertions.assertThat(stu.getStudentGrade()).isEqualTo(3);
-        Assertions.assertThat(stu.getStudentMajor()).isEqualTo("SoftwareDept");
+        Assertions.assertThat(stu.getStudentMajor()).isEqualTo(Major.SoftwareDept);
     }
 
     @Test
@@ -68,19 +79,19 @@ class StudentServiceTest {
         //give
 
         //when
-        Student stu1 = studentService.showStudent(21000L);
-        Student stu2 = studentService.showStudent(19000L);
+        Student stu1 = studentService.showStudent(2100000L);
+        Student stu2 = studentService.showStudent(2200000L);
 
         //then
-        Assertions.assertThat(stu1.getStudentNumber()).isEqualTo(21000L);
+        Assertions.assertThat(stu1.getStudentNumber()).isEqualTo(2100000L);
         Assertions.assertThat(stu1.getStudentName()).isEqualTo("PARK");
-        Assertions.assertThat(stu1.getStudentGrade()).isEqualTo(2);
-        Assertions.assertThat(stu1.getStudentMajor()).isEqualTo("SoftwareDept");
+        Assertions.assertThat(stu1.getStudentGrade()).isEqualTo(1);
+        Assertions.assertThat(stu1.getStudentMajor()).isEqualTo(Major.SoftwareDept);
 
-        Assertions.assertThat(stu2.getStudentNumber()).isEqualTo(19000L);
+        Assertions.assertThat(stu2.getStudentNumber()).isEqualTo(2200000L);
         Assertions.assertThat(stu2.getStudentName()).isEqualTo("KIM");
-        Assertions.assertThat(stu2.getStudentGrade()).isEqualTo(4);
-        Assertions.assertThat(stu2.getStudentMajor()).isEqualTo("SoftwareDept");
+        Assertions.assertThat(stu2.getStudentGrade()).isEqualTo(1);
+        Assertions.assertThat(stu2.getStudentMajor()).isEqualTo(Major.SoftwareDept);
     }
 
     @Test
@@ -98,11 +109,11 @@ class StudentServiceTest {
         //give
 
         //when
-        studentService.deleteStudent(21000L);
+        studentService.deleteStudent(2100000L);
         List<Student> students = studentService.showAllStudent();
         System.out.println("students = " + students);
         //then
-        Assertions.assertThat(students.size()).isEqualTo(3);
+        Assertions.assertThat(students.size()).isEqualTo(1);
         
     }
 
@@ -122,19 +133,19 @@ class StudentServiceTest {
     @Test
     void updateStudent() {
         //give
-        Student updateStu = Student.builder()
-                .studentName("PARK")
-                .studentGrade(1)
-                .studentMajor("ComputerDept")
+        EditStudentForm updateStu = EditStudentForm.builder()
+                .studentNumber(2100000L)
+                .studentName("CHOI")
+                .studentAddress("서울시")
                 .build();
 
         //when
-        studentService.updateStudent(21000L, updateStu);
-        Student student = studentService.showStudent(21000L);
+        studentService.editStudentInformation(updateStu);
+        Student student = studentService.showStudent(2100000L);
+
         //then
-        Assertions.assertThat(student.getStudentName()).isEqualTo("PARK");
-        Assertions.assertThat(student.getStudentGrade()).isEqualTo(1);
-        Assertions.assertThat(student.getStudentMajor()).isEqualTo("ComputerDept");
+        Assertions.assertThat(student.getStudentName()).isEqualTo("CHOI");
+        Assertions.assertThat(student.getStudentAddress()).isEqualTo("서울시");
 
     }
 
