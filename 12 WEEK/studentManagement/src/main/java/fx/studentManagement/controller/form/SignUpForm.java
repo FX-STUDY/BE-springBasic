@@ -3,11 +3,12 @@ package fx.studentManagement.controller.form;
 import fx.studentManagement.entity.enums.Major;
 import fx.studentManagement.entity.enums.ValidEnum;
 import jakarta.validation.constraints.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@Setter
+@Builder
 public class SignUpForm {
 //학번, 이름, 생년월일, 학과, 학기, 주소, 학년
 
