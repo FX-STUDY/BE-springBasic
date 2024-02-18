@@ -21,7 +21,7 @@ public class SignUpForm {
     @Pattern(regexp = "\\d{4}_\\d{2}_\\d{2}", message = "- format : YYYY_mm_dd")
     private String studentBirth;
 
-    @ValidEnum(enumClass = Major.class, message = "- 소프트웨어, 컴퓨터공학, 산업디자인학과 외 금지")
+    @ValidEnum(enumClass = Major.class, message = "- SoftwareDept, ComputerEngineeringDept, IndustrialDesignDept 외 금지")
     private Major studentMajor;
 
     @Digits(integer = 1, fraction = 0)
